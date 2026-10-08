@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+tmp/
+*.pyc
+.env
+*.log
+# Keep compressed raw archives out of Git; the uncompressed collection snapshot is tracked.
+data/raw/*.gz

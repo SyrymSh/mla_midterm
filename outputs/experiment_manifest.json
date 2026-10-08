@@ -1,0 +1,33 @@
+{
+  "completed_at_utc": "2026-10-08T09:28:21+00:00",
+  "source_csv_sha256": "dd460567e18db158bae67492e569dcd382e832f34101f4f279b57d8a4fdae891",
+  "fixed_split_sha256": "5769f3362fb58cc606f62fa531f4f9ae04b4d9645644b78ba0e1e286aaaa309a",
+  "seed": 42,
+  "split": "80% train / 20% untouched held-out test",
+  "training_rows": 4183,
+  "test_rows": 1046,
+  "cv_folds": 3,
+  "selection": "minimum train CV MAE (no test-set selection)",
+  "best_cv_model": "Ridge Regression",
+  "best_model_test_metrics": {
+    "train_cv_MAE_hours": 10.074353880724916,
+    "MAE_hours": 11.815928971535266,
+    "RMSE_hours": 51.42607580556353,
+    "R2": -0.012062749900105363,
+    "MedAE_hours": 3.201885017434297,
+    "MAPE_percent": 122.01138835744767,
+    "sMAPE_percent": 74.87735345058277
+  },
+  "features": [
+    "release_year",
+    "price_usd",
+    "price_missing",
+    "primary_genre",
+    "primary_developer",
+    "genres_text",
+    "tags_text"
+  ],
+  "uses_game_description": false,
+  "developer_tier_definition": "Computed within each training fold from developer catalogue count; not verified company size",
+  "notes": "Other candidate test metrics shown for comparison only. Select final model using CV."
+}
