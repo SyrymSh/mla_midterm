@@ -1,3 +1,7 @@
+## Endterm project
+
+The completed Endterm project, report, slides, executed notebook and real IGDB/Steam data are in [endterm/](endterm/README.md).
+
 # Video Game Completion Time Prediction — Midterm (Direction 42)
 
 **Task:** Regression | **Target:** main-story completion time in **hours** | **Minimum:** 3,000 real, distinct games (1,000 is the formal guide minimum; this project's registration goal is 3,000+)  

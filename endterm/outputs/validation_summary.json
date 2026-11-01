@@ -1,0 +1,28 @@
+{
+  "verified_at_utc": "2026-11-01T23:06:14.576080+00:00",
+  "raw_manifest_files_verified": 10,
+  "original_files_preserved": 19,
+  "cohort_rows": 5229,
+  "test_predictions_verified": 1046,
+  "model_metric_rows_recomputed": 13,
+  "winner_matches_CV_selection": true,
+  "saved_model_predictions_match": true,
+  "target_and_split_preserved": true,
+  "complete_field_dictionary": true,
+  "source_price_and_tag_checks": true,
+  "course_models_present": true,
+  "documentation_links_valid": true,
+  "AI_use_disclosure_present": true,
+  "notebook_executed_code_cells": 14,
+  "report_pages": 9,
+  "slide_pdf_pages": 9,
+  "editable_slide_count": 9,
+  "native_chart_count": 5,
+  "embedded_chart_workbooks": 5,
+  "deliverable_sha256": {
+    "notebooks/Video_Game_Endterm.ipynb": "74798ae9a535090cd23895cba28bdd30252f0025d73616f8e53c9f6ddc2f69c9",
+    "docs/Endterm_Report.pdf": "d98738790c03b91eec582967fcacecb08c56ce1a5627504a816107c6b1e74a9f",
+    "docs/Endterm_Defense.pptx": "01f4d308e362ade233465bf47e49708a6545ebcf9b1fbef74e60bcb8f45f6db4",
+    "docs/Endterm_Defense.pdf": "7a1f3bc1d135bae91f09da1dd6bfa80899ef9a8954b12b11915bb43d85fb2b40"
+  }
+}

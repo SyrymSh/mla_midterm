@@ -1,0 +1,71 @@
+field,stored_type,meaning,model_input,observed_rows,coverage_percent,source
+game_id,int64,Frozen IGDB game identifier; one game per row.,False,5229,100.0,October IGDB snapshot
+steam_appid,float64,Steam ID stored in the October midterm submission.,False,3343,63.93191814878561,October IGDB snapshot
+title,str,Game name in the frozen midterm snapshot.,False,5229,100.0,October IGDB snapshot
+main_story_hours,float64,"Regression target: IGDB hastily seconds / 3600, frozen on 8 October 2026.",False,5229,100.0,October IGDB snapshot
+release_year,float64,Release year retained from midterm IGDB first release date.,True,5227,99.96175176898068,October IGDB snapshot
+price_usd,float64,"Historical midterm price field, entirely missing; retained only for audit.",False,0,0.0,October IGDB snapshot
+primary_genre,str,First genre in the original sorted IGDB genre list.,True,5229,100.0,October IGDB snapshot
+genres_text,str,Pipe-separated original IGDB genre categories.,True,5149,98.4700707592274,October IGDB snapshot
+tags_text,float64,"Historical midterm tag field, entirely empty; retained only for audit.",False,0,0.0,October IGDB snapshot
+primary_developer,str,Original primary studio name; converted to a fold-fitted catalog frequency tier.,True,5228,99.98087588449036,October IGDB snapshot
+description,str,"Original real game description, reserved for Final and excluded at Endterm.",False,5229,100.0,October IGDB snapshot
+description_word_count,int64,"Description length for provenance and audit, excluded from inputs.",False,5229,100.0,October IGDB snapshot
+price_missing,int64,"Historical midterm price-missing indicator, constant and excluded.",False,5229,100.0,October IGDB snapshot
+source_url,str,Original public IGDB game page.,False,5229,100.0,October IGDB snapshot
+matched_steam_appid,float64,"Validated explicit Steam link for enrichment, never used as predictor.",False,3372,64.48651749856569,Current Steam API or explicit match audit
+steam_match_method,str,Explicit external ID/URL or unmatched/ambiguous; no fuzzy title matching.,False,5229,100.0,Current Steam API or explicit match audit
+steam_old_id_conflict,int64,Whether old Steam ID disagrees with all current explicit candidates.,False,5229,100.0,Current Steam API or explicit match audit
+igdb_metadata_available,int64,Whether current IGDB metadata was retrieved for the game.,False,5229,100.0,Current IGDB API
+steam_metadata_available,int64,Whether Steam Browse returned success=1 for the matched app.,False,5229,100.0,Current Steam API or explicit match audit
+igdb_collected_at_utc,str,UTC retrieval time for IGDB metadata.,False,5229,100.0,Current IGDB API
+steam_collected_at_utc,str,UTC retrieval time for Steam Browse metadata.,False,3372,64.48651749856569,Current Steam API or explicit match audit
+steam_price_collected_at_utc,str,UTC retrieval time for Steam price response.,False,3372,64.48651749856569,Current Steam API or explicit match audit
+igdb_game_type,str,"IGDB game type such as Main Game, DLC or Expansion.",True,5229,100.0,Current IGDB API
+igdb_parent_game_id,float64,"IGDB parent game reference, audit only.",False,998,19.085867278638364,Current IGDB API
+igdb_version_parent_id,float64,"IGDB version parent reference, audit only.",False,192,3.671830177854274,Current IGDB API
+steam_name,str,"Steam product name for manual link verification, excluded from predictors.",False,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_item_type,float64,Source Steam Browse product type code; successful protobuf default is 0.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_regular_price_usd,float64,Current US regular/list price from explicit USD initial cents divided by 100. Not launch price.,True,2861,54.714094473130615,Current Steam API or explicit match audit
+steam_current_price_usd,float64,Current US selling price from explicit USD final cents divided by 100.,True,2861,54.714094473130615,Current Steam API or explicit match audit
+steam_discount_percent,float64,Source discount_percent for the same US USD quote.,True,2861,54.714094473130615,Current Steam API or explicit match audit
+steam_price_currency,str,Source quote currency. Model prices accepted only when explicitly USD.,False,2861,54.714094473130615,Current Steam API or explicit match audit
+steam_price_region,str,"Requested Steam store country US, not the student location.",False,3372,64.48651749856569,Current Steam API or explicit match audit
+steam_source_url,str,Public store page for the matched app.,False,3372,64.48651749856569,Current Steam API or explicit match audit
+igdb_themes,str,Pipe-separated source names of IGDB themes.,True,4749,90.82042455536433,Current IGDB API
+igdb_themes_count,float64,Number of entries returned for IGDB themes. Missing array stays missing.,True,4749,90.82042455536433,Current IGDB API
+igdb_keywords,str,Pipe-separated source names of IGDB keywords.,True,4094,78.29412889653854,Current IGDB API
+igdb_keywords_count,float64,Number of entries returned for IGDB keywords. Missing array stays missing.,False,4094,78.29412889653854,Current IGDB API
+igdb_game_modes,str,Pipe-separated source names of IGDB game modes.,True,5092,97.3799961751769,Current IGDB API
+igdb_game_modes_count,float64,Number of entries returned for IGDB game modes. Missing array stays missing.,True,5092,97.3799961751769,Current IGDB API
+igdb_player_perspectives,str,Pipe-separated source names of IGDB player perspectives.,True,4651,88.94626123541786,Current IGDB API
+igdb_player_perspectives_count,float64,Number of entries returned for IGDB player perspectives. Missing array stays missing.,True,4651,88.94626123541786,Current IGDB API
+igdb_platforms,str,Pipe-separated source names of IGDB platforms.,True,5229,100.0,Current IGDB API
+igdb_platforms_count,int64,Number of entries returned for IGDB platforms. Missing array stays missing.,True,5229,100.0,Current IGDB API
+igdb_game_engines,str,Pipe-separated source names of IGDB game engines.,True,3122,59.70548862115127,Current IGDB API
+igdb_game_engines_count,float64,Number of entries returned for IGDB game engines. Missing array stays missing.,False,3122,59.70548862115127,Current IGDB API
+igdb_dlcs_count,float64,Number of source-linked dlcs. Missing array stays missing; audit only.,False,527,10.078408873589597,Current IGDB API
+igdb_expansions_count,float64,Number of source-linked expansions. Missing array stays missing; audit only.,False,216,4.130808950086059,Current IGDB API
+igdb_standalone_expansions_count,float64,Number of source-linked standalone expansions. Missing array stays missing; audit only.,False,79,1.5108051252629566,Current IGDB API
+igdb_developers,str,Source company names explicitly marked developer. Audit only.,False,4800,91.79575444635684,Current IGDB API
+igdb_developer_count,float64,Count of source companies explicitly marked developer.,True,4874,93.21093899407153,Current IGDB API
+igdb_publishers,str,Source company names explicitly marked publisher. Audit only.,False,4710,90.07458405048766,Current IGDB API
+igdb_publisher_count,float64,Count of source companies explicitly marked publisher.,True,4874,93.21093899407153,Current IGDB API
+igdb_single_player,float64,Binary source listing for single player. Missing mode/category list stays missing.,True,5092,97.3799961751769,Current IGDB API
+igdb_multiplayer,float64,Binary source listing for multiplayer. Missing mode/category list stays missing.,True,5092,97.3799961751769,Current IGDB API
+igdb_coop,float64,Binary source listing for coop. Missing mode/category list stays missing.,True,5092,97.3799961751769,Current IGDB API
+steam_tags,str,"Up to 20 ordered Steam community tags, mapped from source IDs using the saved dictionary.",True,3333,63.74067699368904,Current Steam API or explicit match audit
+steam_tag_count,float64,"Number of returned top Steam tags, capped by the request at 20; not total lifetime tags.",True,3333,63.74067699368904,Current Steam API or explicit match audit
+steam_categories,str,"Source category ID set from player, feature and controller categories.",True,3333,63.74067699368904,Current Steam API or explicit match audit
+steam_single_player,float64,Binary source listing for single player. Missing mode/category list stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_multiplayer,float64,Binary source listing for multiplayer. Missing mode/category list stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_coop,float64,Binary source listing for coop. Missing mode/category list stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_online_coop,float64,Binary Steam category listing for online coop. Missing category data stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_achievements_listed,float64,"Steam lists the achievements category. This is a binary listing flag, not achievement count.",True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_workshop,float64,Binary Steam category listing for workshop. Missing category data stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_cloud,float64,Binary Steam category listing for cloud. Missing category data stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_full_controller_support,float64,Binary Steam category listing for full controller support. Missing category data stays missing.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_windows,float64,Binary platform field from successful Steam platform data. Omitted protobuf booleans in a returned platform object mean false.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_mac,float64,Binary platform field from successful Steam platform data. Omitted protobuf booleans in a returned platform object mean false.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_steamos_linux,float64,Binary platform field from successful Steam platform data. Omitted protobuf booleans in a returned platform object mean false.,True,3334,63.7598011091987,Current Steam API or explicit match audit
+steam_language_count,float64,Number of returned language entries explicitly marked supported.,True,3333,63.74067699368904,Current Steam API or explicit match audit

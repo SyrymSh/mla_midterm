@@ -1,0 +1,5 @@
+cluster,training_rows,median_duration_hours_for_description_only,steam_coverage_percent,single_player_listed_percent,median_release_year,median_observed_keyword_count,median_observed_theme_count,top_genres,top_igdb_game_modes,top_igdb_themes,top_steam_tags
+0,634,8.0,100.0,90.37854889589906,2019.0,7.0,2.0,"Adventure, Indie, Shooter","Multiplayer, Co-operative, Single player, Split screen","Action, Fantasy, Science fiction, Open world","Action, Multiplayer, Co-op, Singleplayer"
+1,1396,5.0,0.0,96.41833810888252,2010.0,7.0,2.0,"Adventure, Role-playing (RPG), Arcade","Single player, Multiplayer, Co-operative, Split screen","Action, Fantasy, Science fiction, Comedy",
+2,114,2.0,3.508771929824561,,2016.0,3.0,1.0,"Unknown, Adventure, Puzzle",,"Action, Fantasy, Comedy, Open world","Action, RPG, Gore, Violent"
+3,2039,4.0,100.0,99.85286905345758,2020.0,6.0,2.0,"Adventure, Indie, Role-playing (RPG)","Single player, Multiplayer, Co-operative, Split screen","Action, Fantasy, Horror, Science fiction","Singleplayer, Adventure, Action, Story Rich"

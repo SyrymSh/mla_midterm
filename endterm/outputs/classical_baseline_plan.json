@@ -1,0 +1,24 @@
+{
+  "recorded_at_utc": "2026-11-01T22:45:46.947774+00:00",
+  "models": [
+    "Linear regression original features",
+    "Decision tree original features",
+    "KNN original features"
+  ],
+  "feature_set": "midterm",
+  "parameters": {
+    "linear": "OLS",
+    "tree": {
+      "max_depth": 10,
+      "min_samples_leaf": 10
+    },
+    "knn": {
+      "n_neighbors": 25,
+      "weights": "distance"
+    }
+  },
+  "cv": "Same seeded training-only 3-fold KFold as the existing comparison.",
+  "purpose": "Add Week 3-4 reference models required by the supplied rubric.",
+  "selection_policy": "Original-feature references do not replace the locked expanded-model selection.",
+  "test_exposure": "Test outcomes were already observed. This is a supplementary comparison."
+}

@@ -1,0 +1,13 @@
+{
+  "collection_method": "IGDB official API + optional Steam store appdetails",
+  "main_source": "https://api.igdb.com/v4/game_time_to_beats",
+  "additional_source": "https://store.steampowered.com/api/appdetails",
+  "collected_at_utc": "2026-10-08T08:56:44+00:00",
+  "raw_subset_rows": 5273,
+  "raw_subset_sha256": "5fbad5100572060e625d0037e705f29c0d212b8f644a0a1b4b19aa25f0631277",
+  "source_snapshot": "games_raw.jsonl",
+  "target_field": "hastily (seconds) / 3600; excludes notable extras",
+  "source_credentials": "Twitch client credentials; not saved in dataset",
+  "steam_enrichment_limit": 0,
+  "collection_note": "IGDB may have limited Steam app links; missing prices/tags are real missing fields, not invented values"
+}

@@ -1,0 +1,58 @@
+{
+  "completed_at_utc": "2026-11-01T21:49:31.274363+00:00",
+  "original_cohort_rows": 5229,
+  "igdb_metadata_rows": 5229,
+  "unique_steam_apps_requested": 3306,
+  "region": "US",
+  "price_currency": "USD",
+  "sources": [
+    "IGDB official v4 API",
+    "Steam public IStoreBrowseService/GetItems/v1",
+    "Steam public appdetails price_overview",
+    "Steam IStoreService/GetTagList/v1"
+  ],
+  "target_policy": "Unmodified midterm IGDB hastily/3600 target; no new time fields collected.",
+  "credentials": "Environment or stdin only. Never included in snapshots.",
+  "files": {
+    "igdb_metadata.jsonl": {
+      "sha256": "8e392c57856fb8b02342bc495cf8065f66f2d561e092e5c7a956db59883fce0f",
+      "bytes": 15171839
+    },
+    "steam_browse.jsonl": {
+      "sha256": "9f3d7a80d613d3ef3298f6baa4f5d128a02f4035daebedb4a00de2a14f7d0e06",
+      "bytes": 15471445
+    },
+    "steam_id_mapping.json": {
+      "sha256": "6127ff709d24beef3afc93a03c9f0e2508b72159077f49a8f7145daf1a594582",
+      "bytes": 1095580
+    },
+    "steam_prices.jsonl": {
+      "sha256": "50e90b49b24433d8639c052a0df4a565fe48dea7f212d81dfd7c34ecc343814e",
+      "bytes": 2729909
+    },
+    "steam_tag_dictionary.json": {
+      "sha256": "7dd36972168c070ff870a9ae1de423cbeee89d9a771a268ba806c38497eae823",
+      "bytes": 36518
+    },
+    "source_checks/igdb_docs.txt": {
+      "sha256": "5311031916526078db7e801bbb54a956d677db7597b87ea95eb2396176e39811",
+      "bytes": 1302212
+    },
+    "source_checks/igdb_robots_status.json": {
+      "sha256": "e8f353794f2cd59a809cde28e0e43e6d6cd86944e9f8f9df347788bcf00c9c25",
+      "bytes": 153
+    },
+    "source_checks/steam_api_terms.txt": {
+      "sha256": "625e5dc7bd7b2e8eaf7ba16912b6401d75c3956cfc80471c433f8805dc40f2a6",
+      "bytes": 28983
+    },
+    "source_checks/steam_robots.txt": {
+      "sha256": "c7c08126466424f06e8ea56f754bb8e456aa93f300a6c5555397ca20b92bef46",
+      "bytes": 413
+    },
+    "source_checks/steam_subscriber_agreement.txt": {
+      "sha256": "4e92c4e894571f4ae660986302ca761c6b8f5b6f52ed73db6901b704a848cf82",
+      "bytes": 85731
+    }
+  }
+}

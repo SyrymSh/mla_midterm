@@ -1,0 +1,5 @@
+step,rows_before,removed,rows_after
+Raw snapshot,5273,0,5273
+Invalid target / insufficient text / unusable title,5273,34,5239
+Duplicate normalized title and release year,5239,10,5229
+Duplicate game ID,5229,0,5229

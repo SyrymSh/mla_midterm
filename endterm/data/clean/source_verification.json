@@ -1,0 +1,12 @@
+{
+  "verified_at_utc": "2026-11-01T23:06:01.830709+00:00",
+  "raw_rows": 5273,
+  "reproduced_clean_rows": 5229,
+  "invalid_target_rows": 28,
+  "short_description_rows": 5,
+  "short_title_rows": 1,
+  "duplicate_rows": 10,
+  "price_rows_verified_against_raw_cents": 2861,
+  "tag_rows_verified_against_raw_ids": 3333,
+  "cohort_and_labels_reproduced": true
+}

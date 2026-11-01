@@ -1,0 +1,40 @@
+model,fold,validation_MAE_hours
+Median baseline,1,10.511920387096774
+Median baseline,2,11.880138091822094
+Median baseline,3,10.832693350071736
+Ridge original features,1,9.544433223650712
+Ridge original features,2,10.84086276122401
+Ridge original features,3,9.837236359636544
+Ridge expanded IGDB,1,8.722958612176425
+Ridge expanded IGDB,2,9.986598954469397
+Ridge expanded IGDB,3,9.05103082414659
+Ridge IGDB + Steam,1,8.456713605597235
+Ridge IGDB + Steam,2,9.814580672486176
+Ridge IGDB + Steam,3,9.199816554163627
+ExtraTrees original features,1,9.540598118822295
+ExtraTrees original features,2,10.774565886162849
+ExtraTrees original features,3,9.728077170637976
+ExtraTrees expanded IGDB,1,8.5884699865413
+ExtraTrees expanded IGDB,2,9.965695614657363
+ExtraTrees expanded IGDB,3,9.110749572750056
+ExtraTrees IGDB + Steam,1,8.123276502042488
+ExtraTrees IGDB + Steam,2,9.58174089562884
+ExtraTrees IGDB + Steam,3,8.610297124193274
+Random forest,1,8.119827807268527
+Random forest,2,9.40597710817732
+Random forest,3,8.483709498991182
+Tuned gradient boosting,1,8.089908493850444
+Tuned gradient boosting,2,9.282014970886111
+Tuned gradient boosting,3,8.545593219693817
+Tuned neural network,1,8.393177335897912
+Tuned neural network,2,9.666363068395622
+Tuned neural network,3,8.987792352006105
+Linear regression original features,1,9.540041699331892
+Linear regression original features,2,10.793911191945357
+Linear regression original features,3,9.967745927029771
+Decision tree original features,1,9.558755534417534
+Decision tree original features,2,11.092381558038968
+Decision tree original features,3,9.925782404356896
+KNN original features,1,9.905664882658648
+KNN original features,2,11.18348123483165
+KNN original features,3,10.113005146890298

@@ -1,0 +1,22 @@
+{
+  "completed_at_utc": "2026-11-01T22:01:00.891818+00:00",
+  "fit_rows": 4183,
+  "pca_input_features": 157,
+  "pca_components": 65,
+  "retained_variance": 0.8511873947074478,
+  "pc1_pc2_variance": 0.15177055795039596,
+  "selected_k": 6,
+  "selection": "Highest sampled training silhouette over k=2..6; no targets.",
+  "selected_silhouette": 0.07825399855443255,
+  "adjusted_rand_index_second_seed": 0.9698766973936345,
+  "target_used_for_fit_or_selection": false,
+  "feature_scope": "L2-normalized IGDB semantic categories only; no Steam, prices, numeric counts or missingness flags",
+  "input_columns": [
+    "genres_text",
+    "igdb_themes",
+    "igdb_keywords",
+    "igdb_game_modes",
+    "igdb_player_perspectives"
+  ],
+  "interpretation": "Descriptive clusters, not ground-truth classes. Durations added after fitting. A separate full-feature diagnostic demonstrates coverage confounding."
+}

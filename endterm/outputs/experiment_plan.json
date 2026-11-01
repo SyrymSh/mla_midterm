@@ -1,0 +1,123 @@
+{
+  "created_before_test_evaluation_utc": "2026-11-01T21:49:44.837196+00:00",
+  "seed": 42,
+  "cv": "3-fold shuffled KFold on training IDs only",
+  "metric": "MAE in original hours",
+  "candidate_order": [
+    "Median baseline",
+    "Ridge original features",
+    "Ridge expanded IGDB",
+    "Ridge IGDB + Steam",
+    "ExtraTrees original features",
+    "ExtraTrees expanded IGDB",
+    "ExtraTrees IGDB + Steam",
+    "Random forest",
+    "Tuned gradient boosting",
+    "Tuned neural network"
+  ],
+  "grids": {
+    "Tuned gradient boosting": {
+      "model__max_leaf_nodes": [
+        15,
+        31
+      ],
+      "model__min_samples_leaf": [
+        20,
+        50
+      ],
+      "model__l2_regularization": [
+        1,
+        10
+      ]
+    },
+    "Tuned neural network": {
+      "regressor__model__hidden_layer_sizes": [
+        [
+          32
+        ],
+        [
+          64,
+          32
+        ]
+      ],
+      "regressor__model__alpha": [
+        0.01,
+        0.1
+      ]
+    }
+  },
+  "feature_groups": {
+    "midterm": [
+      "release_year",
+      "primary_genre",
+      "primary_developer",
+      "genres_text"
+    ],
+    "igdb": [
+      "release_year",
+      "igdb_platforms_count",
+      "igdb_game_modes_count",
+      "igdb_player_perspectives_count",
+      "igdb_themes_count",
+      "igdb_developer_count",
+      "igdb_publisher_count",
+      "igdb_single_player",
+      "igdb_multiplayer",
+      "igdb_coop",
+      "primary_genre",
+      "igdb_game_type",
+      "primary_developer",
+      "genres_text",
+      "igdb_themes",
+      "igdb_keywords",
+      "igdb_game_modes",
+      "igdb_player_perspectives",
+      "igdb_platforms",
+      "igdb_game_engines"
+    ],
+    "full": [
+      "release_year",
+      "igdb_platforms_count",
+      "igdb_game_modes_count",
+      "igdb_player_perspectives_count",
+      "igdb_themes_count",
+      "igdb_developer_count",
+      "igdb_publisher_count",
+      "igdb_single_player",
+      "igdb_multiplayer",
+      "igdb_coop",
+      "steam_regular_price_usd",
+      "steam_current_price_usd",
+      "steam_discount_percent",
+      "steam_tag_count",
+      "steam_single_player",
+      "steam_multiplayer",
+      "steam_coop",
+      "steam_online_coop",
+      "steam_achievements_listed",
+      "steam_workshop",
+      "steam_cloud",
+      "steam_full_controller_support",
+      "steam_windows",
+      "steam_mac",
+      "steam_steamos_linux",
+      "steam_language_count",
+      "primary_genre",
+      "igdb_game_type",
+      "steam_item_type",
+      "primary_developer",
+      "genres_text",
+      "igdb_themes",
+      "igdb_keywords",
+      "igdb_game_modes",
+      "igdb_player_perspectives",
+      "igdb_platforms",
+      "igdb_game_engines",
+      "steam_tags",
+      "steam_categories"
+    ]
+  },
+  "ablation": "Ridge and ExtraTrees unchanged across original / IGDB / IGDB + Steam.",
+  "target": "Frozen midterm main_story_hours, no clipping, no label refresh or imputation.",
+  "test_note": "Midterm test outcomes have already been published. This is a stage comparison, not a new independent test."
+}

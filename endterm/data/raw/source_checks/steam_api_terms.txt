@@ -1,0 +1,272 @@
+URL: https://steamcommunity.com/dev/apiterms
+Retrieved UTC: 2026-11-01T21:39:52.093263+00:00
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Steam Community :: Steam Web API Terms of Use</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link href="https://community.fastly.steamstatic.com/public/shared/css/motiva_sans.css?v=-yZgCk0Nu7kH&amp;l=english&amp;_cdn=fastly" rel="stylesheet" type="text/css">
+<link href="https://community.fastly.steamstatic.com/public/shared/css/buttons.css?v=0Ihq-pAoptBq&amp;l=english&amp;_cdn=fastly" rel="stylesheet" type="text/css">
+<link href="https://community.fastly.steamstatic.com/public/shared/css/shared_global.css?v=LPzP0XCBpQoS&amp;l=english&amp;_cdn=fastly" rel="stylesheet" type="text/css">
+<link href="https://community.fastly.steamstatic.com/public/css/globalv2.css?v=VJJj6r-t5GM6&amp;l=english&amp;_cdn=fastly" rel="stylesheet" type="text/css">
+<link href="https://community.fastly.steamstatic.com/public/css/skin_1/global.css?v=K0ryu12K41ve&amp;l=english&amp;_cdn=fastly&amp;client=0" rel="stylesheet" type="text/css">
+<link href="https://community.fastly.steamstatic.com/public/css/skin_1/dev_apikey.css?v=pece57Ef2XFe&amp;l=english&amp;_cdn=fastly" rel="stylesheet" type="text/css">
+<link href="https://community.fastly.steamstatic.com/public/css/skin_1/header.css?v=EM4kCu67DNda&amp;l=english&amp;_cdn=fastly" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	var __PrototypePreserve=[];
+	__PrototypePreserve[0] = Array.from;
+	__PrototypePreserve[1] = Array.prototype.filter;
+	__PrototypePreserve[2] = Array.prototype.flatMap;
+	__PrototypePreserve[3] = Array.prototype.find;
+	__PrototypePreserve[4] = Array.prototype.some;
+	__PrototypePreserve[5] = Function.prototype.bind;
+	__PrototypePreserve[6] = HTMLElement.prototype.scrollTo;
+</script>
+<script type="text/javascript" src="https://community.fastly.steamstatic.com/public/javascript/prototype-1.7.js?v=npJElBnrEO6W&amp;l=english&amp;_cdn=fastly"></script>
+<script type="text/javascript">
+	Array.from = __PrototypePreserve[0] || Array.from;
+	Array.prototype.filter = __PrototypePreserve[1] || Array.prototype.filter;
+	Array.prototype.flatMap = __PrototypePreserve[2] || Array.prototype.flatMap;
+	Array.prototype.find = __PrototypePreserve[3] || Array.prototype.find;
+	Array.prototype.some = __PrototypePreserve[4] || Array.prototype.some;
+	Function.prototype.bind = __PrototypePreserve[5] || Function.prototype.bind;
+	HTMLElement.prototype.scrollTo = __PrototypePreserve[6] || HTMLElement.prototype.scrollTo;
+</script>
+<script type="text/javascript">
+	var __ScriptaculousPreserve=[];
+	__ScriptaculousPreserve[0] = Array.from;
+	__ScriptaculousPreserve[1] = Function.prototype.bind;
+	__ScriptaculousPreserve[2] = HTMLElement.prototype.scrollTo;
+</script>
+<script type="text/javascript" src="https://community.fastly.steamstatic.com/public/javascript/scriptaculous/_combined.js?v=pbdAKOcDIgbC&amp;l=english&amp;_cdn=fastly&amp;load=effects,controls,slider,dragdrop"></script>
+<script type="text/javascript">
+	Array.from = __ScriptaculousPreserve[0] || Array.from;
+	Function.prototype.bind = __ScriptaculousPreserve[1] || Function.prototype.bind;
+	HTMLElement.prototype.scrollTo = __ScriptaculousPreserve[2] || HTMLElement.prototype.scrollTo;
+delete String['__parseStyleElement'];  Prototype.Browser.WebKit = true;</script>
+<script type="text/javascript">VALVE_PUBLIC_PATH = "https:\/\/community.fastly.steamstatic.com\/public\/";</script><script type="text/javascript" src="https://community.fastly.steamstatic.com/public/javascript/global.js?v=gFpIMpzMJ37e&amp;l=english&amp;_cdn=fastly"></script>
+<script type="text/javascript" src="https://community.fastly.steamstatic.com/public/javascript/jquery-1.11.1.min.js?v=gQHVlrK4-jX-&amp;l=english&amp;_cdn=fastly"></script>
+<script type="text/javascript" src="https://community.fastly.steamstatic.com/public/shared/javascript/tooltip.js?v=a9q1REOJMDBo&amp;l=english&amp;_cdn=fastly"></script>
+<script type="text/javascript" src="https://community.fastly.steamstatic.com/public/shared/javascript/shared_global.js?v=LKHHGyvATtqM&amp;l=english&amp;_cdn=fastly"></script>
+<script type="text/javascript" src="https://community.fastly.steamstatic.com/public/shared/javascript/auth_refresh.js?v=w6QbwI-5-j2S&amp;l=english&amp;_cdn=fastly"></script>
+<script type="text/javascript">Object.seal && [ Object, Array, String, Number ].map( function( builtin ) { Object.seal( builtin.prototype ); } );</script><script type="text/javascript">$J = jQuery.noConflict();
+if ( typeof JSON != 'object' || !JSON.stringify || !JSON.parse ) { document.write( "<scr" + "ipt type=\"text\/javascript\" src=\"https:\/\/community.fastly.steamstatic.com\/public\/javascript\/json2.js?v=54NKNglvGTO8&amp;l=english&amp;_cdn=fastly\"><\/script>\n" ); };
+</script>
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(event) {
+				SetupTooltips( { tooltipCSSClass: 'community_tooltip'} );
+		});
+		</script></head>
+<body>
+<center>
+<!-- header bar, contains info browsing user if logged in -->
+<div role="banner" id="global_header" data-panel="{&quot;flow-children&quot;:&quot;row&quot;}">
+	<div class="content">
+		<div class="logo">
+			<span id="logo_holder">
+									<a href="https://store.steampowered.com/" aria-label="Link to the Steam Homepage">
+						<img src="https://community.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" width="144.5" height="44" alt="Link to the Steam Homepage">
+					</a>
+							</span>
+		</div>
+
+			<div role="navigation" class="supernav_container" aria-label="Global Menu">
+								<a class="menuitem supernav" href="https://store.steampowered.com/" data-tooltip-type="selector" data-tooltip-content=".submenu_Store">
+				STORE			</a>
+			<div class="submenu_Store" style="display: none;" data-submenuid="Store">
+														<a class="submenuitem" href="https://store.steampowered.com/">
+						Home											</a>
+														<a class="submenuitem" href="https://store.steampowered.com/explore/">
+						Discovery Queue											</a>
+														<a class="submenuitem" href="https://store.steampowered.com/wishlist/">
+						Wishlist											</a>
+														<a class="submenuitem" href="https://store.steampowered.com/points/shop/">
+						Points Shop											</a>
+														<a class="submenuitem" href="https://store.steampowered.com/news/">
+						News											</a>
+														<a class="submenuitem" href="https://store.steampowered.com/stats/">
+						Charts											</a>
+							</div>
+										<a class="menuitem supernav supernav_active" href="https://steamcommunity.com/" data-tooltip-type="selector" data-tooltip-content=".submenu_Community">
+				COMMUNITY			</a>
+			<div class="submenu_Community" style="display: none;" data-submenuid="Community">
+														<a class="submenuitem" href="https://steamcommunity.com/">
+						Home											</a>
+														<a class="submenuitem" href="https://steamcommunity.com/discussions/">
+						Discussions											</a>
+														<a class="submenuitem" href="https://steamcommunity.com/workshop/">
+						Workshop											</a>
+														<a class="submenuitem" href="https://steamcommunity.com/market/">
+						Market											</a>
+														<a class="submenuitem" href="https://steamcommunity.com/?subsection=broadcasts">
+						Broadcasts											</a>
+							</div>
+										<a class="menuitem " href="https://store.steampowered.com/about/">
+				About			</a>
+										<a class="menuitem " href="https://help.steampowered.com/en/">
+				SUPPORT			</a>
+				</div>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('#global_header .supernav').v_tooltip({'location':'bottom', 'destroyWhenDone': false, 'tooltipClass': 'supernav_content', 'offsetY':-6, 'offsetX': 1, 'horizontalSnap': 4, 'tooltipParent': '#global_header .supernav_container', 'correctForScreenSize': false});
+		});
+	</script>
+
+		<div id="global_actions">
+			<div role="navigation" id="global_action_menu" aria-label="Account Menu">
+									<a class="header_installsteam_btn header_installsteam_btn_green" href="https://store.steampowered.com/about/">
+						<div class="header_installsteam_btn_content">
+							Install Steam						</div>
+					</a>
+				
+				
+									<a class="global_action_link" href="https://steamcommunity.com/login/home/?goto=dev%2Fapiterms">sign in</a>
+											&nbsp;|&nbsp;
+						<span class="pulldown global_action_link" id="language_pulldown" onclick="ShowMenu( this, 'language_dropdown', 'right' );">language</span>
+						<div class="popup_block_new" id="language_dropdown" style="display: none;">
+							<div class="popup_body popup_menu">
+																																					<a class="popup_menu_item tight" href="?l=schinese" onclick="ChangeLanguage( 'schinese' ); return false;">
+											简体中文 (Simplified Chinese)																					</a>
+																													<a class="popup_menu_item tight" href="?l=tchinese" onclick="ChangeLanguage( 'tchinese' ); return false;">
+											繁體中文 (Traditional Chinese)																					</a>
+																													<a class="popup_menu_item tight" href="?l=japanese" onclick="ChangeLanguage( 'japanese' ); return false;">
+											日本語 (Japanese)																					</a>
+																													<a class="popup_menu_item tight" href="?l=koreana" onclick="ChangeLanguage( 'koreana' ); return false;">
+											한국어 (Korean)																					</a>
+																													<a class="popup_menu_item tight" href="?l=thai" onclick="ChangeLanguage( 'thai' ); return false;">
+											ไทย (Thai)																					</a>
+																													<a class="popup_menu_item tight" href="?l=indonesian" onclick="ChangeLanguage( 'indonesian' ); return false;">
+											Bahasa Indonesia (Indonesian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=malay" onclick="ChangeLanguage( 'malay' ); return false;">
+											Bahasa Melayu (Malay)																							<span class="language_beta">BETA</span>
+																					</a>
+																													<a class="popup_menu_item tight" href="?l=bulgarian" onclick="ChangeLanguage( 'bulgarian' ); return false;">
+											Български (Bulgarian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=czech" onclick="ChangeLanguage( 'czech' ); return false;">
+											Čeština (Czech)																					</a>
+																													<a class="popup_menu_item tight" href="?l=danish" onclick="ChangeLanguage( 'danish' ); return false;">
+											Dansk (Danish)																					</a>
+																													<a class="popup_menu_item tight" href="?l=german" onclick="ChangeLanguage( 'german' ); return false;">
+											Deutsch (German)																					</a>
+																																							<a class="popup_menu_item tight" href="?l=spanish" onclick="ChangeLanguage( 'spanish' ); return false;">
+											Español - España (Spanish - Spain)																					</a>
+																													<a class="popup_menu_item tight" href="?l=latam" onclick="ChangeLanguage( 'latam' ); return false;">
+											Español - Latinoamérica (Spanish - Latin America)																					</a>
+																													<a class="popup_menu_item tight" href="?l=greek" onclick="ChangeLanguage( 'greek' ); return false;">
+											Ελληνικά (Greek)																					</a>
+																													<a class="popup_menu_item tight" href="?l=french" onclick="ChangeLanguage( 'french' ); return false;">
+											Français (French)																					</a>
+																													<a class="popup_menu_item tight" href="?l=italian" onclick="ChangeLanguage( 'italian' ); return false;">
+											Italiano (Italian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=hungarian" onclick="ChangeLanguage( 'hungarian' ); return false;">
+											Magyar (Hungarian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=dutch" onclick="ChangeLanguage( 'dutch' ); return false;">
+											Nederlands (Dutch)																					</a>
+																													<a class="popup_menu_item tight" href="?l=norwegian" onclick="ChangeLanguage( 'norwegian' ); return false;">
+											Norsk (Norwegian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=polish" onclick="ChangeLanguage( 'polish' ); return false;">
+											Polski (Polish)																					</a>
+																													<a class="popup_menu_item tight" href="?l=portuguese" onclick="ChangeLanguage( 'portuguese' ); return false;">
+											Português (Portuguese - Portugal)																					</a>
+																													<a class="popup_menu_item tight" href="?l=brazilian" onclick="ChangeLanguage( 'brazilian' ); return false;">
+											Português - Brasil (Portuguese - Brazil)																					</a>
+																													<a class="popup_menu_item tight" href="?l=romanian" onclick="ChangeLanguage( 'romanian' ); return false;">
+											Română (Romanian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=russian" onclick="ChangeLanguage( 'russian' ); return false;">
+											Русский (Russian)																					</a>
+																													<a class="popup_menu_item tight" href="?l=finnish" onclick="ChangeLanguage( 'finnish' ); return false;">
+											Suomi (Finnish)																					</a>
+																													<a class="popup_menu_item tight" href="?l=swedish" onclick="ChangeLanguage( 'swedish' ); return false;">
+											Svenska (Swedish)																					</a>
+																													<a class="popup_menu_item tight" href="?l=turkish" onclick="ChangeLanguage( 'turkish' ); return false;">
+											Türkçe (Turkish)																					</a>
+																													<a class="popup_menu_item tight" href="?l=vietnamese" onclick="ChangeLanguage( 'vietnamese' ); return false;">
+											Tiếng Việt (Vietnamese)																					</a>
+																													<a class="popup_menu_item tight" href="?l=ukrainian" onclick="ChangeLanguage( 'ukrainian' ); return false;">
+											Українська (Ukrainian)																					</a>
+																									<a class="popup_menu_item tight" href="https://www.valvesoftware.com/contact?contact-person=Translation%20Team%20Feedback" target="_blank">Report a translation problem</a>
+							</div>
+						</div>
+												</div>
+					</div>
+			</div>
+</div>
+<div id="modalBG" style="display: none"></div><script type="text/javascript">
+	g_sessionID = "030787b648da4a1ce69bee83";
+	g_steamID = false;
+	g_strLanguage = "english";
+	g_SNR = '2_developer_apiterms_';
+	g_bAllowAppImpressions = true;
+		g_ContentDescriptorPreferences = [1,3,4];
+
+	
+
+	// We always want to have the timezone cookie set for PHP to use
+	setTimezoneCookies();
+
+	$J( function() {
+
+					InitMiniprofileHovers(( 'https%3A%2F%2Fsteamcommunity.com' ));
+			InitEmoticonHovers();
+		
+		ApplyAdultContentPreferences();
+	});
+
+	$J( function() { InitEconomyHovers( "https:\/\/community.fastly.steamstatic.com\/public\/css\/skin_1\/economy.css?v=RsRFFW9vaq1B&l=english&_cdn=fastly", "https:\/\/community.fastly.steamstatic.com\/public\/javascript\/economy_common.js?v=TSVmDS2fQKJu&l=english&_cdn=fastly", "https:\/\/community.fastly.steamstatic.com\/public\/javascript\/economy.js?v=pY7JMvljOOPC&l=english&_cdn=fastly" );});</script>
+<!-- /header bar -->
+
+
+<!-- top content -->
+<div id="BG_top">
+	<div id="mainContents">
+		<h2>Steam Web API Terms of Use </h2>
+		<p>Last updated July 2010</p>
+	</div>
+</div>
+<!-- /top content -->
+<!-- main body -->
+<div id="BG_bottom">
+
+	<div id="bodyContents">
+	
+<p><b>1. Steam Web APIs.</b>  The Steam Web APIs are Valve's service allowing licensees to retrieve certain data regarding Steam and games available via Steam ("Steam Data").  The Steam Web APIs consist of multiple application program interfaces for retrieving various Steam Data, and presenting the Steam Data to end users via a web site, software application, or service owned and operated by you and identified in the your <a href="https://steamcommunity.com/dev/apikey">API key sign up form</a> (the "Application").  These items are further defined in the <a href="https://steamcommunity.com/dev">Steam Web API documentation</a>.  Valve makes the Steam Web API available free, and you understand that Valve may change or terminate the Steam Web API entirely or your access in particular.  Valve may identify new releases from time to time at <a href="https://steamcommunity.com/dev">this link</a>, and may require you to use the most recent version. New versions may be incremental and consistent with older versions, but in some cases they may not be compatible with your previous implementation.  </p>
+<p><b>2. License to Steam Web API & Steam Data.</b>  Subject to these Terms of Use, you may access the Steam Web API, implement the Steam Web API in your Application, and distribute Steam Data to end users for their personal use via your Application, all in accordance with the <a href="https://steamcommunity.com/dev">Steam Web API documentation</a>. This license is subject to the following restrictions: </p>
+<ul>
+<li>You will post a privacy policy regarding the use of nonpublic end user data (including such Steam Data), and you will treat the Steam Data consistent with that policy.  You will only retrieve Steam Data about a Steam end user as requested by the end user.  You will inform the end user about any Steam Data you will store, and you will store the Steam Data in a country (or countries) identified in your privacy policy. </li>
+<li>You agree that you will provide the Steam Data to users on "as is" terms, with disclaimers substantially equivalent to those set forth in Sections 7 and 8. </li>
+<li>You agree to keep your Steam Web API key confidential, and not to share it with any third party. This license is personal to you and specific to your Application. You agree that you will be personally responsible for the use of your Steam Web API key.</li>
+<li>The Steam Web API may require a licensed Steam end user to authenticate a Steam account.  You will abide by the Steam Web API documentation and, in particular, you will not intercept or store the end user's Steam password on log in.  </li>
+<li>You may not present the Steam Data (or permit the Steam Data to be presented) so that it appears (a) that your Application is endorsed or affiliated with Valve or Steam, or (b) to be available from a third party.  </li>
+<li>You may not use the Steam Web API or Steam Data in any way that violates the <a href="http://store.steampowered.com/subscriber_agreement/">Steam Subscriber Agreement</a>.  You may not use the Steam Web API in any way that degrades the operation or performance of Steam or any games distributed via Steam.  You agree that you will not create or assist third parties in any way to create any technology or functionality that may give a user an unfair competitive advantage when playing multiplayer versions of any Steam game.  </li>
+<li>You may not use the Steam Web API or Steam Data for unsolicited marketing communications.</li>  
+<li>You are limited to one hundred thousand (100,000) calls to the Steam Web API per day. </li>
+<li>If you become aware that any user of your implementation is in material breach of these API Terms of Use, any provisions you are required to offer under these API Terms of Use, the <a href="http://store.steampowered.com/subscriber_agreement/">Steam Subscriber Agreement</a>, or the Steam Web API documentation (the "Applicable Terms"), then you agree to notify Valve promptly of such breach by e-mail to webapi@valvesoftware.com, and to take prompt commercially reasonable corrective action at your expense to remedy such breach.  In addition, upon request of Valve, you will either (a) use commercially reasonable efforts to obtain such equitable relief to prevent harm to Valve or its licensors, or (b) assign any of your applicable rights to permit Valve or the applicable licensor to seek such equitable relief.  Your obligations to report and enforce the Applicable Terms will survive termination of these API Terms of Use or your use of the Steam Web API. </li>
+</ul>
+<p><b>3. License to Valve Brand & Links.</b>  You agree, and Valve grants you a license, to implement the Valve name(s), logo(s), and links to Valve (the "Valve Brand & Links") on any Web page incorporating the Steam Web API and/or Steam Data, in accordance with the <a href="https://steamcommunity.com/dev">Steam Web API documentation</a>. You shall not tag links to Valve hereunder with a "nofollow" attribute or otherwise prevent or discourage search engines from following or scoring the link. </p>
+<p><b>4. Acceptable Use.</b>  You agree not to use the Steam Web API, Steam Data, or Valve Brand & Links in any way that is unlawful, or harms Valve, developers and publishers of games via Steam, their service providers, their suppliers, end users, or any other person.  Further, pursuant to Section 11 below, Valve may terminate your use of the Steam Web API, Steam Data and Valve Brand & Links at any time in Valve's sole discretion. </p>
+<p><b>5. Limited Relationship.</b>  You and Valve are independent contractors, and nothing in these API Terms of Use shall be construed as creating an employer-employee relationship, a partnership, or a joint venture. While you may publicly refer to the fact that you have implemented the Steam Web API, you agree not make any other public statements that assert or imply any other relationship with Valve, unless you have Valve's prior written approval. </p>
+<p><b>6. Indemnity.</b>  You agree to hold harmless and indemnify Valve, and its subsidiaries, affiliates, officers, agents, employees, and suppliers, from and against any third party claim arising from or in any way related to your or your users' use of your Application or the Steam Web API or Steam Data, use of Valve Brand & Links other than as set forth in the Steam Web API Network Branding Requirements, violation of these API Terms of Use or other actions connected with use of Valve services, including any liability or expense arising from all claims, losses, damages (actual and consequential), suits, judgments, litigation costs and attorneys' fees, of every kind and nature. In such a case, Valve will provide you with written notice of such claim, suit or action. </p>
+<p><b>7. NO WARRANTY.</b>  VALVE PROVIDES THE STEAM WEB API, STEAM DATA, AND VALVE BRAND & LINKS "AS IS," "WITH ALL FAULTS" AND "AS AVAILABLE," AND THE ENTIRE RISK AS TO SATISFACTORY QUALITY, PERFORMANCE, ACCURACY, AND EFFORT IS WITH YOU.  TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, VALVE , STEAM GAME PUBLISHERS AND DEVELOPERS, AND THEIR SUPPLIERS MAKE NO REPRESENTATIONS, WARRANTIES OR CONDITIONS, EXPRESS OR IMPLIED.  VALVE, STEAM GAME PUBLISHERS AND DEVELOPERS, AND THEIR SUPPLIERS EXPRESSLY DISCLAIM ANY AND ALL WARRANTIES OR CONDITIONS, EXPRESS, STATUTORY AND IMPLIED, INCLUDING WITHOUT LIMITATION (A) WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, WORKMANLIKE EFFORT, ACCURACY, TITLE, QUIET ENJOYMENT, NO ENCUMBRANCES, NO LIENS AND NON-INFRINGEMENT, (B) WARRANTIES OR CONDITIONS ARISING THROUGH COURSE OF DEALING OR USAGE OF TRADE, AND (C) WARRANTIES OR CONDITIONS OF UNINTERRUPTED OR ERROR-FREE ACCESS OR USE. </P>
+<P><B>8. LIABILITY LIMITATION; EXCLUSIVE REMEDY.</B>  IN NO EVENT WILL VALVE OR ANY SUPPLIER BE LIABLE FOR ANY DAMAGES, INCLUDING WITHOUT LIMITATION ANY INDIRECT, CONSEQUENTIAL, SPECIAL, INCIDENTAL, OR PUNITIVE DAMAGES ARISING OUT OF, BASED ON, OR RESULTING FROM THESE API TERMS OF USE OR YOUR USE OF STEAM WEB API, STEAM DATA, OR VALVE BRAND & LINKS, EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE EXCLUSION OF DAMAGES UNDER THIS PARAGRAPH IS INDEPENDENT OF YOUR EXCLUSIVE REMEDY AND SURVIVES IN THE EVENT SUCH REMEDY FAILS OF ITS ESSENTIAL PURPOSE OR IS OTHERWISE DEEMED UNENFORCEABLE. THESE LIMITATIONS AND EXCLUSIONS APPLY WITHOUT REGARD TO WHETHER THE DAMAGES ARISE FROM (A) BREACH OF CONTRACT, (B) BREACH OF WARRANTY, (C) NEGLIGENCE, OR (D) ANY OTHER CAUSE OF ACTION, TO THE EXTENT SUCH EXCLUSION AND LIMITATIONS ARE NOT PROHIBITED BY APPLICABLE LAW. IF YOU DO NOT AGREE WITH ANY PART OF THESE API TERMS OF USE, OR YOU HAVE ANY DISPUTE OR CLAIM AGAINST VALVE OR ITS SUPPLIERS WITH RESPECT TO THESE TERMS OF USE OR THE SERVICES, THEN YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USING THE STEAM WEB API, STEAM DATA, AND VALVE BRAND & LINKS. </p>
+<p><b>9. Intellectual Property.</b>  The Steam Web API, Steam Data, and Valve Brand & Links are the property of Valve, and subject to the intellectual property rights of Valve and its licensors. (c) 1996 -2010 Valve Corporation. All rights not explicitly granted are reserved. Valve, Steam, the Valve logo and the Steam logo are registered trademarks of Valve Corporation. 
+<p><b>10. Changes.</b>  Valve reserves the right to change the API Terms of Use, and you are responsible for regularly reviewing these API Terms of Use.  Your continued use of the Steam Web API and/or Steam Data after the effective date of such changes will constitute acceptance of and agreement to any such changes.  If you don't agree with any such changes, or to any of the terms in this Agreement, your only remedy is to discontinue using the Steam Web API, Steam Data, and Valve Brand & Links.  Valve may suspend or discontinue the Steam Web API at any time to you and/or to others, without notice. </p>
+<p><b>11. Termination.</b>  Valve may change, suspend or discontinue the Steam Web API and suspend or terminate your use of the Steam Web API, Steam Data, and/or Valve Brand & Links at any time for any reason, without notice. You may also terminate by ceasing to use the Steam Web API, Steam Data, and Valve Brand & Links, removing implementation of the Steam Web API from your Application, and deleting all copies of the Steam Data and Valve Brand & Links. </p>
+<p><b>12. Choice of Law; Disputes.</b>  These API Terms of Use are governed by the laws of the State of Washington, USA. You agree to submit to exclusive jurisdiction and venue in the state and federal courts sitting in King County, Washington, USA for any and all disputes, claims and actions arising from or in connection with the Steam Web API, Steam Data, Valve Brand & Links, and/or these API Terms of Use. In any dispute arising under this Agreement, the prevailing party will be entitled to attorneys' fees and expenses. </p>
+<p><b>13. General.</b>  You represent that you have the authority to bind the organization (if any) identified in your <a href="https://steamcommunity.com/dev/apikey">API key sign up form</a>.  You agree not to export from anywhere any part of the Steam Web API, Steam Data, or Valve Brand & Links provided to you or any direct product thereof except in compliance with, and with all licenses and approvals required under, applicable export laws, rules and regulations.  If any part of these API Terms of Use is determined to be invalid or unenforceable, then the invalid or unenforceable provision will be replaced with a valid, enforceable provision that most closely matches the intent of the original provision and the remainder of these API Terms of Use will continue in effect.  The section titles in these API Terms of Use are solely used for the convenience of the parties and have no legal or contractual significance.  Valve may assign these API Terms of Use, in whole or in part, at any time with or without notice to you.  You may not transfer, assign, or delegate the API Terms of Use and your Steam Web API key to any third party.  Valve's failure to act with respect to a breach by you or others does not waive its right to act with respect to subsequent or similar breaches.  Except as expressly stated herein, these API Terms of Use constitute the entire agreement between you and Valve with respect to the Steam Web API and Steam Data and supersede all prior or contemporaneous communications of any kind between you and Valve with respect to the Steam Web API, Steam Data, or Valve Brand & Links. </p>
+<br />	
+<a href="https://steamcommunity.com/dev/apikey">Back to Registration page</a>	
+	</div>
+<br />
+
+<br clear="all" />
+
+<br />
+
+</div>
+<!-- footer -->
+<div  data-featuretarget="footer"></div><!-- /footer -->
+
+</center>
+</body>
+</html>

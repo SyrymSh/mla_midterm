@@ -1,0 +1,7 @@
+{
+  "selected_at_utc": "2026-11-01T22:00:10.355712+00:00",
+  "winner": "Tuned gradient boosting",
+  "rule": "Lowest mean training CV MAE among expanded full-feature candidates",
+  "cv_MAE_hours": 8.639172228143456,
+  "plan_sha256": "f16c12df14bf08f36c3031f3bc478a424fdf89be1fdf207a77dfb2acbae2f810"
+}

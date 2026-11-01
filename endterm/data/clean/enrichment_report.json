@@ -1,0 +1,19 @@
+{
+  "prepared_at_utc": "2026-11-01T21:49:18.118783+00:00",
+  "original_rows": 5229,
+  "enriched_rows": 5229,
+  "original_columns": 14,
+  "enriched_columns": 70,
+  "igdb_returned_rows": 5229,
+  "steam_matched_rows": 3372,
+  "steam_metadata_rows": 3334,
+  "usd_price_rows": 2861,
+  "steam_tag_rows": 3333,
+  "steam_tag_dictionary_size": 446,
+  "test_rows_with_steam_app_in_training": 23,
+  "target_unchanged": true,
+  "split_unchanged": true,
+  "split_sha256": "5769f3362fb58cc606f62fa531f4f9ae04b4d9645644b78ba0e1e286aaaa309a",
+  "dataset_sha256": "2148c224a220e03571fa928de4cea3a4bf45b2429b2c1ab00fe505276239e6a8",
+  "policy": "No target imputation, no invented prices/tags, no cohort expansion, no removal based on test errors. Raw missing stays missing; any predictor imputation occurs inside training folds."
+}

@@ -1,0 +1,14 @@
+model,feature_set,parameters,selected_search_parameters,reason
+Median baseline,midterm,Training-label median,{},Minimum-complexity reference for absolute error.
+Ridge original features,midterm,alpha=20; solver=lsqr; log1p target,{},Regularized linear reference; identical settings isolate feature-set effects.
+Ridge expanded IGDB,igdb,alpha=20; solver=lsqr; log1p target,{},Regularized linear reference; identical settings isolate feature-set effects.
+Ridge IGDB + Steam,full,alpha=20; solver=lsqr; log1p target,{},Regularized linear reference; identical settings isolate feature-set effects.
+ExtraTrees original features,midterm,200 trees; min_samples_leaf=3; max_features=0.8; seed=42,{},Randomized tree ensemble; identical settings isolate feature-set effects.
+ExtraTrees expanded IGDB,igdb,200 trees; min_samples_leaf=3; max_features=0.8; seed=42,{},Randomized tree ensemble; identical settings isolate feature-set effects.
+ExtraTrees IGDB + Steam,full,200 trees; min_samples_leaf=3; max_features=0.8; seed=42,{},Randomized tree ensemble; identical settings isolate feature-set effects.
+Random forest,full,250 trees; min_samples_leaf=3; max_features=0.7; bootstrap=True; seed=42,{},Averages bootstrap-trained trees to reduce single-tree variance.
+Tuned gradient boosting,full,250 iterations; learning_rate=0.07; absolute_error; leaf/min-leaf/L2 grid,"{""model__l2_regularization"": 10, ""model__max_leaf_nodes"": 31, ""model__min_samples_leaf"": 20}",Fits the primary hour-scale absolute-error objective with tuned complexity.
+Tuned neural network,full,"Hidden layers (32,) or (64,32); alpha=0.01 or 0.1; max_iter=350; early stopping","{""regressor__model__alpha"": 0.1, ""regressor__model__hidden_layer_sizes"": [64, 32]}",Tests nonlinear combinations of structured inputs with regularization.
+Linear regression original features,midterm,OLS; log1p target,{},Tests whether unregularized linear relations are sufficient.
+Decision tree original features,midterm,max_depth=10; min_samples_leaf=10; seed=42,{},Captures nonlinear thresholds while limiting tree complexity.
+KNN original features,midterm,25 neighbours; distance weights; numeric scaling,{},Tests local similarity. Scaling prevents release year from dominating distance.

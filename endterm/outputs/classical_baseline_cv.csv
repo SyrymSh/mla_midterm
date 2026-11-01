@@ -1,0 +1,4 @@
+model,feature_set,train_cv_MAE_hours,train_cv_MAE_std_hours,training_seconds,tuned,best_parameters
+Linear regression original features,midterm,10.100566272769006,0.6373994895733792,0.58,False,{}
+Decision tree original features,midterm,10.192306498937798,0.8007986730922761,0.33,False,{}
+KNN original features,midterm,10.400717088126866,0.6857749472806399,0.3,False,{}
