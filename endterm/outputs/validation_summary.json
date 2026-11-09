@@ -1,5 +1,5 @@
 {
-  "verified_at_utc": "2026-11-01T23:06:14.576080+00:00",
+  "verified_at_utc": "2026-11-09T10:17:47.978571+00:00",
   "raw_manifest_files_verified": 10,
   "original_files_preserved": 19,
   "cohort_rows": 5229,
@@ -9,20 +9,24 @@
   "saved_model_predictions_match": true,
   "target_and_split_preserved": true,
   "complete_field_dictionary": true,
+  "model_input_view_has_no_empty_predictor_columns": true,
   "source_price_and_tag_checks": true,
   "course_models_present": true,
+  "both_ensembles_have_training_CV_searches": true,
+  "cross_model_and_cluster_errors_verified": true,
+  "MLP_learning_checks_present": true,
   "documentation_links_valid": true,
   "AI_use_disclosure_present": true,
-  "notebook_executed_code_cells": 14,
-  "report_pages": 9,
+  "notebook_executed_code_cells": 13,
+  "report_pages": 10,
   "slide_pdf_pages": 9,
   "editable_slide_count": 9,
-  "native_chart_count": 5,
-  "embedded_chart_workbooks": 5,
+  "native_chart_count": 6,
+  "embedded_chart_workbooks": 6,
   "deliverable_sha256": {
-    "notebooks/Video_Game_Endterm.ipynb": "74798ae9a535090cd23895cba28bdd30252f0025d73616f8e53c9f6ddc2f69c9",
-    "docs/Endterm_Report.pdf": "d98738790c03b91eec582967fcacecb08c56ce1a5627504a816107c6b1e74a9f",
-    "docs/Endterm_Defense.pptx": "01f4d308e362ade233465bf47e49708a6545ebcf9b1fbef74e60bcb8f45f6db4",
-    "docs/Endterm_Defense.pdf": "7a1f3bc1d135bae91f09da1dd6bfa80899ef9a8954b12b11915bb43d85fb2b40"
+    "notebooks/Video_Game_Endterm.ipynb": "ff1212828a69cad33d80dd3f255f33c1a13ef1a6b79cac44ee98cc6b7013cef0",
+    "docs/Endterm_Report.pdf": "af9119238f245a9869a1bbcea6d6eb409d71a4b97d4fe3ce6e77a0f53965b9b6",
+    "docs/Endterm_Defense.pptx": "c5b71e141ced64bcfa3b5d123028e01ae02e7d4f86db644b5e6dc78af51d550b",
+    "docs/Endterm_Defense.pdf": "7a926227d6335d84f7e4530b9a9324eb4673b2df9255cbd00abd2cbecb011469"
   }
 }

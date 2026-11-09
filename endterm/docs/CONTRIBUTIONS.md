@@ -1,15 +1,21 @@
-# Team responsibilities and tools
+# Responsibilities and tools
 
-These responsibilities are assigned for project review and the defence. Completed individual work has not been confirmed, so the table should not be presented as a record of personal authorship.
+Syrym Shadiyarbek and Yerdaulet Akhanov, group SE2424.
 
-| Team member | Responsibility | Review work before the defence |
+The team has assigned the review and defence responsibilities below. Completed personal work has not been confirmed. Each partner should record the work they actually finish before using this section to describe their contribution.
+
+| Team member | Assigned area | Work to complete and explain |
 | --- | --- | --- |
-| Syrym Shadiyarbek | Collection and preparation | Review the API requests, check five games against raw responses, explain prices and missing data, and run preparation and the data audit. |
-| Syrym Shadiyarbek | Exploration and clustering | Explain the target, genre and price plots, normalization, PCA, selection of k and the overlapping clusters. |
-| Yerdaulet Akhanov | Models and tuning | Review the classical references, ensembles and neural network. Explain parameter choices, pipelines, CV and selection. |
-| Yerdaulet Akhanov | Evaluation | Recompute scores, inspect feature comparisons and errors, and explain uncertainty and the fixed test set. |
-| Both | Conclusions and presentation | Review the report, rehearse the talk and practise questions on each other's areas. |
+| Syrym Shadiyarbek | Collection and preparation | Trace the IGDB target collector and Endterm metadata collector, check five game IDs against the raw responses, run preparation/source audits, and explain the price/tag coverage and unchanged split. |
+| Syrym Shadiyarbek | Exploration and unsupervised analysis | Explain the training-only target/genre/price summaries, descriptor normalization, PCA, k selection, seed stability and the cluster-based error analysis, using named games. |
+| Yerdaulet Akhanov | Models and tuning | Run or review the classical references, both ensemble searches and the MLP. Explain the search spaces, train-fold pipelines, CV variability, selection rule and early stopping. |
+| Yerdaulet Akhanov | Evaluation | Recompute scores from predictions, compare errors across models and duration/genre/cluster groups, inspect real failures, and explain uncertainty and test reuse. |
+| Both | Conclusions, archive and defence | Review the full notebook/report/slides, explain what changed after Midterm, rehearse the seven-minute talk, check the extracted ZIP and practise questions from the partner's areas. |
 
 ## AI tools used
 
-OpenAI Codex helped write and run the collection and modelling code, check the results, and prepare the notebook, report and slides. The data are saved API observations, and the scores come from executed experiments. The students are responsible for reviewing the work and explaining it. Individual contribution claims should be updated only after the corresponding work is completed.
+OpenAI Codex assisted with the collection and modelling code, executed experiments, data/result checks, and preparation of the notebook, report and slides. The Humanizer editing skill helped revise wording while preserving its factual meaning. The dataset contains saved source observations, and reported scores come from model runs. The team must review the resulting work and explain it independently.
+
+## Personal review record
+
+Before submission, each student should add a short dated statement describing tasks they completed, the commands or evidence they checked, and any changes they made. A partner's assigned area alone does not establish that the work was completed. No review or rehearsal is claimed in this document until the students confirm it.

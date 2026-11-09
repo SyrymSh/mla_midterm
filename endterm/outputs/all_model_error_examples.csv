@@ -1,0 +1,55 @@
+model,selection,game_id,title,actual_hours,predicted_hours,absolute_error
+Median baseline,largest error,143228,Gorilla Tag,997.5,5.0,992.5
+Median baseline,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,5.0,95.0
+Median baseline,largest gain over archived Ridge,217304,Road to Vostok,8.0,5.0,3.0
+Median baseline,largest loss against archived Ridge,26845,Fire Emblem: Three Houses,44.19167,5.0,39.19167
+Linear regression original features,largest error,143228,Gorilla Tag,997.5,1.2880763538448718,996.2119236461551
+Linear regression original features,largest error among 5-100-hour games,56613,Mad Age and This Guy,100.0,2.272735745087391,97.72726425491261
+Linear regression original features,largest gain over archived Ridge,55945,Brawl Stars,342.0,39.847969030806006,302.152030969194
+Linear regression original features,largest loss against archived Ridge,23193,Battlerite,7.7,54.30517641614448,46.605176416144474
+Decision tree original features,largest error,143228,Gorilla Tag,997.5,2.5080918482106376,994.9919081517894
+Decision tree original features,largest error among 5-100-hour games,56613,Mad Age and This Guy,100.0,2.459256275266545,97.54074372473346
+Decision tree original features,largest gain over archived Ridge,7360,Rainbow Six Siege,500.0,33.53098069484423,466.46901930515577
+Decision tree original features,largest loss against archived Ridge,170263,SpellForce III: Reforced,28.5,3.2088781305446723,25.291121869455328
+KNN original features,largest error,143228,Gorilla Tag,997.5,2.76798097760133,994.7320190223986
+KNN original features,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.0,99.0
+KNN original features,largest gain over archived Ridge,9927,Persona 5,100.0,40.00000000000001,59.99999999999999
+KNN original features,largest loss against archived Ridge,1203,Tales of Destiny 2,30.0,100.00000000000004,70.00000000000004
+Ridge original features,largest error,143228,Gorilla Tag,997.5,1.405043291958758,996.0949567080412
+Ridge original features,largest error among 5-100-hour games,56613,Mad Age and This Guy,100.0,2.278271184572976,97.72172881542703
+Ridge original features,largest gain over archived Ridge,293354,Polytrack,0.16667,0.3766972839327301,0.2100272839327301
+Ridge original features,largest loss against archived Ridge,27804,Phoenix Point,40.0,23.62871537618383,16.37128462381617
+Ridge expanded IGDB,largest error,143228,Gorilla Tag,997.5,3.3889917808602883,994.1110082191398
+Ridge expanded IGDB,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,0.8882634456491565,99.11173655435084
+Ridge expanded IGDB,largest gain over archived Ridge,1020,Grand Theft Auto V,115.05611,38.12349866223129,76.93261133776872
+Ridge expanded IGDB,largest loss against archived Ridge,277807,Cyberpunk 2077: Ultimate Edition,17.0,54.85411333315541,37.85411333315541
+Ridge IGDB + Steam,largest error,143228,Gorilla Tag,997.5,6.499154009077055,991.0008459909229
+Ridge IGDB + Steam,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.1703426431708892,98.82965735682912
+Ridge IGDB + Steam,largest gain over archived Ridge,151665,Palworld,85.0,39.80161658834303,45.19838341165697
+Ridge IGDB + Steam,largest loss against archived Ridge,2058,Payday 2,15.0,41.46475760886548,26.464757608865483
+ExtraTrees original features,largest error,143228,Gorilla Tag,997.5,3.060230518697497,994.4397694813025
+ExtraTrees original features,largest error among 5-100-hour games,94169,Gun Bros,100.0,1.9726332051745292,98.02736679482547
+ExtraTrees original features,largest gain over archived Ridge,2265,WWE SmackDown vs. Raw 2011,100.0,40.966189384758266,59.033810615241734
+ExtraTrees original features,largest loss against archived Ridge,325591,Elden Ring Nightreign,10.0,32.939930011774976,22.939930011774976
+ExtraTrees expanded IGDB,largest error,143228,Gorilla Tag,997.5,3.9524381240489497,993.547561875951
+ExtraTrees expanded IGDB,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.1276512787637718,98.87234872123622
+ExtraTrees expanded IGDB,largest gain over archived Ridge,373557,HDOS,486.0,46.49928439479874,439.50071560520126
+ExtraTrees expanded IGDB,largest loss against archived Ridge,92697,Dragon Ball Online,5.0,49.14667451230702,44.14667451230702
+ExtraTrees IGDB + Steam,largest error,143228,Gorilla Tag,997.5,4.992600810457738,992.5073991895423
+ExtraTrees IGDB + Steam,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.107618614295451,98.89238138570455
+ExtraTrees IGDB + Steam,largest gain over archived Ridge,252647,Persona 3 Reload,63.5,62.32229390277558,1.1777060972244229
+ExtraTrees IGDB + Steam,largest loss against archived Ridge,116149,Attack on Titan 2: Final Battle,18.0,45.00422216687346,27.00422216687346
+Random forest,largest error,143228,Gorilla Tag,997.5,6.034237922797595,991.4657620772024
+Random forest,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.522271456126985,98.47772854387301
+Random forest,largest gain over archived Ridge,252647,Persona 3 Reload,63.5,50.90308787901229,12.59691212098771
+Random forest,largest loss against archived Ridge,24728,Lords of the Fallen: Game of the Year Edition,14.0,29.9357607835837,15.9357607835837
+Tuned gradient boosting,largest error,143228,Gorilla Tag,997.5,5.852350303047158,991.6476496969528
+Tuned gradient boosting,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.1764992119842257,98.82350078801578
+Tuned gradient boosting,largest gain over archived Ridge,26765,Octopath Traveler,60.0,36.01222766312144,23.987772336878557
+Tuned gradient boosting,largest loss against archived Ridge,14,Fallout 2,2.0,19.286775479664527,17.286775479664527
+Tuned neural network,largest error,143228,Gorilla Tag,997.5,5.059915340481069,992.4400846595189
+Tuned neural network,largest error among 5-100-hour games,192114,Sonic Adventure: Sonic Adventure DX Upgrade,100.0,1.127011765021574,98.87298823497842
+Tuned neural network,largest gain over archived Ridge,7046,Factorio,50.0,40.82459646520342,9.17540353479658
+Tuned neural network,largest loss against archived Ridge,105417,Digimon Survive,20.0,54.89786103584071,34.89786103584071
+Archived Midterm Ridge,largest error,143228,Gorilla Tag,997.5,1.404778112074569,996.0952218879254
+Archived Midterm Ridge,largest error among 5-100-hour games,56613,Mad Age and This Guy,100.0,2.2773680200544333,97.72263197994556

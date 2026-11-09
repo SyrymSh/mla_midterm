@@ -1,0 +1,14 @@
+model,feature_set,train_cv_MAE_hours,train_cv_MAE_std_hours,training_seconds,tuned,best_parameters
+Median baseline,midterm,11.074917276330202,0.7155482127152616,1.19,False,{}
+Linear regression original features,midterm,10.100566272769006,0.6373994895733792,0.92,False,{}
+Decision tree original features,midterm,10.192306498937798,0.8007986730922761,0.86,False,{}
+KNN original features,midterm,10.400717088126866,0.6857749472806399,1.02,False,{}
+Ridge original features,midterm,10.074177448170422,0.6799177862431917,0.88,False,{}
+Ridge expanded IGDB,igdb,9.25352946359747,0.6557064914290284,3.41,False,{}
+Ridge IGDB + Steam,full,9.157036944082346,0.679943610981399,4.77,False,{}
+ExtraTrees original features,midterm,10.014413725207705,0.6649515618231185,11.98,False,{}
+ExtraTrees expanded IGDB,igdb,9.221638391316239,0.6952768191498796,97.92,False,{}
+ExtraTrees IGDB + Steam,full,8.7717715072882,0.7425194133062889,112.08,False,{}
+Random forest,full,8.63569441791808,0.6420519007854526,291.05,True,"{""regressor__model__max_features"": 0.5, ""regressor__model__min_samples_leaf"": 3, ""regressor__model__n_estimators"": 250}"
+Tuned gradient boosting,full,8.639172228143456,0.601537393903663,461.47,True,"{""model__l2_regularization"": 10, ""model__max_leaf_nodes"": 31, ""model__min_samples_leaf"": 20}"
+Tuned neural network,full,9.015777585433213,0.6370540458441576,52.92,True,"{""regressor__model__alpha"": 0.1, ""regressor__model__hidden_layer_sizes"": [64, 32]}"

@@ -1,4 +1,5 @@
 {
+  "recorded_before_test_scoring_utc": "2026-11-09T10:14:24.301016+00:00",
   "hidden_layer_sizes": [
     64,
     32
@@ -72,6 +73,12 @@
     0.3989320466085089,
     0.38746556784731967
   ],
+  "best_validation_iteration": 9,
+  "best_internal_validation_R2": 0.48466556895571633,
   "target_transform": "log1p then train-fitted StandardScaler; inverse before hour metrics",
-  "note": "Loss and internal validation R2 are in standardized log-target space, not hours."
+  "note": "Loss and internal validation R2 are in standardized log-target space, not hours.",
+  "final_internal_validation_R2": 0.38746556784731967,
+  "loss_at_best_validation_iteration": 0.18754465551432983,
+  "final_training_loss": 0.06962343027509034,
+  "interpretation": "After the validation peak, decreasing training loss with weaker validation indicates overfitting. Early stopping restores the peak weights; reaching a plateau does not establish a globally optimal network."
 }

@@ -63,6 +63,46 @@ def metrics(y,pred):
             'test_MedAE_hours':float(median_absolute_error(y,p)),
             'test_sMAPE_percent':float(np.mean(2*np.abs(y-p)/(y+p))*100)}
 
+def write_neural_diagnostics(fitted):
+    """Record train/internal-validation progress before held-out predictions."""
+    neural=fitted['Tuned neural network'].regressor_.named_steps['model']
+    peak=int(np.argmax(neural.validation_scores_))
+    write_json(OUT/'neural_network_diagnostics.json',{
+        'recorded_before_test_scoring_utc':utc_now(),
+        'hidden_layer_sizes':list(neural.hidden_layer_sizes), 'alpha':float(neural.alpha),
+        'iterations':int(neural.n_iter_), 'max_iter':int(neural.max_iter),
+        'early_stopping':bool(neural.early_stopping),'validation_fraction':float(neural.validation_fraction),
+        'loss_curve':[float(v) for v in neural.loss_curve_],
+        'internal_validation_R2_curve':[float(v) for v in neural.validation_scores_],
+        'best_validation_iteration':peak+1,
+        'best_internal_validation_R2':float(neural.validation_scores_[peak]),
+        'target_transform':'log1p then train-fitted StandardScaler; inverse before hour metrics',
+        'note':'Loss and internal validation R2 are in standardized log-target space, not hours.'})
+
+def write_conclusions(comparison,predictions,winner):
+    table=comparison.set_index('model')
+    selected=table.loc[winner]
+    gain=100*(1-selected.test_MAE_hours/table.loc['Median baseline','test_MAE_hours'])
+    long=predictions.actual_hours.gt(100)
+    fraction=100*predictions.loc[long,'absolute_error'].sum()/predictions.absolute_error.sum()
+    conclusion={
+        'question':'Can structured game metadata estimate main-story completion hours?',
+        'answer':f'{winner} provides rough catalog estimates, with test MAE {selected.test_MAE_hours:.2f} hours and median absolute error {selected.test_MedAE_hours:.2f} hours.',
+        'selection':'Lowest mean training-only CV MAE among expanded full-feature candidates.',
+        'winner':winner,'test_MAE_hours':float(selected.test_MAE_hours),
+        'MAE_reduction_percent_vs_median':float(gain),
+        'test_games_above_100_hours':int(long.sum()),
+        'absolute_error_percent_from_above_100_hour_games':float(fraction),
+        'MLP_test_MAE_hours':float(table.loc['Tuned neural network','test_MAE_hours']),
+        'limitations':'Extreme/open-ended-game labels, selective Steam coverage, current rather than launch metadata and a previously observed test set limit generalization.',
+        'Final_plan':'Use the retained IGDB descriptions linked by game ID; compare train-fold TF-IDF text and structured-plus-text models on the same CV folds and split, then build the local prediction app.'}
+    write_json(OUT/'conclusions.json',conclusion)
+    print('\nCONCLUSIONS',flush=True)
+    print(conclusion['answer'],flush=True)
+    print(f'MAE is {gain:.1f}% lower than the median baseline. The {int(long.sum())} games above 100 hours contribute {fraction:.1f}% of total absolute error.',flush=True)
+    print('Limitations:',conclusion['limitations'],flush=True)
+    print('Final plan:',conclusion['Final_plan'],flush=True)
+
 def bootstrap_improvement(y,reference,new,n=5000):
     """Paired game bootstrap, conditional on these fitted models and this cohort."""
     deltas=np.abs(np.asarray(y)-np.asarray(reference))-np.abs(np.asarray(y)-np.asarray(new))
@@ -86,7 +126,7 @@ def write_model_specifications(comparison):
         'Linear regression original features':('OLS; log1p target','Tests whether unregularized linear relations are sufficient.'),
         'Decision tree original features':('max_depth=10; min_samples_leaf=10; seed=42','Captures nonlinear thresholds while limiting tree complexity.'),
         'KNN original features':('25 neighbours; distance weights; numeric scaling','Tests local similarity. Scaling prevents release year from dominating distance.'),
-        'Random forest':('250 trees; min_samples_leaf=3; max_features=0.7; bootstrap=True; seed=42','Averages bootstrap-trained trees to reduce single-tree variance.'),
+        'Random forest':('150/250 trees; min_samples_leaf=3/8; max_features=0.5/0.7; bootstrap=True; seed=42','Training-CV search tests ensemble size, leaf smoothing and feature diversity.'),
         'Tuned gradient boosting':('250 iterations; learning_rate=0.07; absolute_error; leaf/min-leaf/L2 grid','Fits the primary hour-scale absolute-error objective with tuned complexity.'),
         'Tuned neural network':('Hidden layers (32,) or (64,32); alpha=0.01 or 0.1; max_iter=350; early stopping','Tests nonlinear combinations of structured inputs with regularization.'),
     }
@@ -179,7 +219,10 @@ def run():
         'ExtraTrees original features':(estimator(ExtraTreesRegressor(n_estimators=200,min_samples_leaf=3,max_features=.8,random_state=SEED,n_jobs=2),'midterm'),None,'midterm'),
         'ExtraTrees expanded IGDB':(estimator(ExtraTreesRegressor(n_estimators=200,min_samples_leaf=3,max_features=.8,random_state=SEED,n_jobs=2),'igdb'),None,'igdb'),
         'ExtraTrees IGDB + Steam':(estimator(ExtraTreesRegressor(n_estimators=200,min_samples_leaf=3,max_features=.8,random_state=SEED,n_jobs=2)),None,'full'),
-        'Random forest':(estimator(RandomForestRegressor(n_estimators=250,min_samples_leaf=3,max_features=.7,random_state=SEED,n_jobs=2)),None,'full'),
+        'Random forest':(estimator(RandomForestRegressor(random_state=SEED,n_jobs=2)),{
+            'regressor__model__n_estimators':[150,250],
+            'regressor__model__min_samples_leaf':[3,8],
+            'regressor__model__max_features':[.5,.7]},'full'),
         'Tuned gradient boosting':(estimator(HistGradientBoostingRegressor(loss='absolute_error',max_iter=250,learning_rate=.07,random_state=SEED),'full','raw'),{
             'model__max_leaf_nodes':[15,31], 'model__min_samples_leaf':[20,50], 'model__l2_regularization':[1,10]},'full'),
         'Tuned neural network':(estimator(MLPRegressor(max_iter=350,early_stopping=True,validation_fraction=.15,n_iter_no_change=20,random_state=SEED),'full','scaled_log'),{
@@ -202,12 +245,14 @@ def run():
         print('TRAIN CV:',name,flush=True)
         with threadpool_limits(limits=2):
             if grid:
-                search=GridSearchCV(model,grid,scoring=SCORER,cv=folds,n_jobs=1,error_score='raise',refit=True,return_train_score=True)
+                search=GridSearchCV(model,grid,scoring=SCORER,cv=folds,n_jobs=1,error_score='raise',refit=True,return_train_score=True,verbose=1)
                 search.fit(x,y)
                 model=search.best_estimator_
                 params=search.best_params_
                 scores=np.array([-search.cv_results_[f'split{i}_test_score'][search.best_index_] for i in range(3)])
-                pd.DataFrame(search.cv_results_).to_csv(OUT/'search'/('gradient_boosting.csv' if 'boosting' in name else 'neural_network.csv'),index=False)
+                search_file={'Random forest':'random_forest.csv','Tuned gradient boosting':'gradient_boosting.csv',
+                             'Tuned neural network':'neural_network.csv'}[name]
+                pd.DataFrame(search.cv_results_).to_csv(OUT/'search'/search_file,index=False)
             else:
                 cv=cross_validate(model,x,y,cv=folds,scoring=SCORER,error_score='raise',n_jobs=1)
                 scores=-cv['test_score']
@@ -221,6 +266,7 @@ def run():
         cv_details.extend({'model':name,'fold':i+1,'validation_MAE_hours':float(score)} for i,score in enumerate(scores))
         pd.DataFrame(results).to_csv(OUT/'training_cv_progress.csv',index=False)
         print('CV MAE:',round(scores.mean(),3),'+/-',round(scores.std(ddof=1),3),'hours',flush=True)
+    write_neural_diagnostics(fitted)
     comparison=pd.DataFrame(results)
     eligible=comparison[comparison.feature_set.eq('full')]
     winner=eligible.sort_values('train_cv_MAE_hours',kind='stable').iloc[0].model
@@ -248,15 +294,6 @@ def run():
     pd.DataFrame(cv_details).to_csv(OUT/'cv_fold_scores.csv',index=False)
     write_model_specifications(comparison)
     joblib.dump(selected,OUT/'best_model.joblib',compress=3)
-    neural=fitted['Tuned neural network'].regressor_.named_steps['model']
-    write_json(OUT/'neural_network_diagnostics.json',{
-        'hidden_layer_sizes':list(neural.hidden_layer_sizes), 'alpha':float(neural.alpha),
-        'iterations':int(neural.n_iter_), 'max_iter':int(neural.max_iter),
-        'early_stopping':bool(neural.early_stopping),'validation_fraction':float(neural.validation_fraction),
-        'loss_curve':[float(v) for v in neural.loss_curve_],
-        'internal_validation_R2_curve':[float(v) for v in neural.validation_scores_],
-        'target_transform':'log1p then train-fitted StandardScaler; inverse before hour metrics',
-        'note':'Loss and internal validation R2 are in standardized log-target space, not hours.'})
     paired={
         'selected_vs_median':bootstrap_improvement(ytest,all_predictions['Median baseline'],all_predictions[winner]),
         'selected_vs_retrained_original_ridge':bootstrap_improvement(ytest,all_predictions['Ridge original features'],all_predictions[winner]),
@@ -309,6 +346,7 @@ def run():
                          'Long-duration labels remain in the full-cohort evaluation.','Missing raw predictors stay missing; model-only imputation is fitted in folds.']}
     write_json(OUT/'experiment_manifest.json',manifest)
     print(comparison[['model','train_cv_MAE_hours','test_MAE_hours','test_R2']].to_string(index=False),flush=True)
+    write_conclusions(comparison,predictions,winner)
     return comparison
 
 if __name__=='__main__':

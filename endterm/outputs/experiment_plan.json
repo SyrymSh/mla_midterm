@@ -1,10 +1,13 @@
 {
-  "created_before_test_evaluation_utc": "2026-11-01T21:49:44.837196+00:00",
+  "created_before_test_evaluation_utc": "2026-11-09T09:57:03.703451+00:00",
   "seed": 42,
   "cv": "3-fold shuffled KFold on training IDs only",
   "metric": "MAE in original hours",
   "candidate_order": [
     "Median baseline",
+    "Linear regression original features",
+    "Decision tree original features",
+    "KNN original features",
     "Ridge original features",
     "Ridge expanded IGDB",
     "Ridge IGDB + Steam",
@@ -16,6 +19,20 @@
     "Tuned neural network"
   ],
   "grids": {
+    "Random forest": {
+      "regressor__model__n_estimators": [
+        150,
+        250
+      ],
+      "regressor__model__min_samples_leaf": [
+        3,
+        8
+      ],
+      "regressor__model__max_features": [
+        0.5,
+        0.7
+      ]
+    },
     "Tuned gradient boosting": {
       "model__max_leaf_nodes": [
         15,

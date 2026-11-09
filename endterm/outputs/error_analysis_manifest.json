@@ -1,0 +1,26 @@
+{
+  "completed_at_utc": "2026-11-09T10:16:38.617667+00:00",
+  "models": [
+    "Median baseline",
+    "Linear regression original features",
+    "Decision tree original features",
+    "KNN original features",
+    "Ridge original features",
+    "Ridge expanded IGDB",
+    "Ridge IGDB + Steam",
+    "ExtraTrees original features",
+    "ExtraTrees expanded IGDB",
+    "ExtraTrees IGDB + Steam",
+    "Random forest",
+    "Tuned gradient boosting",
+    "Tuned neural network",
+    "Archived Midterm Ridge"
+  ],
+  "selected_model": "Random forest",
+  "test_rows": 1046,
+  "cluster_fit": "Predictors from training partition only; no duration used for fitting or k selection.",
+  "purpose": "Held-out descriptive error analysis. Does not select features, clusters, settings or winner.",
+  "bias_definition": "Actual minus predicted; positive values indicate underprediction.",
+  "examples": "Deterministic largest errors and gains/losses, plus near-median-duration cluster examples.",
+  "midterm_reference": "Exact archived Midterm Ridge predictions, separate from current original-feature refit."
+}

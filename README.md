@@ -1,3 +1,13 @@
+## Complete Endterm submission archives
+
+The Endterm revision follows the supplied Endterm rubric and includes the collection code, real data, saved split, executed notebook, report, slides and build scripts. Everything needed for assessment is inside each ZIP.
+
+- [Syrym Shadiyarbek, SE2424](submissions/Endterm_Shadiyarbek_Syrym_SE2424.zip)
+- [Yerdaulet Akhanov, SE2424](submissions/Endterm_Akhanov_Yerdaulet_SE2424.zip)
+- [Project instructions and results](endterm/README.md)
+
+Both archives contain identical project contents. The seven-minute defence script and individual review tasks are in the project documentation.
+
 ## Endterm project
 
 The completed Endterm project, report, slides, executed notebook and real IGDB/Steam data are in [endterm/](endterm/README.md).

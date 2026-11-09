@@ -1,5 +1,6 @@
 """Verify source integrity, independent score recomputation and executed artifacts."""
 import json
+import ast
 import zipfile
 import re
 from urllib.parse import unquote
@@ -33,10 +34,27 @@ def run(artifacts=True):
               'Decision tree original features','KNN original features','Random forest',
               'Tuned gradient boosting','Tuned neural network'}
     assert required.issubset(set(comparison.model)), 'A course-required model is missing'
+    for model_name,filename,size in [('Random forest','random_forest.csv',8),
+                                     ('Tuned gradient boosting','gradient_boosting.csv',8),
+                                     ('Tuned neural network','neural_network.csv',4)]:
+        search=pd.read_csv(OUT/'search'/filename)
+        row=comparison.set_index('model').loc[model_name]
+        assert bool(row.tuned), f'{model_name} was not tuned'
+        assert len(search)==size and search.params.nunique()==size
+        winner=search.loc[search.rank_test_score.eq(1)].iloc[0]
+        assert np.isclose(-winner.mean_test_score,row.train_cv_MAE_hours)
+        assert json.loads(json.dumps(ast.literal_eval(winner.params)))==json.loads(row.best_parameters)
+        assert all(f'split{i}_test_score' in search for i in range(3))
     raw_frame=pd.read_csv(CLEAN/'games_enriched.csv')
     dictionary=pd.read_csv(CLEAN/'data_dictionary.csv')
     assert set(dictionary.field)==set(raw_frame.columns), 'Incomplete field dictionary'
     assert set(dictionary.loc[dictionary.model_input,'field'])==set(input_columns('full'))
+    model_view=pd.read_csv(CLEAN/'games_model_inputs.csv',dtype={'game_id':str})
+    assert model_view.columns.tolist()==['game_id','title','main_story_hours','partition']+input_columns('full')
+    assert model_view.game_id.tolist()==df.game_id.tolist()
+    assert model_view.partition.tolist()==df.partition.tolist()
+    np.testing.assert_array_equal(model_view.main_story_hours,df.main_story_hours)
+    assert model_view[input_columns('full')].notna().any().all(), 'An entirely empty model field remains'
     assert raw_frame.game_id.nunique()>=1000 and raw_frame.description.fillna('').str.strip().ne('').all()
     source_check=json.loads((CLEAN/'source_verification.json').read_text())
     assert source_check['cohort_and_labels_reproduced']
@@ -56,6 +74,27 @@ def run(artifacts=True):
         assert len(scores)==3
         assert np.isclose(scores.mean(),row.train_cv_MAE_hours)
         assert np.isclose(scores.std(ddof=1),row.train_cv_MAE_std_hours)
+    cluster_assignments=pd.read_csv(OUT/'cluster_assignments.csv',dtype={'game_id':str})
+    test_clusters=cluster_assignments.loc[cluster_assignments.partition.eq('test'),['game_id','cluster']]
+    assert set(test_clusters.game_id)==set(test.game_id)
+    cross_errors=pd.read_csv(OUT/'all_model_error_by_duration.csv')
+    assert set(cross_errors.model)==set(comparison.model)|{'Archived Midterm Ridge'}
+    assert cross_errors.groupby('model').rows.sum().eq(len(test)).all()
+    cluster_errors=pd.read_csv(OUT/'cluster_error_summary.csv')
+    assert cluster_errors.groupby('model').rows.sum().eq(len(test)).all()
+    assert {'Archived Midterm Ridge',json.loads((OUT/'model_selection.json').read_text())['winner']}.issubset(set(cluster_errors.model))
+    joined=predictions.merge(test_clusters,on='game_id',validate='one_to_one')
+    for row in cluster_errors[cluster_errors.model.isin(comparison.model)].itertuples(index=False):
+        subset=joined[joined.cluster.eq(row.cluster)]
+        ae=(subset.actual_hours-subset[row.model]).abs()
+        assert len(subset)==row.rows and np.isclose(ae.mean(),row.MAE_hours)
+        assert np.isclose(ae.median(),row.median_AE_hours)
+    examples=pd.read_csv(OUT/'all_model_error_examples.csv',dtype={'game_id':str})
+    assert set(examples.model)==set(cross_errors.model)
+    assert set(examples.game_id).issubset(set(test.game_id))
+    nn=json.loads((OUT/'neural_network_diagnostics.json').read_text())
+    assert len(nn['loss_curve'])==len(nn['internal_validation_R2_curve'])==nn['iterations']
+    assert np.isfinite(nn['loss_curve']).all() and np.isfinite(nn['internal_validation_R2_curve']).all()
     selection=json.loads((OUT/'model_selection.json').read_text())
     expected=comparison[comparison.feature_set.eq('full')].sort_values('train_cv_MAE_hours',kind='stable').iloc[0].model
     assert selection['winner']==expected
@@ -73,8 +112,12 @@ def run(artifacts=True):
             'model_metric_rows_recomputed':len(comparison),'winner_matches_CV_selection':True,
             'saved_model_predictions_match':True,'target_and_split_preserved':True}
     report['complete_field_dictionary']=True
+    report['model_input_view_has_no_empty_predictor_columns']=True
     report['source_price_and_tag_checks']=True
     report['course_models_present']=True
+    report['both_ensembles_have_training_CV_searches']=True
+    report['cross_model_and_cluster_errors_verified']=True
+    report['MLP_learning_checks_present']=True
     if artifacts:
         notebook=json.loads((ROOT/'notebooks/Video_Game_Endterm.ipynb').read_text(encoding='utf-8'))
         code=[c for c in notebook['cells'] if c['cell_type']=='code']

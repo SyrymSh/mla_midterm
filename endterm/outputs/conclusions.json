@@ -1,0 +1,13 @@
+{
+  "question": "Can structured game metadata estimate main-story completion hours?",
+  "answer": "Random forest provides rough catalog estimates, with test MAE 10.37 hours and median absolute error 2.26 hours.",
+  "selection": "Lowest mean training-only CV MAE among expanded full-feature candidates.",
+  "winner": "Random forest",
+  "test_MAE_hours": 10.37028226650011,
+  "MAE_reduction_percent_vs_median": 20.306652069409648,
+  "test_games_above_100_hours": 13,
+  "absolute_error_percent_from_above_100_hour_games": 44.78240285254192,
+  "MLP_test_MAE_hours": 10.411847852656706,
+  "limitations": "Extreme/open-ended-game labels, selective Steam coverage, current rather than launch metadata and a previously observed test set limit generalization.",
+  "Final_plan": "Use the retained IGDB descriptions linked by game ID; compare train-fold TF-IDF text and structured-plus-text models on the same CV folds and split, then build the local prediction app."
+}

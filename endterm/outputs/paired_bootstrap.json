@@ -1,15 +1,15 @@
 {
   "selected_vs_median": {
-    "MAE_reduction_hours": 2.7525913338775947,
-    "lower_95_hours": 2.393949767457595,
-    "upper_95_hours": 3.116153845905166,
+    "MAE_reduction_hours": 2.6424503338822984,
+    "lower_95_hours": 2.305267426269483,
+    "upper_95_hours": 3.0054705413041836,
     "bootstrap_resamples": 5000,
     "interpretation": "Positive values favor new model. Conditional on this frozen cohort; not a causal estimate or fresh-test guarantee."
   },
   "selected_vs_retrained_original_ridge": {
-    "MAE_reduction_hours": 1.5528183301419172,
-    "lower_95_hours": 1.2825770054981167,
-    "upper_95_hours": 1.8083392745954552,
+    "MAE_reduction_hours": 1.4426773301466214,
+    "lower_95_hours": 1.1765844461120207,
+    "upper_95_hours": 1.713561279468793,
     "bootstrap_resamples": 5000,
     "interpretation": "Positive values favor new model. Conditional on this frozen cohort; not a causal estimate or fresh-test guarantee."
   },
@@ -28,23 +28,23 @@
     "interpretation": "Positive values favor new model. Conditional on this frozen cohort; not a causal estimate or fresh-test guarantee."
   },
   "extratrees_igdb_gain": {
-    "MAE_reduction_hours": 0.8803503025013295,
-    "lower_95_hours": 0.5460440079892771,
-    "upper_95_hours": 1.2015441177592896,
+    "MAE_reduction_hours": 0.8803503025013292,
+    "lower_95_hours": 0.5460440079892769,
+    "upper_95_hours": 1.2015441177592894,
     "bootstrap_resamples": 5000,
     "interpretation": "Positive values favor new model. Conditional on this frozen cohort; not a causal estimate or fresh-test guarantee."
   },
   "extratrees_steam_gain": {
-    "MAE_reduction_hours": 0.33339537203734265,
-    "lower_95_hours": 0.10304632837315088,
+    "MAE_reduction_hours": 0.3333953720373427,
+    "lower_95_hours": 0.10304632837315085,
     "upper_95_hours": 0.5650558674517812,
     "bootstrap_resamples": 5000,
     "interpretation": "Positive values favor new model. Conditional on this frozen cohort; not a causal estimate or fresh-test guarantee."
   },
   "selected_vs_submitted_midterm_ridge": {
-    "MAE_reduction_hours": 1.5557877050304525,
-    "lower_95_hours": 1.2850853409824685,
-    "upper_95_hours": 1.810798818462339,
+    "MAE_reduction_hours": 1.4456467050351567,
+    "lower_95_hours": 1.1797669414686605,
+    "upper_95_hours": 1.7165925552203964,
     "bootstrap_resamples": 5000,
     "interpretation": "Positive values favor new model. Conditional on this frozen cohort; not a causal estimate or fresh-test guarantee."
   }

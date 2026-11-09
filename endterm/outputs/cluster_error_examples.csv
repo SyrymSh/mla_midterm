@@ -1,0 +1,13 @@
+cluster,selection,game_id,title,primary_genre,igdb_themes,igdb_game_modes,igdb_single_player,actual_hours,Archived Midterm Ridge,selected_model_prediction,midterm_absolute_error,selected_absolute_error
+0,largest archived Ridge error,267774,Tales of Arise: Beyond the Dawn - Ultimate Edition,Unknown,,Single player,1.0,40.0,3.3973867282677803,17.200566996722745,36.60261327173222,22.799433003277255
+0,near cluster median duration,10733,The Novelist,Adventure,Drama|Stealth,Single player,1.0,2.05,4.947134804978728,2.8726391315919826,2.8971348049787284,0.8226391315919828
+1,largest archived Ridge error,143228,Gorilla Tag,Arcade,Action,Multiplayer,0.0,997.5,1.404778112074569,6.034237922797595,996.0952218879254,991.4657620772024
+1,near cluster median duration,110070,Aborigenus,Adventure,Action|Fantasy,Single player,1.0,3.0,7.586184718300231,5.073820145997665,4.586184718300231,2.073820145997665
+2,largest archived Ridge error,1020,Grand Theft Auto V,Adventure,Action|Comedy|Open world|Sandbox,Co-operative|Multiplayer|Single player,1.0,115.05611,10.79100658445172,19.19372461412296,104.26510341554828,95.86238538587705
+2,near cluster median duration,4,Thief,Adventure,Action|Sandbox|Stealth,Single player,1.0,8.0,7.453174790159146,8.990432438832913,0.5468252098408541,0.9904324388329133
+3,largest archived Ridge error,79824,Old School RuneScape,Adventure,Fantasy|Open world|Sandbox,Massively Multiplayer Online (MMO)|Multiplayer,0.0,486.5,12.525873034254428,20.813938451880592,473.9741269657456,465.6860615481194
+3,near cluster median duration,14694,Shakedown: Hawaii,Adventure,Action|Business|Open world,Single player,1.0,12.0,4.945685120717123,8.758117838261432,7.054314879282877,3.241882161738568
+4,largest archived Ridge error,119277,Genshin Impact,Adventure,Action|Fantasy|Open world,Co-operative|Multiplayer|Single player,1.0,468.49167,12.62829198402376,20.515086760712773,455.86337801597625,447.9765832392872
+4,near cluster median duration,109455,Luigi's Mansion 3,Adventure,Action|Comedy|Fantasy|Horror|Science fiction,Co-operative|Multiplayer|Single player|Split screen,1.0,10.0,5.528699952754691,7.7789221920290945,4.471300047245309,2.2210778079709055
+5,largest archived Ridge error,134710,Grand Theft Auto Online,Adventure,Action|Comedy|Open world|Sandbox,Co-operative|Multiplayer|Single player,1.0,513.0,7.806522840759989,11.54391288109574,505.19347715924,501.45608711890424
+5,near cluster median duration,112613,Prodeus,Adventure,Action|Horror|Science fiction,Co-operative|Multiplayer|Single player,1.0,5.0,4.206571312973868,6.553157309368008,0.7934286870261316,1.5531573093680082

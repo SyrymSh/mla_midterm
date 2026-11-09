@@ -17,6 +17,22 @@ def count_list(item, field):
     value=item.get(field)
     return len(value) if isinstance(value,list) else np.nan
 
+def export_model_inputs(joined=None,split=None):
+    """A teaching/review view without empty historical audit-only columns."""
+    from features import input_columns
+    if joined is None:
+        joined=pd.read_csv(CLEAN/'games_enriched.csv',dtype={'game_id':str})
+    if split is None:
+        split=pd.read_csv(CLEAN/'fixed_split.csv',dtype={'game_id':str})
+    fields=input_columns('full')
+    frame=joined[['game_id','title','main_story_hours']+fields].merge(split,on='game_id',validate='one_to_one',sort=False)
+    frame=frame[['game_id','title','main_story_hours','partition']+fields]
+    assert frame.game_id.tolist()==joined.game_id.tolist()
+    np.testing.assert_array_equal(frame.main_story_hours,joined.main_story_hours)
+    assert all((frame[c].notna() & frame[c].astype(str).str.strip().ne('')).any() for c in fields)
+    frame.to_csv(CLEAN/'games_model_inputs.csv',index=False)
+    return frame
+
 def prepare():
     base=pd.read_csv(MIDTERM/'data/clean/games_clean.csv',dtype={'game_id':str})
     original_columns=list(base.columns)
@@ -106,6 +122,7 @@ def prepare():
                          'is_new_column':column not in original_columns})
     pd.DataFrame(coverage).to_csv(CLEAN/'feature_coverage.csv',index=False)
     split=pd.read_csv(CLEAN/'fixed_split.csv',dtype={'game_id':str})
+    export_model_inputs(joined,split)
     audit=joined.merge(split,on='game_id',validate='one_to_one')
     train_apps=set(audit.loc[audit.partition.eq('train'),'matched_steam_appid'].dropna())
     overlaps=audit.partition.eq('test') & audit.matched_steam_appid.isin(train_apps)

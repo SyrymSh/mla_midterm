@@ -22,6 +22,8 @@ The inherited target rule requires finite values in 0.1–1,000 hours. The 28 ex
 
 There are 70 stored columns, including provenance and historical audit fields. **39 raw columns enter the full model pipeline**, which creates 473 numeric encoded features. These are different counts. Source IDs, URLs, titles, descriptions, timestamps and label-quality counts are not predictors.
 
+For modelling, open `data/clean/games_model_inputs.csv`. It contains these 39 input fields plus game ID, title, target and saved partition for reference. None of the predictor columns is entirely empty. IDs, title, target and partition remain excluded from the input selection. The 70-column `games_enriched.csv` is the provenance/audit view, retaining the old empty price/tag fields so the Midterm-to-Endterm change stays visible.
+
 | field | stored_type | meaning | model_input | observed_rows |
 | --- | --- | --- | --- | --- |
 | game_id | int64 | Frozen IGDB game identifier; one game per row. | False | 5229 |

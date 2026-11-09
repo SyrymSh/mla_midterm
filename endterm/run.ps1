@@ -25,7 +25,7 @@ try {
             if ($LASTEXITCODE -ne 0) {throw "Failed: $script"}
         }
     } elseif ($Stage -eq 'Train') {
-        foreach ($script in @('prepare.py','audit_data.py','train.py','cluster.py','plots.py')) {
+        foreach ($script in @('prepare.py','audit_data.py','train.py','cluster.py','error_analysis.py','plots.py')) {
             & $PythonExecutable (Join-Path $projectRoot "src\$script")
             if ($LASTEXITCODE -ne 0) {throw "Failed: $script"}
         }

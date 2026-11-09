@@ -1,181 +1,198 @@
 # Predicting video game completion time
 
-**Machine Learning Algorithms Endterm**
+Machine Learning Algorithms Endterm
 
-**Syrym Shadiyarbek and Yerdaulet Akhanov**
+Syrym Shadiyarbek and Yerdaulet Akhanov, SE2424
 
-## Research question
+## Research question and answer
 
-Can a game's structured metadata help a player estimate the time needed to reach its credits? The project predicts a positive number of main-story hours. The endterm tests whether real additional feature types and the Week 5-8 methods improve the midterm model.
+Can structured game metadata help a player choose a game that fits a time budget? We predict a positive number of main-story hours. On the same 1,046 test games as the Midterm, the model selected by training CV is Random forest, with MAE 10.37 hours, RMSE 50.54 hours, R2 0.022 and median absolute error 2.26 hours. The result supports rough catalog estimates, while large errors for long and open-ended games remain.
 
-The selected model is gradient boosting. On the original 1,046 test games, its mean absolute error is **10.26 hours**, compared with **11.82 hours** for the submitted midterm Ridge model and **13.01 hours** for the median baseline. Median absolute error is **2.39 hours**. R2 is only **0.023**, and the largest errors remain substantial. The result supports rough catalog estimates, especially for ordinary-length games, rather than precise estimates for every title.
+The gain against the exact submitted Midterm Ridge is 1.45 hours MAE, with a conditional paired 95% interval of 1.18 to 1.72 hours. Against the median dummy, MAE is 20.3% lower. These are measured stage comparisons on an already observed test, with the limitations explained below.
 
-## Data and collection
+## Changes responding to the teacher
 
-The same 5,229 games are retained. Their target is IGDB's `hastily` time in seconds divided by 3,600, recorded on 8 October 2026. It measures reaching the credits without notable extras. The original raw field is named `hltb_main_hours`, but its source record explicitly identifies IGDB. No HLTB labels are mixed into this study.
+The teacher's feedback supplied from 2 November 2026 identified missing collection code and conclusions, empty columns, and the need to upload every file in a ZIP because GitHub would not be checked. It also commented on the defence ("защита получше"). The complete ZIP now contains collection code, raw responses, cleaned data, saved split, an executed notebook, model checks and outputs, the report and slides. The notebook displays collection source and ends with a computed conclusion. The final slide states the answer and next experiment. The seven-minute defence guide includes both speakers and five minutes of Q&A preparation.
 
-On 2 November 2026 in Asia/Qyzylorda, the metadata was expanded using the official IGDB API and public Steam endpoints. UTC timestamps are saved beside the responses. IGDB adds themes, gameplay keywords, modes, perspectives, platforms, engines and game type. Explicit linked Steam app IDs add top user tags, store categories, platform/language information and current prices. Matching does not rely on similar titles.
+The new data types are genuine observations on the same games. A short change log in docs/CHANGELOG.md links each feedback point to before/after evidence. Historical empty fields remain clearly identified audit columns and are excluded from predictors. Presentation and report build scripts are retained under tools/ so their construction is reproducible.
 
-The expanded snapshot contains **2,861 observed USD prices** and **3,333 rows with Steam tags**. Prices are current US-store quotes, not launch prices. Missing quotes remain missing. Imputed model inputs are kept separate from observations, and targets are never imputed. All observed regular prices and tag names were checked against the saved raw responses.
+## Data, collection and cleaning
 
-The data card defines all 70 stored columns and distinguishes the 39 raw predictor fields from IDs, provenance and historical fields. The fitted full pipeline creates 473 encoded features. Real descriptions are retained for Final-stage text experiments and are excluded from these models.
+One row describes one of 5,229 real distinct games. The original target is IGDB game_time_to_beats.hastily seconds divided by 3,600, recorded on 8 October 2026: reaching credits without notable extras. The old raw field is named hltb_main_hours, but its recorded source is IGDB. No HLTB targets are mixed in.
 
-IGDB documents non-commercial API use under the Twitch Developer Service Agreement. Steam's API terms and robots rules were checked and saved. The IGDB website robots request returned 403; collection used the authenticated API instead of website scraping. No private user profiles or individual reviews were collected. Developer credentials are not stored in the submission. API access, source attribution and current metadata limitations are documented in DATA_CARD.md.
+Metadata collected on 2 November 2026 adds IGDB themes, gameplay keywords, modes, perspectives, platforms, engines and game type. Explicit linked Steam app IDs add tags, store categories, supported platforms/languages and current US USD prices. The saved snapshot contains 2,861 observed regular prices and 3,333 rows with Steam tags. Missing quotes remain missing. Prices describe current store listings and cannot support launch-day forecasting. All observed price fields and tag names are verified against saved raw responses. Timestamps, URLs, dictionaries and hash manifests accompany those responses.
 
-## Cleaning and checks
+src/collect.py contains the enrichment requests, batched requests/caching, bounded retries, explicit matching and environment-based credentials. reference/midterm_source/src/collect_igdb.py preserves the original target collector. Both files are inside the ZIP and visible from the notebook. Developer secrets are excluded. The saved IGDB API terms and Steam terms/robots checks document access. The IGDB website robots request returned 403, so collection used the official authenticated API. No private user profiles or individual reviews enter the data.
 
-The audit reconstructs the original cleaning decisions from the raw snapshot. Every raw row has a recorded outcome in `data/clean/cleaning_audit.csv`.
+The supplied Midterm raw snapshot has 5,273 rows. Its inherited rules remove 28 durations below 0.1 hours, five descriptions with fewer than eight words, one title with fewer than two characters, and ten repeated normalized-title/year records, leaving 5,229 games. The target inclusion range is 0.1-1,000 hours. These short durations are real observations outside the inclusion rule, rather than demonstrated source errors. Text readiness and duplicate filters can also exclude real short games or different editions. The row-level cleaning audit reconstructs every decision. Endterm adds columns by left join and changes no games, targets or split assignments.
 
-| step | rows_before | removed | rows_after |
-| --- | --- | --- | --- |
-| Raw snapshot | 5273 | 0 | 5273 |
-| Invalid target / insufficient text / unusable title | 5273 | 34 | 5239 |
-| Duplicate normalized title and release year | 5239 | 10 | 5229 |
-| Duplicate game ID | 5229 | 0 | 5229 |
+The main modelling dataset is data/clean/games_model_inputs.csv: 5,229 rows and 43 columns, consisting of 39 populated raw predictor fields plus game ID, title, target and saved partition for reference. No predictor is entirely empty. The data card and CSV dictionary also define the full 70-column provenance/audit view. IDs, titles, descriptions, source URLs, timestamps, other completion-time fields and explicit duration tags are excluded from predictors. Empty old price/tag fields remain audit-only. Numeric missing-value medians and missingness indicators enter the model pipeline without turning imputed values into observations.
 
-The original target rule accepts finite values from 0.1 to 1,000 hours. All 28 excluded target values are positive durations below 0.1 hours (six minutes); they are outside that inclusion rule, not proven incorrect labels. Five descriptions have fewer than eight words and one title has fewer than two characters. These text filters retain a usable title and description for the later text stage. Ten repeated normalized-title/year records are removed to reduce duplicate entries; no additional repeated game IDs remain. The row-level audit records every outcome.
+## Exploration and modelling decisions
 
-These inherited choices can exclude real very short games or collapse different editions with the same title and year. They are retained for comparability with the midterm. The reproduced game IDs and target values match the supplied clean dataset. Endterm uses a left join: it changes no target, adds no game and removes no further game. The split file is byte-identical to the midterm file.
-
-## Exploration and decisions
-
-Three training-only summaries guide the modelling choices.
+Three training-only summaries guide the choices below.
 
 | Evidence | Interpretation | Decision |
 | --- | --- | --- |
-| Training duration median 5 h, 95th percentile 40 h, 99th percentile 100 h | A few long labels can dominate squared error. | Use MAE as the main metric, keep RMSE/R2 visible, and test log-target models. |
-| Recorded RPG genre median 14.25 h (246 training games), compared with 3 h for Indie (374 games) | Broad genres carry information but hide variation within a genre. | Retain all genres and add themes, modes, perspectives and gameplay tags. |
-| 2,305 training games have observed prices; price/duration Spearman correlation is 0.618 | Price is associated with duration in the observed store-linked subset, but cannot explain it alone. | Test price jointly with other metadata, measure coverage and use a controlled feature comparison. |
+| Median duration 5 h, 95th percentile 40 h, 99th percentile 100 h | A small tail can dominate squared error. | Select by hour MAE, report RMSE/R2, and test log-target models. |
+| RPG median 14.25 h over 246 training games; Indie 3 h over 374 | Broad genres carry information but conceal variation. | Add detailed themes, modes, perspectives and gameplay tags. |
+| 2,305 observed training prices; Spearman price/duration correlation 0.618 | Price and duration vary together in the store-linked subset. | Test price jointly, report coverage and compare fixed-estimator feature sets. |
 
-The target, genre and price figures in the notebook use training rows only. These associations do not establish that changing a price changes a game's duration.
+![Training duration distribution](../outputs/figures/target_distribution.png)
 
-## Models and validation
+These associations do not establish causal effects. Selective Steam coverage and correlated predictors limit interpretations of price and tag importance.
 
-The original split contains 4,183 training and 1,046 test games. Three shuffled training folds use seed 42. Numeric imputation and scaling, categorical encodings, tag vocabularies and the developer catalog tier are fitted inside each training fold. The catalog tier means frequency in the training sample, not verified studio size.
+## Fair workflow and tuning
 
-Other completion-time fields, explicit duration tags such as Short/Long, game IDs, titles, descriptions, URLs and collection timestamps are excluded. Twenty-three test rows share a Steam app ID with a training row. This limitation is reported rather than hidden: the study includes a test subset without that overlap and a Steam-ID-grouped training-CV check.
+The saved split is byte-identical to Midterm: 4,183 training and 1,046 test games. Every candidate uses the same three shuffled training folds with seed 42. Numeric imputation/scaling, one-hot encoding, multi-hot vocabularies and developer catalog-frequency tiers fit each training fold only. Catalog frequency is a proxy, not verified studio size. Twenty-three test rows share Steam app IDs with training. Grouped training CV and the test subset without overlap describe that limitation.
 
-| Model family | Why it is included | Main settings |
-| --- | --- | --- |
-| Median baseline | A simple reference for absolute error | Training-label median |
-| Ordinary linear regression | Tests linear relationships without regularization | OLS on the log target |
-| Ridge | Regularizes the linear reference | alpha 20, lsqr solver |
-| Decision tree | Tests nonlinear thresholds | depth 10, at least 10 rows per leaf |
-| KNN | Tests local similarity | 25 distance-weighted neighbours; numeric scaling |
-| ExtraTrees | Tests randomized tree interactions and feature-set gains | 200 trees, leaf minimum 3, feature fraction 0.8 |
-| Random forest | Reduces single-tree variance through averaging | 250 bootstrap trees, leaf minimum 3, feature fraction 0.7 |
-| Gradient boosting | Fits the hour-scale absolute-error objective | 250 iterations; learning rate 0.07; eight leaf/min-leaf/L2 settings |
-| Neural network | Tests learned nonlinear combinations | Four architecture/L2 settings; early stopping |
+The median dummy provides the absolute-error baseline. OLS tests linear relationships; Ridge adds regularization; a depth-10 tree with at least ten rows per leaf limits tree complexity; 25-neighbour distance-weighted KNN tests local similarity with numeric scaling. Fixed Ridge and ExtraTrees configurations repeat across original, IGDB and IGDB-plus-Steam features. Full model settings and reasons are in outputs/model_specifications.csv.
 
-The classical references use the original feature family and the same split/folds. Ridge and ExtraTrees also repeat unchanged settings with expanded IGDB and then IGDB plus Steam features. This separates feature gains from changing the estimator. The full parameter record is in `outputs/model_specifications.csv`.
+Random forest searches n_estimators 150/250, minimum leaf rows 3/8 and feature fraction 0.5/0.7: eight configurations. Tree count checks averaging stability, minimum leaf size limits complexity, and feature fraction controls diversity. Boosting searches 15/31 leaves, 20/50 minimum leaf rows and L2 1/10, holding 250 iterations and learning rate 0.07 fixed. It fits absolute-error loss directly in hours. The MLP searches hidden layers (32,) or (64,32) and L2 0.01/0.1. These small networks and penalties control complexity for the available training sample.
 
-OLS, Ridge, tree, KNN and forest models fit log1p hours. The neural network also standardizes that log target. Boosting uses absolute-error loss on raw hours. All reported metrics use predictions converted back to hours. The tree and KNN settings are fixed reference choices; they were not selected on the test score.
+| Search | Grid size | Selected parameters | CV MAE +/- SD |
+| --- | --- | --- | --- |
+| Random forest | 8 | {'max_features': 0.5, 'min_samples_leaf': 3, 'n_estimators': 250} | 8.636 +/- 0.642 |
+| Boosting | 8 | {'l2_regularization': 10, 'max_leaf_nodes': 31, 'min_samples_leaf': 20} | 8.639 +/- 0.602 |
+| MLP | 4 | {'alpha': 0.1, 'hidden_layer_sizes': [64, 32]} | 9.016 +/- 0.637 |
 
-The expanded winner is selected by mean training CV MAE. Boosting searches eight configurations and the neural network searches four. Tuning CV is not nested CV, so its selected score can be optimistic. The separately dated classical-reference supplement does not change the locked expanded-model selection. The test was already observed at midterm and is a stage-comparison benchmark, not a new independent test.
+Each search uses training CV MAE with fold-fitted preprocessing. The winner is locked before test predictions. The selected CV score is a search estimate and can be optimistic because CV is not nested. OLS, Ridge, trees, KNN and forests fit log1p hours. The MLP standardizes that log target. Every reported metric uses inverse-transformed hour predictions. Exact archived Midterm predictions remain a separate historical reference; current original-feature rows are refits through the current pipeline.
 
-## Results
+## Results on the saved split
 
-All errors below are in hours. CV spread is the sample standard deviation across the three validation folds, not a confidence interval. Original refers to the midterm feature family; IGDB and full refer to the expanded inputs.
+MAE is the primary metric because a player interprets error in hours and occasional long labels strongly affect squared error. CV spread is the sample standard deviation over three folds. All baseline and current model comparisons appear in one table.
 
-| Model and features | CV MAE +/- SD | Test MAE | RMSE | R2 | Median AE |
+| Model / features | CV MAE +/- SD | Test MAE | RMSE | R2 | Median AE |
 | --- | --- | --- | --- | --- | --- |
-| Median baseline | 11.07 +/- 0.72 | 13.01 | 52.17 | -0.041 | 4.00 |
-| OLS (original) | 10.10 +/- 0.64 | 11.83 | 51.27 | -0.006 | 3.28 |
-| Ridge (original) | 10.07 +/- 0.68 | 11.81 | 51.43 | -0.012 | 3.20 |
-| Decision tree (original) | 10.19 +/- 0.80 | 11.81 | 50.96 | 0.006 | 3.26 |
-| KNN (original) | 10.40 +/- 0.69 | 11.90 | 51.25 | -0.005 | 3.29 |
-| Ridge (IGDB) | 9.25 +/- 0.66 | 10.69 | 50.36 | 0.029 | 2.55 |
-| Ridge (IGDB + Steam) | 9.16 +/- 0.68 | 10.71 | 50.49 | 0.024 | 2.42 |
-| ExtraTrees (original) | 10.01 +/- 0.66 | 11.70 | 51.12 | -0.000 | 3.39 |
-| ExtraTrees (IGDB) | 9.22 +/- 0.70 | 10.82 | 50.53 | 0.023 | 2.50 |
-| ExtraTrees (IGDB + Steam) | 8.77 +/- 0.74 | 10.49 | 50.54 | 0.022 | 2.37 |
-| Random forest (full) | 8.67 +/- 0.66 | 10.33 | 50.51 | 0.024 | 2.29 |
-| Tuned boosting (full) | 8.64 +/- 0.60 | 10.26 | 50.52 | 0.023 | 2.39 |
-| Tuned MLP (full) | 9.02 +/- 0.64 | 10.41 | 50.18 | 0.036 | 2.29 |
+| Median baseline | 11.075 +/- 0.716 | 13.01 | 52.17 | -0.041 | 4.00 |
+| Linear regression original | 10.101 +/- 0.637 | 11.83 | 51.27 | -0.006 | 3.28 |
+| Decision tree original | 10.192 +/- 0.801 | 11.81 | 50.96 | 0.006 | 3.26 |
+| KNN original | 10.401 +/- 0.686 | 11.90 | 51.25 | -0.005 | 3.29 |
+| Ridge original | 10.074 +/- 0.680 | 11.81 | 51.43 | -0.012 | 3.20 |
+| Ridge IGDB | 9.254 +/- 0.656 | 10.69 | 50.36 | 0.029 | 2.55 |
+| Ridge IGDB + Steam | 9.157 +/- 0.680 | 10.71 | 50.49 | 0.024 | 2.42 |
+| ExtraTrees original | 10.014 +/- 0.665 | 11.70 | 51.12 | -0.000 | 3.39 |
+| ExtraTrees IGDB | 9.222 +/- 0.695 | 10.82 | 50.53 | 0.023 | 2.50 |
+| ExtraTrees IGDB + Steam | 8.772 +/- 0.743 | 10.49 | 50.54 | 0.022 | 2.37 |
+| Random forest | 8.636 +/- 0.642 | 10.37 | 50.54 | 0.022 | 2.26 |
+| Boosting | 8.639 +/- 0.602 | 10.26 | 50.52 | 0.023 | 2.39 |
+| MLP | 9.016 +/- 0.637 | 10.41 | 50.18 | 0.036 | 2.29 |
 
-The selected boosting model has CV MAE **8.64 +/- 0.60 h**. Steam-ID-grouped training CV gives **8.66 +/- 0.66 h**. The test MAE reduction against the submitted Ridge is **1.56 h**, with a paired 95% bootstrap interval of **1.29 to 1.81 h**. Against the median baseline, MAE is **21.2% lower**.
+The exact submitted Midterm Ridge test MAE was 11.81593 h. Its current original-feature refit is 11.81296 h; the small difference reflects the current encoding pipeline. Selection uses the new candidates' training CV, while the historical gain above uses the archived predictions. Steam-ID-grouped CV for the selected model is 8.64 +/- 0.69 h.
 
-## Value of the new features
+The top two expanded CV means differ by only 0.00348 h, compared with fold standard deviations around 0.64 h. The minimum-mean rule resolves this near-tie mechanically. It does not establish a meaningful advantage over the runner-up. A different test ranking does not change that predeclared training-CV selection.
 
-With fixed Ridge settings, extra IGDB fields lower test MAE from 11.81 to 10.69 h. Steam then gives 10.71 h, so it adds no clear further gain for Ridge. For fixed ExtraTrees settings, extra IGDB gives 10.82 h and Steam lowers it to 10.49 h. That Steam gain is 0.33 h, with a paired interval of 0.10 to 0.57 h. Useful columns therefore depend partly on the model and the information already present.
+## Value of the additional columns
 
-A permutation check on one training-validation fold ranks genre, regular price, game type, themes and Steam tags among useful fields. Permuting regular price increases MAE by about 0.58 h and tags by 0.26 h in that fold. Correlated features can substitute for each other, so these are predictive associations rather than causal effects.
+With unchanged Ridge settings, IGDB fields move test MAE from 11.81 to 10.69 h, and adding Steam gives 10.71 h. With unchanged ExtraTrees settings, the corresponding values are 11.70, 10.82 and 10.49 h. Steam has model-dependent additional value after IGDB metadata. The paired intervals and a training-validation permutation check document uncertainty and correlated-feature effects.
 
-Bootstrap comparisons resample the same test games 5,000 times in pairs. They describe conditional uncertainty for these fitted models on this cohort, not all training variability or future-game performance. The complete intervals are saved in `outputs/paired_bootstrap.json`.
+![Fixed-estimator feature comparison](../outputs/figures/feature_ablation.png)
 
-## PCA and clustering
+Bootstrap resampling uses the same test games in pairs 5,000 times. It describes these fitted models on this cohort and does not cover all training variability or create a fresh independent test.
 
-The full-feature diagnostic mainly split games by Steam metadata coverage. The main analysis therefore uses IGDB genres, themes, keywords, modes and perspectives only, with no Steam fields or explicit missingness flags. L2 normalization reduces the influence of annotation volume before PCA. Neither PCA nor KMeans uses duration labels.
+## Errors across models
 
-PCA reduces 157 encoded semantic features to **65 components**, retaining **85.1%** of feature variance. KMeans compares k=2 through 6 on training rows. Among these settings, k=6 has the highest sampled silhouette, **0.078**. The second-seed adjusted Rand index is **0.970**.
+The following table shows each principal model's test MAE by actual-duration band. Complete duration and genre tables cover all 13 current models plus the exact archived Ridge. Positive residual means underprediction.
 
-| Cluster | Train games | Common themes | Median hours |
+| Model | 0-5 h | >5-20 h | >20-50 h | >50-100 h | >100 h |
+| --- | --- | --- | --- | --- | --- |
+| Median baseline | 2.71 | 5.97 | 26.47 | 68.9 | 382.3 |
+| Archived Midterm Ridge | 2.65 | 5.01 | 20.5 | 64.39 | 378.39 |
+| Random forest | 1.8 | 4.3 | 15.75 | 57.1 | 373.67 |
+| Boosting | 1.91 | 4.14 | 14.7 | 57.29 | 373.86 |
+| MLP | 1.78 | 4.6 | 15.53 | 57.36 | 369.99 |
+
+![Residuals across the earlier and Endterm models](../outputs/figures/cross_model_residuals.png)
+
+The linear reference smooths coarse metadata relationships. Forests and boosting exploit nonlinear interactions, while the MLP learns a regularized transformed-target representation. The measured bands reveal where those mechanisms help and where every model underpredicts the long tail. Log-target fits favour relative distinctions and common short games. Raw-hour absolute-error boosting also favours conditional medians, so it does not resolve open-ended-game labels.
+
+The lowest observed band errors among the two ensembles and MLP belong to MLP in the 0-5 h band (1.78 h MAE), Boosting in the >5-20 h band (4.14 h MAE), Boosting in the >20-50 h band (14.70 h MAE), MLP in the >100 h band (369.99 h MAE). Different models lead in different bands. These are descriptive test comparisons; they do not override the training-CV choice or establish statistically significant band-wise gains.
+
+Linear regression original has MAE 2.64 h for 0-5-hour games and 20.29 h for >20-50-hour games. Decision tree original has MAE 2.86 h for 0-5-hour games and 19.17 h for >20-50-hour games. KNN original has MAE 2.70 h for 0-5-hour games and 19.56 h for >20-50-hour games. ExtraTrees IGDB + Steam has MAE 1.94 h for 0-5-hour games and 15.60 h for >20-50-hour games. The tree and neighbour references improve some medium-duration errors while retaining substantial short-game errors. Expanded ExtraTrees reduces both bands, but its long-tail failures remain visible in the complete duration table. The fixed-feature comparisons separate nonlinear interactions from the additional metadata.
+
+Median baseline has MAE 2.71 h for 0-5-hour games and 382.30 h above 100 hours. Among 5-100-hour games, its largest error is Sonic Adventure: Sonic Adventure DX Upgrade: actual 100.00 h, predicted 5.00 h.
+
+Archived Midterm Ridge has MAE 2.65 h for 0-5-hour games and 378.39 h above 100 hours. Among 5-100-hour games, its largest error is Mad Age and This Guy: actual 100.00 h, predicted 2.28 h.
+
+Random forest has MAE 1.80 h for 0-5-hour games and 373.67 h above 100 hours. Among 5-100-hour games, its largest error is Sonic Adventure: Sonic Adventure DX Upgrade: actual 100.00 h, predicted 1.52 h.
+
+Boosting has MAE 1.91 h for 0-5-hour games and 373.86 h above 100 hours. Among 5-100-hour games, its largest error is Sonic Adventure: Sonic Adventure DX Upgrade: actual 100.00 h, predicted 1.18 h.
+
+MLP has MAE 1.78 h for 0-5-hour games and 369.99 h above 100 hours. Among 5-100-hour games, its largest error is Sonic Adventure: Sonic Adventure DX Upgrade: actual 100.00 h, predicted 1.13 h.
+
+The next examples include the largest loss against archived Ridge for each ensemble/MLP, plus the selected model's largest failure. They expose regressions as well as aggregate improvement. Values are predictions in hours, not absolute errors.
+
+| Game | Actual h | Midterm Ridge | RF | Boosting | MLP |
+| --- | --- | --- | --- | --- | --- |
+| Lords of the Fallen: Game of the Year Edition | 14.0 | 14.63 | 29.94 | 25.38 | 24.69 |
+| Fallout 2 | 2.0 | 6.75 | 13.56 | 19.29 | 12.9 |
+| Digimon Survive | 20.0 | 8.56 | 27.33 | 30.06 | 54.9 |
+| Gorilla Tag | 997.5 | 1.4 | 6.03 | 5.85 | 5.06 |
+
+Only 13 test games exceed 100 hours, but they contribute 44.8% of selected-model absolute error. Online titles such as Gorilla Tag and Grand Theft Auto Online have very large labels whose interpretation as main-story completion is uncertain. Their raw source values remain unchanged. Large error alone does not justify dropping a row or inventing a correction. Source-coverage, single-player and overlap-free sensitivity tables supplement the full-cohort score and never choose the model.
+
+## PCA, clusters and the earlier model's failures
+
+The full-feature diagnostic mainly separates Steam availability. The main analysis therefore uses IGDB genres, themes, keywords, modes and perspectives, with L2 row normalization to reduce the influence of annotation volume. PCA reduces 157 semantic features to 65 components, retaining 85.1% of variance. Training-only KMeans compares k=2..6; k=6 has the highest sampled silhouette, 0.078. Another seed gives adjusted Rand index 0.970. Neither duration nor test errors determine these settings.
+
+![Training-only PCA projection](../outputs/figures/pca_clusters.png)
+
+The first two components retain 15.2% of variance. The low silhouette indicates substantial overlap, and stable initialization does not establish natural game classes. Profiles use source genres, themes and modes. The named near-median-duration examples below show actual objects behind the profiles, together with their held-out absolute errors.
+
+| Cluster | Game | Source themes | Actual h | Ridge error | Selected error |
+| --- | --- | --- | --- | --- | --- |
+| 0 | The Novelist | Drama, Stealth | 2.05 | 2.9 | 0.82 |
+| 1 | Aborigenus | Action, Fantasy | 3.0 | 4.59 | 2.07 |
+| 2 | Thief | Action, Sandbox, Stealth | 8.0 | 0.55 | 0.99 |
+| 3 | Shakedown: Hawaii | Action, Business, Open world | 12.0 | 7.05 | 3.24 |
+| 4 | Luigi's Mansion 3 | Action, Comedy, Fantasy, Horror, Science fiction | 10.0 | 4.47 | 2.22 |
+| 5 | Prodeus | Action, Horror, Science fiction | 5.0 | 0.79 | 1.55 |
+
+| Cluster | Test games | Midterm Ridge MAE | Selected MAE |
 | --- | --- | --- | --- |
-| 0 | 1007 | Horror, Mystery | 2.0 |
-| 1 | 566 | Action, Fantasy | 3.0 |
-| 2 | 561 | Action, Science fiction | 8.0 |
-| 3 | 666 | Fantasy, Action | 7.5 |
-| 4 | 779 | Action, Fantasy | 10.0 |
-| 5 | 604 | Action, Science fiction | 5.0 |
+| 0 | 233 | 3.62 | 2.71 |
+| 1 | 163 | 10.2 | 9.53 |
+| 2 | 150 | 8.54 | 7.33 |
+| 3 | 149 | 16.94 | 16.07 |
+| 4 | 202 | 15.37 | 11.95 |
+| 5 | 149 | 19.76 | 18.5 |
 
-Durations are added only after fitting to describe the groups. The low silhouette shows substantial overlap despite stable initialization. The first two principal components explain only **15.2%** of feature variance. These results do not establish six distinct natural game classes.
+Cluster 5 has the highest archived Ridge MAE in this test comparison (19.76 h). Its selected-model MAE is 18.50 h. This connects the unsupervised grouping to the earlier model's failures. Counts and named cases matter because unequal group sizes and rare extreme labels can dominate a cluster mean. The complete examples also show each cluster's largest earlier-model failure. This is descriptive error analysis after evaluation, with no cluster-based model selection.
 
-## Neural network
+In that cluster, Grand Theft Auto Online has a source duration of 513.00 h and archived Ridge error 505.19 h. The near-median example Prodeus has duration 5.00 h. Their shared cluster membership permits a wide duration range. Coarse genre and semantic groups cannot identify how long an individual campaign takes, particularly when an open-ended-game label dominates the group's mean error.
 
-The best neural configuration has 64- and 32-unit hidden layers, ReLU/Adam and L2 penalty 0.1. It uses a 15% internal training holdback and stops after 30 of at most 350 iterations, restoring the best validation weights. The training and validation curves use transformed-target units, not hour MAE.
+## MLP learning and comparison
 
-Its CV MAE is 9.02 h and test MAE 10.41 h. Boosting performs better on the primary MAE metric, so the neural network remains a benchmark. Its slightly better R2 does not replace the prespecified MAE selection rule.
+The chosen MLP uses hidden layers [64, 32], ReLU/Adam and L2 0.1. A 15% holdback inside the training partition controls early stopping. Training loss uses standardized log-target space. Internal validation R2 is dimensionless and computed on that transformed target. Validation peaks at iteration 9 with R2 0.485; by iteration 30, R2 is 0.387. Training loss continues to fall while validation weakens, indicating overfitting after the peak. Early stopping restores the best validation weights. The run stops after 30 of at most 350 iterations, so the evidence is a validation stopping check rather than proof of a globally converged optimum.
 
-## Errors and label quality
+![MLP training and validation learning curves](../outputs/figures/neural_learning.png)
 
-| Actual hours | Games | MAE | Median AE |
-| --- | --- | --- | --- |
-| 0-5 h | 505 | 1.91 | 1.01 |
-| >5-20 h | 387 | 4.14 | 3.23 |
-| >20-50 h | 112 | 14.7 | 13.19 |
-| >50-100 h | 29 | 57.29 | 50.64 |
-| >100 h | 13 | 373.86 | 344.14 |
+The MLP has CV MAE 9.02 +/- 0.64 h and test MAE 10.41 h. The best earlier expanded model by CV is Random forest, with CV MAE 8.636 h and test MAE 10.37 h. MLP minus earlier-model test MAE is +0.04 h. The common table also compares the Midterm-family references. R2, RMSE and median error expose trade-offs, but the prespecified selection rule remains hour MAE.
 
-Only 13 test games exceed 100 hours, but they contribute **45.3% of total absolute error**. These cases explain much of the gap between mean and median error.
+## Conclusions and Final source plan
 
-| IGDB ID | Game | Actual | Predicted | Error |
-| --- | --- | --- | --- | --- |
-| 143228 | Gorilla Tag | 997.5 | 5.85 | 991.65 |
-| 134710 | Grand Theft Auto Online | 513.0 | 12.69 | 500.31 |
-| 7360 | Rainbow Six Siege | 500.0 | 7.72 | 492.28 |
-| 79824 | Old School RuneScape | 486.5 | 21.21 | 465.29 |
-| 373557 | HDOS | 486.0 | 22.55 | 463.45 |
-| 119277 | Genshin Impact | 468.49 | 23.3 | 445.19 |
+Real additional feature types improve this stage comparison, and Random forest has the lowest training CV MAE among expanded candidates. The result answers the player-time-budget question with rough catalog estimates. Low R2 and large errors for long/open-ended titles limit precise per-game predictions. Selective Steam coverage, current metadata, repeated store IDs, inherited inclusion rules and prior test exposure remain concrete limitations. The weak cluster separation also limits any interpretation as distinct game categories.
 
-The largest failures include ongoing online titles such as Gorilla Tag and Grand Theft Auto Online. A main-story average is difficult to interpret for those games. Their source labels are retained; a large error alone does not justify inventing a correction or dropping a test row.
+For Final, use real IGDB descriptions already stored for the same games. If more text is needed, collect summary/storyline from the official /v4/games API and link by the same game_id. Retain attribution, source snapshots and lawful-access evidence. Keep developer credentials in environment variables, observe rate limits and recheck current terms before any new request. This adds text representations while preserving the object cohort.
 
-The report also checks genre errors, store coverage, games explicitly listed as single-player and the subset without repeated Steam IDs. These are descriptive sensitivity checks. They do not replace the full-cohort score or choose the model.
+Descriptions may distinguish campaign structure and open-ended online play inside broad genres. Check and remove explicit duration statements before encoding to prevent target disclosure. Compare structured-only, text-only and combined features, with fold-fitted TF-IDF/IDF and regularized Ridge using the same training folds and hour MAE. Choose vocabulary and regularization by training CV, then score the locked comparison on the saved test and inspect the same long-game/cluster errors. A local app can load the selected pipeline. No text-model gain is claimed before that experiment runs.
 
-## Conclusions and Final plan
+## Reproduction, contributions and tools
 
-The added metadata improves the comparison with the midterm, and tuned boosting has the lowest training CV MAE among expanded candidates. The average test error is still 10.26 h and R2 is low. The method is more useful for rough estimates of ordinary-length games than for very long or open-ended titles.
+README provides installation and offline commands. The notebook defaults to RETRAIN=True for Restart/Run All. tools/notebook/execute_notebook.py executes a fresh kernel and compares a complete repeated fit against the command-line experiment. outputs/reproducibility_check.json records numeric differences and source hashes. Raw-source verification, data integrity tests and artifact checks accompany the results. Live API recollection is separate from this fixed-snapshot reproduction.
 
-The main limits are selective Steam coverage, current rather than launch prices, community labels of unequal reliability, repeated store IDs and earlier exposure to test outcomes. The clustering result also shows weak separation. Those limitations remain part of the conclusion even though some metrics improve.
+Syrym is assigned collection/preparation, exploration and PCA/clustering review. Yerdaulet is assigned modelling, tuning, MLP and evaluation review. Both must review conclusions and practise the entire defence. These are assigned tasks; completed individual contributions require factual student confirmation. CONTRIBUTIONS.md records the review tasks.
 
-| Midterm weakness | Endterm response | Result and next step |
-| --- | --- | --- |
-| Empty price/tag fields and coarse metadata | Real IGDB/Steam feature expansion and matched feature comparisons | Gains are measured by estimator; retain source and coverage audits. |
-| Limited linear relationships | Forests, ExtraTrees and tuned boosting | Boosting improves MAE; tail errors still need better label/scope validation. |
-| No view of game groupings | Normalized descriptors, PCA and KMeans | Groups overlap; use them for exploration, not ground-truth labels. |
-| No learned nonlinear benchmark | Tuned MLP with early stopping | Tested on the same split; it does not beat boosting on MAE. |
-
-For Final, add description features and compare them with the structured model, build the local prediction app, and seek a newly collected independent validation cohort if feasible. These are the Final-stage additions named in the supplied guide; no description features enter this Endterm model.
-
-## Team roles and tools
-
-Syrym is assigned collection, preparation, exploration and unsupervised analysis. Yerdaulet is assigned modelling, tuning and evaluation. Both should review the findings and practise the full defence. These are assigned responsibilities; individual completed work has not been confirmed.
-
-OpenAI Codex assisted with code, authorized data collection, executed experiments, checks and preparation of the materials. The factual disclosure and review tasks are in CONTRIBUTIONS.md.
+OpenAI Codex assisted with code, actual experiments, verification, notebook/report/slide preparation and editing. Both students remain responsible for explaining the submitted work independently. The complete ZIP supplies everything shown, because the teacher will not inspect GitHub. Each partner must upload the same complete contents by 23:59 on the day before defence, using the required Endterm_Surname_Name_Group.zip filename format. The spoken presentation is seven minutes, followed by five minutes of questions. Rehearsal and upload are student actions.
 
 ## Sources
 
-- Supplied Project Guide and Midterm Rubric, retained under `reference/`.
-- IGDB API documentation: https://api-docs.igdb.com/
-- Steam API overview: https://partner.steamgames.com/doc/webapi_overview
-- Steam API terms: https://steamcommunity.com/dev/apiterms
-- Saved raw responses, collection manifests, model configurations and experiment outputs included with the project.
+Supplied Endterm Rubric, Project Guide and Midterm Rubric are included under reference/. The original submission and collection code remain there for comparison.
+
+IGDB API documentation: https://api-docs.igdb.com/
+
+Steam API overview: https://partner.steamgames.com/doc/webapi_overview
+
+Steam API terms: https://steamcommunity.com/dev/apiterms
+
+Saved raw responses, source checks, manifests, parameter-search tables, predictions and error examples support the measured results.

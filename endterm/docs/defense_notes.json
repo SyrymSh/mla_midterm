@@ -1,0 +1,56 @@
+[
+  {
+    "slide": 1,
+    "speaker": "Syrym",
+    "seconds": 25,
+    "text": "Our question is whether game metadata can help a player choose a game that fits their time budget. We predict main-story hours using the same Midterm games and split, with additional real data and the required Endterm methods."
+  },
+  {
+    "slide": 2,
+    "speaker": "Syrym",
+    "seconds": 50,
+    "text": "The teacher identified missing collection code, missing conclusions and empty columns. The ZIP now contains both collectors, raw responses, collection dates, the notebook conclusion and slides. All 5,229 games remain. The old price and tag fields had no observations. Their replacements contain 2,861 USD prices and 3,333 rows with Steam tags. Themes, perspectives and modes add other feature types. Source gaps stay missing in the saved data; imputation belongs inside model training."
+  },
+  {
+    "slide": 3,
+    "speaker": "Syrym",
+    "seconds": 45,
+    "text": "The target is IGDB's hastily seconds divided by 3,600: time to credits without notable extras. October labels and the 4,183 training and 1,046 test games stay fixed. Encoders, imputation, scaling and developer frequencies fit inside training folds. We exclude alternate completion-time fields and explicit duration tags. The test was already seen at Midterm, which limits generalization claims. Offline reproduction needs no live API access."
+  },
+  {
+    "slide": 4,
+    "speaker": "Yerdaulet",
+    "seconds": 50,
+    "text": "We hold each estimator's settings fixed while adding feature families. Ridge and ExtraTrees each compare original features, expanded IGDB, and IGDB plus Steam. Added IGDB descriptors help both comparisons. Steam's extra value depends on the estimator. Prices are current US-store quotes, and Steam covers only part of the cohort. These limits remain visible in the interpretation."
+  },
+  {
+    "slide": 5,
+    "speaker": "Yerdaulet",
+    "seconds": 60,
+    "text": "MAE in hours fits the time-budget question. Both forest and boosting now have eight-setting searches using three training folds. Forest varies tree count, leaf size and feature fraction. Boosting varies tree complexity and regularization. The MLP has a separate four-setting search. We select the lowest training CV MAE before calculating test scores. The selected model is random forest, with CV MAE 8.636 and test MAE 10.37 hours. Forest and boosting are nearly tied in CV. Boosting has lower test MAE, but the training-CV rule selects forest. The full table also reports RMSE, R-squared and median error."
+  },
+  {
+    "slide": 6,
+    "speaker": "Yerdaulet",
+    "seconds": 55,
+    "text": "We now compare duration and genre errors for every model and inspect the same real cases across models. For games up to five hours, forest MAE is 1.80 hours, versus boosting at 1.91. For games over five and up to twenty hours, boosting does better: 4.14 versus 4.30 hours. Very long and ongoing online titles remain difficult. Their completion labels can be hard to interpret as a main story. We keep these games and source labels in the result. RMSE exposes extreme failures, while median error describes a more typical mistake."
+  },
+  {
+    "slide": 7,
+    "speaker": "Syrym",
+    "seconds": 50,
+    "text": "We normalize IGDB semantic descriptors before PCA so heavily annotated games do not dominate distances. PCA and KMeans fit training objects only. We check explained variance, several values of k and a second seed. Low silhouette means the groups overlap. Their held-out errors now compare the archived Midterm Ridge and selected model. Ridge MAE is 3.62 hours in cluster zero and 19.76 in cluster five; forest reduces both. Old School RuneScape in cluster three is a fantasy MMO: actual 486.5 hours, forest prediction 20.81. These descriptive errors do not choose the models or k."
+  },
+  {
+    "slide": 8,
+    "speaker": "Yerdaulet",
+    "seconds": 45,
+    "text": "The MLP searches two layer structures and two L2 penalties. It predicts a standardized log target and converts back to hours for evaluation. Training loss falls, while internal validation peaks around iteration 9. Training stops at 30 and restores the best validation weights. This controls overfitting. Curve units differ from hour MAE. The MLP's test MAE is 10.41 hours. Its CV MAE is higher than the selected forest's."
+  },
+  {
+    "slide": 9,
+    "speaker": "Both",
+    "seconds": 40,
+    "text": "The additional metadata improves this stage comparison, but very long or open-ended games remain unreliable. For Final, we will test IGDB descriptions linked by the same game IDs. We will review API terms, fit TF-IDF inside training folds, and compare structured, text-only and combined inputs using the same CV metric. Campaign wording may distinguish story progression from repeatable online play. The comparison will test whether it helps."
+  }
+]

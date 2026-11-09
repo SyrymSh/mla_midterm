@@ -1,69 +1,152 @@
 # Defence guide
 
-The course guide specifies a 7-10 minute talk followed by 3-5 minutes of questions. Either partner may be asked about any part of the project. The schedule below totals nine minutes, but it still needs an actual timed rehearsal.
+The Endterm defence has seven minutes for the presentation and five minutes for questions. Either partner may be asked about any part of the project. The allocations below total exactly 420 seconds. They are a rehearsal plan; actual delivery still needs a timer.
 
-| Slide | Speaker | Seconds | Main point |
-| --- | --- | --- | --- |
-| 1 | Syrym | 35 | Main-story duration estimates help players plan their time. |
-| 2 | Syrym | 65 | The same games now have more observed feature types. |
-| 3 | Syrym | 60 | Labels and split stay fixed; preprocessing fits training folds. |
-| 4 | Yerdaulet | 65 | Fixed-estimator comparisons isolate feature-set effects. |
-| 5 | Yerdaulet | 70 | Explain the classical models, ensembles, tuning and selection rule. |
-| 6 | Yerdaulet | 65 | Explain MAE, uncertainty and long-game failures. |
-| 7 | Syrym | 65 | Explain PCA, selection of k and weak cluster separation. |
-| 8 | Yerdaulet | 65 | Explain the neural network and early stopping. |
-| 9 | Both | 50 | State the conclusion, limitations and Final-stage plan. |
+| Slide | Speaker | Seconds | Cumulative time | Topic |
+| --- | --- | --- | --- | --- |
+| 1 | Syrym | 25 | 0:25 | Question and beneficiary |
+| 2 | Syrym | 50 | 1:15 | Feedback fixes and source coverage |
+| 3 | Syrym | 45 | 2:00 | Fixed target, split and pipelines |
+| 4 | Yerdaulet | 50 | 2:50 | Controlled feature comparison |
+| 5 | Yerdaulet | 60 | 3:50 | Tuned ensembles and model selection |
+| 6 | Yerdaulet | 55 | 4:45 | Errors across models |
+| 7 | Syrym | 50 | 5:35 | PCA, clustering and group errors |
+| 8 | Yerdaulet | 45 | 6:20 | MLP learning and comparison |
+| 9 | Both | 40 | 7:00 | Conclusion and Final source plan |
+
+The spoken script leaves time to point at the figures. Use the exact selected settings and measured values in the delivered slides. Do not explain every row in the full results table during the seven-minute talk. Keep it available in the notebook for questions.
+
+## Spoken script
+
+### Slide 1: Question and beneficiary
+
+Syrym, 25 seconds.
+
+Our question is whether game metadata can help a player choose a game that fits their time budget. We predict main-story hours using the same Midterm games and split, with additional real data and the required Endterm methods.
+
+### Slide 2: Feedback fixes and source coverage
+
+Syrym, 50 seconds.
+
+The teacher identified missing collection code, missing conclusions and empty columns. The ZIP now contains both collectors, raw responses, collection dates, the notebook conclusion and slides. All 5,229 games remain. The old price and tag fields had no observations. Their replacements contain 2,861 USD prices and 3,333 rows with Steam tags. Themes, perspectives and modes add other feature types. Source gaps stay missing in the saved data; imputation belongs inside model training.
+
+### Slide 3: Fixed target, split and pipelines
+
+Syrym, 45 seconds.
+
+The target is IGDB's hastily seconds divided by 3,600: time to credits without notable extras. October labels and the 4,183 training and 1,046 test games stay fixed. Encoders, imputation, scaling and developer frequencies fit inside training folds. We exclude alternate completion-time fields and explicit duration tags. The test was already seen at Midterm, which limits generalization claims. Offline reproduction needs no live API access.
+
+### Slide 4: Controlled feature comparison
+
+Yerdaulet, 50 seconds.
+
+We hold each estimator's settings fixed while adding feature families. Ridge and ExtraTrees each compare original features, expanded IGDB, and IGDB plus Steam. Added IGDB descriptors help both comparisons. Steam's extra value depends on the estimator. Prices are current US-store quotes, and Steam covers only part of the cohort. These limits remain visible in the interpretation.
+
+### Slide 5: Tuned ensembles and model selection
+
+Yerdaulet, 60 seconds.
+
+MAE in hours fits the time-budget question. Both forest and boosting now have eight-setting searches using three training folds. Forest varies tree count, leaf size and feature fraction. Boosting varies tree complexity and regularization. The MLP has a separate four-setting search. We select the lowest training CV MAE before calculating test scores. The selected model is random forest, with CV MAE 8.636 and test MAE 10.37 hours. Forest and boosting are nearly tied in CV. Boosting has lower test MAE, but the training-CV rule selects forest. The full table also reports RMSE, R-squared and median error.
+
+### Slide 6: Errors across models
+
+Yerdaulet, 55 seconds.
+
+We now compare duration and genre errors for every model and inspect the same real cases across models. For games up to five hours, forest MAE is 1.80 hours, versus boosting at 1.91. For games over five and up to twenty hours, boosting does better: 4.14 versus 4.30 hours. Very long and ongoing online titles remain difficult. Their completion labels can be hard to interpret as a main story. We keep these games and source labels in the result. RMSE exposes extreme failures, while median error describes a more typical mistake.
+
+### Slide 7: PCA, clustering and group errors
+
+Syrym, 50 seconds.
+
+We normalize IGDB semantic descriptors before PCA so heavily annotated games do not dominate distances. PCA and KMeans fit training objects only. We check explained variance, several values of k and a second seed. Low silhouette means the groups overlap. Their held-out errors now compare the archived Midterm Ridge and selected model. Ridge MAE is 3.62 hours in cluster zero and 19.76 in cluster five; forest reduces both. Old School RuneScape in cluster three is a fantasy MMO: actual 486.5 hours, forest prediction 20.81. These descriptive errors do not choose the models or k.
+
+### Slide 8: MLP learning and comparison
+
+Yerdaulet, 45 seconds.
+
+The MLP searches two layer structures and two L2 penalties. It predicts a standardized log target and converts back to hours for evaluation. Training loss falls, while internal validation peaks around iteration 9. Training stops at 30 and restores the best validation weights. This controls overfitting. Curve units differ from hour MAE. The MLP's test MAE is 10.41 hours. Its CV MAE is higher than the selected forest's.
+
+### Slide 9: Conclusion and Final source plan
+
+Both, 40 seconds.
+
+The additional metadata improves this stage comparison, but very long or open-ended games remain unreliable. For Final, we will test IGDB descriptions linked by the same game IDs. We will review API terms, fit TF-IDF inside training folds, and compare structured, text-only and combined inputs using the same CV metric. Campaign wording may distinguish story progression from repeatable online play. The comparison will test whether it helps.
 
 ## Questions both partners should practise
 
-**What exactly is the target?** IGDB `hastily` seconds divided by 3,600: reaching credits without notable extras. The October labels stay unchanged. The old raw field name mentions HLTB, but its recorded source is IGDB.
+### Data and continuity
 
-**Why the same split?** It makes the comparison with midterm meaningful: 4,183 training and 1,046 test games. The test was already observed at midterm, so it is a stage benchmark, not an independent new test.
+What is the target? IGDB `game_time_to_beats.hastily` seconds divided by 3,600, meaning time to the credits without notable extras. The October target values remain unchanged. The original field name mentions HLTB, but its source record identifies IGDB.
 
-**Why did the original data need work?** All prices were missing and all tags empty. The effective predictors were mostly year, genre and a developer catalog proxy. More rows would not supply the missing feature types.
+Where is the collection code? `src/collect.py` fetches the added IGDB and Steam metadata. `reference/midterm_source/src/collect_igdb.py` preserves the original target collector. Both are inside the ZIP, with raw observations and collection manifests.
 
-**Where do prices and tags come from?** Explicit linked Steam app IDs lead to saved public API responses. Prices are current US USD quotes, not launch prices. Tag names are mapped from source IDs. The audit checks these against the saved responses.
+Why did the Midterm need more data? The old price and tag fields had no observations. The Endterm adds populated feature types to the same games. It measures coverage and tests added value with fixed-estimator ablations.
 
-**Does missing price mean free?** No. The stored value stays missing. Only the model's training-fold imputer supplies a computational median. It is not treated as an observed price. Targets are never imputed.
+Does a missing price mean free? No. The stored value remains missing. The model fits a predictor imputer inside each training fold. That computational value does not become an observed price, and the target is never imputed.
 
-**What cleaning was done?** Of 5,273 raw rows, 28 durations are below the inherited six-minute minimum, five descriptions have fewer than eight words and one title has fewer than two characters. Ten normalized-title/year duplicates are removed. The audit reproduces all 5,229 retained games and records each reason. The range rule can exclude real short games, and matching titles can hide different editions. Endterm keeps these choices for comparability and changes no games or labels.
+Why keep the same split? The saved 4,183/1,046 assignment makes stage results comparable. The test was already observed at Midterm, so it is a benchmark with earlier exposure, not an independent new evaluation.
 
-**What would leak the answer?** Other completion-time fields, explicit duration tags, or preprocessing fitted using test rows. These are excluded or fitted in folds. Repeated Steam IDs across partitions are disclosed and checked separately.
+What cleaning happened? The inherited target rule accepts finite labels from 0.1 to 1,000 hours. All 28 duration exclusions are below six minutes. Five descriptions fail the eight-word minimum and one title fails the two-character minimum. Ten normalized-title/year duplicates are removed. These filters can exclude real short games or different editions; the Endterm retains them for continuity.
 
-**Why MAE?** Its unit is hours, which fits the time-budget question. RMSE highlights large errors, R2 describes explained variation, and median absolute error describes a typical mistake when a few labels are extreme.
+What protects against leakage? Source identifiers, titles, descriptions, alternate completion-time fields and explicit duration tags are excluded from structured model inputs. Encoders, imputers, numeric scales and developer catalog counts fit training folds. Repeated Steam IDs across partitions remain a disclosed limitation, checked with grouped CV and overlap-free subsets.
 
-**What does CV estimate?** It holds back different parts of the training data for validation. The mean supports selection and the fold standard deviation shows variation. The tuning score is not nested CV, so it can be optimistic.
+### Tuning and comparison
 
-**Why OLS, Ridge, a tree and KNN?** They are the Week 3-4 references. OLS tests unrestricted linear relationships; Ridge regularizes them; a tree learns thresholds; KNN tests local similarity. All four use the original feature family. Numeric inputs are scaled inside each fold for KNN.
+Why MAE? Its unit is hours, matching the player's time-budget question. RMSE makes extreme failures more visible; median absolute error describes a typical error despite the long label tail. R2 is also reported, including weak values.
 
-**Why those parameters?** The tree has depth at most ten and at least ten rows per leaf to limit complexity. KNN uses 25 distance-weighted neighbours to reduce reliance on one noisy game. Ridge uses the original alpha 20. Those reference choices were not selected using test error.
+What does CV estimate? Each fold holds back different training games for validation. The mean supports selection and the sample standard deviation describes fold variation. The selected tuning score is not nested CV and can be optimistic.
 
-**How are the ensembles different?** Random forest averages bootstrap-trained trees. ExtraTrees adds more random split thresholds. Boosting builds trees sequentially; this experiment uses absolute-error loss in hours. The main settings and reasons are in model_specifications.csv.
+What was tuned in the forest? The eight combinations vary tree count, minimum leaf rows and feature fraction. Tree count concerns ensemble stability and runtime; larger leaf sizes regularize trees; a smaller feature fraction decorrelates them. Selection uses training CV MAE.
 
-**What was tuned?** Eight boosting configurations vary leaf count, minimum leaf rows and L2 penalty. Four MLP configurations vary architecture and L2 penalty. Selection uses training CV MAE.
+What was tuned in boosting? Eight combinations vary maximum leaves, minimum leaf rows and L2 regularization. These control the complexity and regularization of the sequential model. The objective is absolute error in hours.
 
-**How was extra data tested fairly?** Ridge settings stay fixed across three feature sets, and ExtraTrees repeats the same comparison. Steam improves ExtraTrees here but gives no clear further gain to Ridge. A real feature can have little extra value after correlated fields are present.
+How do forest and boosting differ? A random forest averages bootstrap-trained trees. Boosting fits trees sequentially to improve the current predictions. ExtraTrees adds random split thresholds and serves as a fixed-setting feature-ablation comparator.
 
-**How does the neural network work?** The chosen hidden layers have 64 and 32 units, using ReLU/Adam and L2 penalty 0.1. It fits a standardized log target and converts predictions back to hours. A 15% internal training holdback controls early stopping. Training stops after 30 iterations and restores the best validation weights.
+How was the model selected? By mean training CV MAE among full-feature candidates. Test scores describe the chosen comparison and do not select search settings. The selection manifest records the rule and the dataset/split hashes.
 
-**Why can validation worsen while training loss falls?** The network can fit training-specific detail. Early stopping follows validation progress. The loss curve uses transformed-target units, not hour MAE.
+What is the Midterm reference? The submitted best model was Ridge under its training-CV rule. Its archived predictions remain available. The Endterm also refits the original-feature references using the current pipeline; those rows are labelled separately so small refit differences are visible.
 
-**What does PCA explain?** Variation in encoded predictors, not duration. The main study uses normalized IGDB descriptors and excludes Steam coverage fields. It fits training rows only.
+Why test fixed-estimator feature sets? Keeping estimator settings fixed isolates the observed change when feature families are added. Comparing a new forest with an old linear model alone mixes feature and estimator effects.
 
-**Why k=6?** It has the highest sampled silhouette among the tested values 2-6. The score is only about 0.078, so groups overlap. Stable initialization does not prove good separation or six natural game classes.
+### Unsupervised analysis and errors
 
-**Why are some errors enormous?** Ongoing online titles can have very large labels that are hard to interpret as main-story completion. The full result retains them. The audit flags source records rather than inventing corrections or deleting difficult test cases.
+What does normalization do here? It gives each multi-hot semantic descriptor vector equal L2 length before PCA. This reduces domination by games with more annotations. It does not use duration labels.
 
-**What does the bootstrap interval mean?** It resamples the same test games in pairs to compare absolute errors for fitted models. It does not cover all training uncertainty or repair earlier test exposure.
+What does PCA explain? Variance in the encoded predictors, not duration. The retained-variance figure describes the full PCA space; the first two plotted components contain only part of that information.
 
-**What remains for Final?** Description features, a matched comparison with structured inputs, a local app and stronger independent validation where feasible. Those are Final-stage additions in the supplied guide.
+Why choose that k? KMeans compares the declared values using sampled training silhouette. The second seed checks assignment stability. A stable assignment can still have weak separation, so low silhouette remains a limitation.
 
-**How were AI tools used?** Give the factual statement in CONTRIBUTIONS.md, then explain what each student personally reviewed, changed or verified.
+How are the groups relevant to prediction? Their held-out error summaries compare the archived Midterm Ridge and selected model, with named games and features. This uses the rubric's error-explanation route. Cluster labels are not added as predictors, and held-out group errors do not select k or the supervised model.
+
+How do errors differ across models? Use `all_model_error_by_duration.csv` and `all_model_error_by_genre.csv` to compare matched subsets. Then open the same games in `all_model_error_examples.csv`. Explain a measured contrast using actual predictions rather than assuming one family wins everywhere.
+
+Why are some errors huge? Ongoing online games can have very large labels that are difficult to interpret as main-story completion. The full-cohort result retains them. Raw labels are audited, and a large error alone is not a reason to change the source value or remove a test game.
+
+What does the paired bootstrap interval mean? It resamples the same test games in pairs to compare the absolute errors of already fitted models. It describes conditional uncertainty on that cohort, without covering all training uncertainty or repairing earlier test exposure.
+
+### MLP and Final plan
+
+What does the MLP learn? Nonlinear combinations of the encoded structured inputs. Two layer layouts and two L2 penalties form the declared search. Numeric transforms, feature encodings and target transforms fit the training data within each CV fold.
+
+What do the two learning curves show? Training loss and internal validation R2 use the transformed target. A falling training loss alongside weaker validation shows that fitting training details can stop helping validation. Early stopping restores the best validation weights. These curve units are different from final hour MAE.
+
+Why compare the MLP with the best earlier model? The rubric asks whether it improves on the strongest preceding approach, including tuned ensembles. Architecture complexity and a higher R2 do not override the main MAE selection rule.
+
+What exactly will be added at Final? IGDB description/summary text for the same game IDs. Start with the saved descriptions. A refresh would use the official API, local credentials, saved timestamps and a terms review. Compare structured, text-only TF-IDF/Ridge and combined inputs with fold-fitted vocabularies and the same CV metric/split. Campaign wording may explain information hidden by broad genres. Audit direct duration statements before fitting text.
+
+Who did what? Each partner should describe tasks they actually completed and evidence they checked. The assigned review areas are in `CONTRIBUTIONS.md`; they should not be described as completed personal work until the students confirm them.
+
+Which AI tools were used? OpenAI Codex assisted with code, runs, verification and preparation of the materials. Humanizer helped edit wording. Explain the resulting work independently and identify personal review or changes honestly.
+
+## Five-minute question practice
+
+Take turns asking one question from each of these areas: tuning, unsupervised interpretation, MLP learning, errors, and the partner's assigned work. Give a direct answer, then point to the relevant saved output. Practise navigating from the notebook to the raw record for one game without internet access.
 
 ## Before uploading
 
-- Complete and confirm each person's assigned review tasks.
-- Rehearse aloud with a timer, with both partners speaking.
-- Practise questions on the other person's area as well as your own.
-- Save the presentation and use the same archive for both uploads.
-- Both partners upload by 23:59 on the day before the defence.
+- Complete and record each person's actual review tasks in `CONTRIBUTIONS.md`.
+- Rehearse aloud with both speakers. Stop at seven minutes, then practise five minutes of questions.
+- Extract the final ZIP into a new folder and open the report, slides and executed notebook there.
+- Check that the collection code, data, split and all shown results are inside that archive.
+- Use `Endterm_Shadiyarbek_Syrym_SE2424.zip` and `Endterm_Akhanov_Yerdaulet_SE2424.zip`, containing the same complete project.
+- Both partners upload the same complete contents to Moodle by 23:59 on the day before the defence.

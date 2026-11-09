@@ -1,0 +1,26 @@
+{
+  "verified_at_utc": "2026-11-09T10:16:47.580927+00:00",
+  "method": "Two complete fits: command-line then fresh-kernel Restart/Run All with RETRAIN=True.",
+  "code_cells_executed": 13,
+  "errors": 0,
+  "models_compared": 13,
+  "max_numeric_metric_difference": 0.0,
+  "max_selected_prediction_difference": 2.4868995751603507e-14,
+  "dataset_sha256": "2148c224a220e03571fa928de4cea3a4bf45b2429b2c1ab00fe505276239e6a8",
+  "split_sha256": "5769f3362fb58cc606f62fa531f4f9ae04b4d9645644b78ba0e1e286aaaa309a",
+  "source_sha256": {
+    "audit_data.py": "a394ae0aafcb6165ffb43bc77b691eea2048c6f1bd232ae65c83a90cd126006b",
+    "cluster.py": "1be897a15c020ce940bca4acc027ace795f48b34eeb2ceefd8ceea0b0652a5b0",
+    "collect.py": "c95df35a421867558ed7fd5ecfe7b780de524c23dc649535c5d030ccd47d0566",
+    "common.py": "f1175bf1382fd5a53549b77dee837f233fdb7321cd07313f3b8da10ff49b48e3",
+    "error_analysis.py": "899b37854d3e2ae7a1908771570b8059089cf248081e3e324958ab7c5ae6ab9e",
+    "features.py": "58deb562605038cb9545c8a679252c713f026310c4fdc660805b8e5bfd809a7c",
+    "plots.py": "484dc948dff39de5953782d7e73a1f0db7417621cddccd3c9339ac8a20634ba1",
+    "prepare.py": "10a078e10aa34f37dee076fce3c8933184390e001420d6cf28078982f6f242fd",
+    "train.py": "35fbcb9fbad07bfb9d2ffed3170beb670bdbde1c1fb244bb9424ed84bc551768",
+    "validate_submission.py": "334246e16ed8330c91e7335679422a9ad55e511052f5349267e6fbe3d325ec49"
+  },
+  "notebook_sha256": "ff1212828a69cad33d80dd3f255f33c1a13ef1a6b79cac44ee98cc6b7013cef0",
+  "post_execution_documentation_refresh": "Teacher-feedback wording and change-log display refreshed; executable code and numerical results unchanged.",
+  "executed_code_matches_current_template": true
+}

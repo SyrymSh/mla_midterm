@@ -78,10 +78,50 @@ def run():
     fig,axs=plt.subplots(1,2,figsize=(11,4));axs[0].plot(np.arange(1,len(nn['loss_curve'])+1),nn['loss_curve'],color=TEAL)
     axs[0].set(xlabel='Training iteration',ylabel='Loss in standardized log-target space',title='Neural network training')
     axs[1].plot(np.arange(1,len(nn['internal_validation_R2_curve'])+1),nn['internal_validation_R2_curve'],color=GOLD)
+    peak=int(np.argmax(nn['internal_validation_R2_curve']))+1
+    axs[1].axvline(peak,color=GRAY,ls='--',label=f'Best weights: iteration {peak}')
+    axs[1].legend(fontsize=9)
     axs[1].set(xlabel='Training iteration',ylabel='Internal validation R² (transformed target)',title='Early stopping uses training rows only');fig.tight_layout();save('neural_learning',fig)
     importance=pd.read_csv(OUT/'permutation_importance.csv').head(10).iloc[::-1]
     fig,ax=plt.subplots();ax.barh(importance.feature,importance.validation_MAE_increase_hours,xerr=importance.std_hours,color=TEAL)
     ax.set(xlabel='Validation MAE increase after permutation (hours)',title='Importance from one training-validation fold');fig.tight_layout();save('permutation_importance',fig)
+    # Use the same rows and axis limits to compare failure patterns directly.
+    from common import MIDTERM
+    archived=pd.read_csv(MIDTERM/'outputs/test_predictions.csv',dtype={'game_id':str})
+    pred['Archived Midterm Ridge']=archived.set_index('game_id').predicted_hours.reindex(pred.game_id.astype(str)).to_numpy()
+    families=['Archived Midterm Ridge','Random forest','Tuned gradient boosting','Tuned neural network']
+    fig,axes=plt.subplots(2,2,figsize=(11,8),sharex=True,sharey=True)
+    for ax,name in zip(axes.flat,families):
+        ax.scatter(pred.actual_hours,pred.actual_hours-pred[name],s=10,alpha=.35,color=TEAL)
+        ax.axhline(0,color=GOLD,lw=1)
+        ax.set(xscale='log',yscale='symlog',title=name,xlabel='Actual hours (log)',ylabel='Actual minus predicted hours')
+    fig.suptitle('The same long-label failures affect every main model',fontsize=14)
+    fig.tight_layout();save('cross_model_residuals',fig)
+    errors=pd.read_csv(OUT/'all_model_error_by_duration.csv')
+    bands=['0-5 h','>5-20 h','>20-50 h','>50-100 h','>100 h']
+    matrix=errors.pivot(index='model',columns='duration_band',values='MAE_hours').reindex(index=comparison.model.tolist()+['Archived Midterm Ridge'],columns=bands)
+    fig,ax=plt.subplots(figsize=(10,9))
+    from matplotlib.colors import LogNorm
+    heat=ax.imshow(matrix,aspect='auto',cmap='YlGnBu',norm=LogNorm(vmin=matrix.min().min(),vmax=matrix.max().max()))
+    for i in range(len(matrix)):
+        for j in range(len(bands)):
+            v=matrix.iloc[i,j]
+            ax.text(j,i,f'{v:.1f}',ha='center',va='center',color='white' if v>60 else '#142A30',fontsize=9)
+    ax.set(xticks=np.arange(len(bands)),xticklabels=bands,yticks=np.arange(len(matrix)),yticklabels=matrix.index,
+           xlabel='Actual duration band',title='Cross-model test MAE by duration (hours)')
+    fig.colorbar(heat,ax=ax,label='MAE in hours (logarithmic color scale)',fraction=.035,pad=.03)
+    fig.tight_layout();save('cross_model_duration_errors',fig)
+    cluster_errors=pd.read_csv(OUT/'cluster_error_summary.csv')
+    winner=manifest['best_cv_model']
+    fig,ax=plt.subplots(figsize=(10,5))
+    for offset,name,color in [(-.18,'Archived Midterm Ridge',GRAY),(.18,winner,TEAL)]:
+        points=cluster_errors[cluster_errors.model.eq(name)].sort_values('cluster')
+        xx=points.cluster.to_numpy()
+        ax.bar(xx+offset,points.MAE_hours,width=.34,color=color,label=name)
+        for x,v in zip(xx,points.MAE_hours):ax.text(x+offset,v+.25,f'{v:.1f}',ha='center',fontsize=9)
+    ax.set(xticks=sorted(cluster_errors.cluster.unique()),xlabel='Train-fitted semantic cluster',ylabel='Test MAE in hours',
+           title='Semantic groups locate errors in the earlier model')
+    ax.legend();fig.tight_layout();save('cluster_model_errors',fig)
     print('Plots saved:',OUT/'figures',flush=True)
 
 if __name__=='__main__':

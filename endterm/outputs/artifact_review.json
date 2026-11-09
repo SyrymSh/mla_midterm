@@ -1,0 +1,18 @@
+{
+  "reviewed_at_utc": "2026-11-09T10:09:54.764144+00:00",
+  "reviewer": "Codex visual inspection of final rendered pages",
+  "report_pages_reviewed": 10,
+  "slides_reviewed": 9,
+  "slide_pdf_pages_reviewed": 9,
+  "clipping_or_overlap_observed": false,
+  "native_editable_charts": 6,
+  "embedded_chart_workbooks": 6,
+  "speaker_notes_match_script": true,
+  "planned_presentation_seconds": 420,
+  "deliverable_sha256": {
+    "Endterm_Report.pdf": "af9119238f245a9869a1bbcea6d6eb409d71a4b97d4fe3ce6e77a0f53965b9b6",
+    "Endterm_Defense.pptx": "c5b71e141ced64bcfa3b5d123028e01ae02e7d4f86db644b5e6dc78af51d550b",
+    "Endterm_Defense.pdf": "7a926227d6335d84f7e4530b9a9324eb4673b2df9255cbd00abd2cbecb011469"
+  },
+  "qualification": "Planned timing and file review do not certify student rehearsal or individual understanding."
+}

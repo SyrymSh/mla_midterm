@@ -92,7 +92,10 @@ def analyze(coverage_diagnostic=False):
 
 def run():
     analyze(coverage_diagnostic=True)
-    return analyze(coverage_diagnostic=False)
+    assignments=analyze(coverage_diagnostic=False)
+    from error_analysis import run as analyze_errors
+    analyze_errors()
+    return assignments
 
 if __name__=='__main__':
     run()

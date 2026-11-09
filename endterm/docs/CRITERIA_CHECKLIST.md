@@ -1,42 +1,44 @@
-# Criteria checklist
+# Endterm criteria and submission checks
 
-This review uses the supplied **Midterm Rubric** and **Project Guide**. The team confirmed that no separate Endterm brief has been issued. The guide requires ensembles and tuning, unsupervised analysis, and a neural network at Endterm. It reserves text/image features and a local app for Final.
+This checklist follows `reference/Endterm Rubric.pdf`, including the seven-minute presentation and five-minute question period. The earlier Midterm checklist is superseded. The rubric awards criteria 1-7 to the team and criterion 8 separately to each student.
 
-The statuses below describe evidence in the files, not a predicted mark. Oral performance and administrative actions cannot be verified by code.
+File checks can establish that code, data and analyses are present and consistent. Presentation timing, independent understanding, actual personal contributions and Moodle submission require student actions.
 
-| Criterion | File evidence | Status |
+The final verification completed two full fits: command-line training and a fresh-kernel notebook run with `RETRAIN=True`. All 13 model metric rows matched exactly; the maximum difference in selected-model predictions was 2.49e-14 hours. All 13 notebook code cells completed without errors. Eight integrity tests and the source/artifact checks passed. The report has ten reviewed pages; the presentation has nine reviewed slides, six native editable charts and six embedded workbooks. Evidence is in `outputs/reproducibility_check.json`, `validation_summary.json` and `artifact_review.json`.
+
+| Criterion | Requirement and evidence | Verification or remaining action |
 | --- | --- | --- |
-| 1 Question and purpose | Report and notebook define main-story duration regression for players planning their time. | Covered |
-| 1 Own collection code, raw snapshot and date | collect.py, archived midterm collection code, timestamped IGDB/Steam responses, collection manifests and source hashes. | Verified |
-| 1 Data minimum and format | 5,229 distinct games; numeric/categorical features and a real description field retained for Final. | Verified |
-| 1 Source and ethics check | DATA_CARD.md records sources, API access, robots/terms checks, dates, attribution and absence of private-person data. | Documented; source acceptance remains the teacher's judgement |
-| 1 Registration and team eligibility | Same-practice-group membership and topic approval are not documented in these files. | Team confirmation needed |
-| 2 Cleaning and before/after evidence | audit_data.py reproduces 5,273 raw rows, 34 range/text exclusions and ten duplicates, leaving the frozen 5,229 rows. cleaning_audit.csv gives every raw row's outcome. Reasons and the inherited short-game/edition limitations are explained. | Verified |
-| 2 Real additional feature types | Saved-source verification checks the observed Steam prices and tags. Coverage and dictionary files distinguish raw inputs, provenance and derived fields. | Verified |
-| 2 Leakage check | Time-to-beat alternatives, explicit duration tags, identifiers and descriptions are excluded. Encoders, imputers, scales and catalog tiers fit training folds only. Steam-ID overlap is disclosed and checked by sensitivity analysis. | Verified with the stated overlap limitation |
-| 2 At least three interpreted plots | Target, genre and price plots have quantitative interpretations and lead to metric, feature and model choices in the report/notebook. | Covered |
-| 3 Fixed split | Original 4,183/1,046 split is byte-identical, and targets/game IDs are unchanged. | Verified |
-| 3 Dummy and at least three Week 3-4 models | Median dummy, OLS, Ridge, decision tree and scaled KNN are compared using the same original-feature family. | Verified |
-| 3 Pipelines, CV and parameter reasons | Three training-only folds; model_specifications.csv explains every model and its main settings. | Verified |
-| 3 Notebook with visible outputs | The delivered notebook is executed from top to bottom and checked for errors. Cached experiments are identified; RETRAIN=True reproduces model fitting. | Execution checked by validate_submission.py |
-| Endterm ensembles and tuning | Random forest, ExtraTrees, and an eight-setting gradient-boosting search with saved fold results. | Verified |
-| Endterm unsupervised analysis | Training-only normalized IGDB descriptors, PCA, k=2..6 KMeans, silhouette, stability and profiles. Weak separation is explained. | Verified |
-| Endterm neural network | Four-setting MLP comparison, target transformation, early stopping, learning curves and CV/test results. | Verified |
-| 4 Metric and complete comparison | One table contains all 13 comparisons, CV mean/spread and test scores. MAE is justified; RMSE, R2 and median error are also reported. | Verified |
-| 4 Errors and examples | Residuals, genre/duration errors, source-linked long-label audit, actual failure cases and coverage/overlap sensitivity checks. | Verified |
-| 5 Conclusions, limits and next stage | Report answers the question, connects Week 5-8 methods to midterm weaknesses, and gives a Final plan. | Covered |
-| 5 Contributions and AI tools | CONTRIBUTIONS.md identifies assigned responsibilities and the AI tool and its uses. Actual completed individual work has not been confirmed. | Disclosure present; factual individual contributions need confirmation |
-| 6 Slides | Nine readable slides, labelled figures/tables and speaker notes. The complete model table is in the report/notebook. | File checks complete |
-| 6 Both speakers and 7-10 minutes | DEFENSE_GUIDE.md allocates a planned nine-minute talk to both partners. | Timed rehearsal needed |
-| 7 Each partner understands the whole project | Method questions and cross-topic preparation are provided in DEFENSE_GUIDE.md. | Cannot verify without each student's answers |
-| Submission | Both partners upload the same package by 23:59 on the day before the defence. | Student action needed |
+| 1. Continuity and fixes, 10 points | `CHANGELOG.md` maps the teacher's actual feedback to fixes and before/after evidence. `data/clean/fixed_split.csv` preserves 4,183 train and 1,046 test IDs; target values match the Midterm. Collection code, raw responses and dates are included. | `audit_data.py`, the integrity tests and `validate_submission.py` check continuity. Notebook Restart and Run All with `RETRAIN=True` must reproduce the delivered scores within numerical tolerance. |
+| 2. Tuned ensembles, 15 points | Random forest and gradient boosting both use three-fold training CV, with all preprocessing inside the fitted pipeline. Search candidates and selected settings are saved in `outputs/search/random_forest.csv` and `gradient_boosting.csv`. `model_comparison.csv` gives CV mean/spread and test scores alongside the Midterm-family references. | The test set never selects search settings. The report explains the search choices. The archived submitted Midterm result is distinguished from a new refit. |
+| 3. Unsupervised analysis, 10 points | IGDB semantic descriptors are L2-normalized. PCA retains the chosen variance fraction; KMeans compares k and checks a second seed. `cluster_profiles.csv` interprets metadata; `cluster_error_summary.csv` and `cluster_error_examples.csv` connect groups to the archived Midterm Ridge's errors and the selected model. | PCA, encoders and clusters fit training objects only. Group errors are descriptive held-out checks. Named games support the interpretation, and low separation remains a stated limitation. |
+| 4. MLP against the best earlier model, 15 points | Architecture/L2 settings use training CV. `neural_network_diagnostics.json` and learning curves record training loss and internal validation progress. The report explains the validation peak, stopping, restored weights and comparison with the strongest earlier model under MAE. | All final scores use the same test IDs and predictions transformed back to hours. Training loss uses standardized log-target space; dimensionless validation R2 uses the transformed target. |
+| 5. Fair comparison and errors, 15 points | One results table includes the dummy, Midterm-family models, ensembles and MLP with CV mean/spread and test scores. `all_model_error_by_duration.csv`, `all_model_error_by_genre.csv` and `all_model_error_examples.csv` provide comparable errors and real objects across models. | Main metric MAE fits the time-budget question. RMSE, R2 and median error describe trade-offs. Residual figures and the report explain failure patterns rather than only ranking average scores. |
+| 6. Conclusions, limits and Final plan, 10 points | The notebook, report and final slide answer the research question and state current limits. The Final plan names IGDB descriptions, access through the official API, links by `game_id`, campaign/open-ended-game motivation, and a structured/text/combined test with fold-fitted TF-IDF/Ridge. | The plan keeps training CV selection and the saved test split. Source terms must be reviewed before any future fresh collection; cached source-access evidence is included. |
+| 7. Presentation, 10 points | Nine readable slides follow the question, fixes, data, models, results, errors, unsupervised analysis, MLP and conclusion. `DEFENSE_GUIDE.md` assigns both speakers a total of exactly 420 seconds. | Rehearse aloud to meet seven minutes. The planned allocation does not prove actual delivery time. Allow a further five minutes for questions. |
+| 8. Individual answers, 15 points each | `CONTRIBUTIONS.md` gives assigned responsibilities and factual AI-tool use. The defence guide covers tuning, leakage, group interpretation, MLP learning, errors and the partner's areas. | Each student must complete the stated review work, describe their actual contribution and explain the whole project independently. Personal work and oral understanding have not been independently confirmed. |
 
-## Important qualifications
+## Archive completeness
 
-- The fixed test was already observed at midterm. It supports a stage comparison, not a new independent test.
-- Current prices and metadata support retrospective catalog prediction, not launch-day forecasting.
-- The main result retains extreme and open-ended-game labels. Reported subset scores do not replace the full-cohort result.
-- IGDB uses developer OAuth credentials. This is documented explicitly; the team should confirm the teacher accepts authenticated APIs under the guide's no-login wording.
-- Keeping the AI disclosure is part of criterion 5. The rubric explicitly requires the AI tools used and their purpose.
+| Required item | Included location |
+| --- | --- |
+| Collection code and saved source observations | `src/collect.py`, `reference/midterm_source/src/collect_igdb.py`, `data/raw/`, `reference/midterm/data/raw/` |
+| Clean data, saved split and data card | `data/clean/games_model_inputs.csv`, enriched audit view, saved split, `docs/DATA_CARD.md` |
+| Runnable code, visible notebook outputs and run instructions | `src/`, `tests/`, `notebooks/Video_Game_Endterm.ipynb`, `requirements.txt`, `run.ps1`, `README.md` |
+| Searches, unsupervised/MLP checks, results and errors | `outputs/search/`, other `outputs/` tables and figures |
+| Change log, conclusions and Final source plan | `docs/CHANGELOG.md`, report, notebook and final slide |
+| Slides for the seven-minute talk | `docs/Endterm_Defense.pptx`, `docs/Endterm_Defense.pdf`, `docs/DEFENSE_GUIDE.md` |
+| Contributions and AI use | `docs/CONTRIBUTIONS.md` and notebook disclosure |
+| Supplied instructions | `reference/Endterm Rubric.pdf`, earlier rubric and guide |
+| Artifact construction code | `tools/presentation/`, `tools/report/`, `tools/notebook/` |
 
-The remaining items require real team actions. This checklist does not claim that a rehearsal, upload, registration approval or individual review has happened.
+Both partners upload the same complete project contents. The confirmed group is SE2424. The archives use the required filename pattern: `Endterm_Shadiyarbek_Syrym_SE2424.zip` and `Endterm_Akhanov_Yerdaulet_SE2424.zip`. The deadline is 23:59 on the day before the defence. The teacher said GitHub would not be checked, so no required evidence may depend on a repository link.
+
+## Qualifications to keep visible
+
+- The saved test was already seen at Midterm. Reusing it supports a stage comparison and limits claims about unseen future games.
+- Stored source gaps remain missing. `games_model_inputs.csv` has no entirely empty predictors. Historical empty price/tag columns remain only in the audit view, excluded from model inputs; their new populated replacements have measured coverage.
+- The original range and text filters exclude some real short games, and normalized-title/year deduplication can collapse editions. Endterm preserves them for continuity.
+- Current prices, selective Steam coverage, repeated app IDs and uncertain online-game labels limit interpretation. Neither a large error nor a higher score licenses changing source labels.
+- AI use is allowed by the Endterm rubric and must be disclosed. The disclosure does not replace each student's independent understanding.
+
+A successful automated validation covers the file requirements it tests. It cannot certify a seven-minute performance, completed personal work, the teacher's final judgement or a Moodle upload.
