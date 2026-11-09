@@ -9,13 +9,13 @@
     "slide": 2,
     "speaker": "Syrym",
     "seconds": 50,
-    "text": "The teacher identified missing collection code, missing conclusions and empty columns. The ZIP now contains both collectors, raw responses, collection dates, the notebook conclusion and slides. All 5,229 games remain. The old price and tag fields had no observations. Their replacements contain 2,861 USD prices and 3,333 rows with Steam tags. Themes, perspectives and modes add other feature types. Source gaps stay missing in the saved data; imputation belongs inside model training."
+    "text": "We keep the same 5,229 games and labels, while adding real information about gameplay and store listings. The full model uses 39 predictor fields. Themes, modes and perspectives describe game structure. Steam contributes user tags and current US prices. The table shows observed coverage, so a missing price is not confused with a free game. This feature expansion addresses limited metadata in the Midterm. The next controlled comparison measures its effect."
   },
   {
     "slide": 3,
     "speaker": "Syrym",
     "seconds": 45,
-    "text": "The target is IGDB's hastily seconds divided by 3,600: time to credits without notable extras. October labels and the 4,183 training and 1,046 test games stay fixed. Encoders, imputation, scaling and developer frequencies fit inside training folds. We exclude alternate completion-time fields and explicit duration tags. The test was already seen at Midterm, which limits generalization claims. Offline reproduction needs no live API access."
+    "text": "The same split contains 4,183 training games and 1,046 test games. Each training CV fold fits its own imputation, scaling, category vocabularies and developer frequencies. We compare settings by validation MAE in hours, select the lowest mean and refit the training partition. IDs, descriptions, alternate completion times and explicit duration tags are excluded. The test was already seen at Midterm, so it supports a comparison between stages."
   },
   {
     "slide": 4,
@@ -26,14 +26,14 @@
   {
     "slide": 5,
     "speaker": "Yerdaulet",
-    "seconds": 60,
+    "seconds": 55,
     "text": "MAE in hours fits the time-budget question. Both forest and boosting now have eight-setting searches using three training folds. Forest varies tree count, leaf size and feature fraction. Boosting varies tree complexity and regularization. The MLP has a separate four-setting search. We select the lowest training CV MAE before calculating test scores. The selected model is random forest, with CV MAE 8.636 and test MAE 10.37 hours. Forest and boosting are nearly tied in CV. Boosting has lower test MAE, but the training-CV rule selects forest. The full table also reports RMSE, R-squared and median error."
   },
   {
     "slide": 6,
     "speaker": "Yerdaulet",
-    "seconds": 55,
-    "text": "We now compare duration and genre errors for every model and inspect the same real cases across models. For games up to five hours, forest MAE is 1.80 hours, versus boosting at 1.91. For games over five and up to twenty hours, boosting does better: 4.14 versus 4.30 hours. Very long and ongoing online titles remain difficult. Their completion labels can be hard to interpret as a main story. We keep these games and source labels in the result. RMSE exposes extreme failures, while median error describes a more typical mistake."
+    "seconds": 50,
+    "text": "The chart focuses on the 1,004 test games lasting up to 50 hours so the ordinary errors can be read. Forest is better than boosting for zero-to-five-hour games, while boosting is better in the medium ranges. The full scores still include all 1,046 test games. Thirteen games over 100 hours contribute 44.8 percent of forest absolute error. Long and open-ended titles remain difficult for every model, and uncertain completion labels help explain this."
   },
   {
     "slide": 7,
@@ -50,7 +50,7 @@
   {
     "slide": 9,
     "speaker": "Both",
-    "seconds": 40,
-    "text": "The additional metadata improves this stage comparison, but very long or open-ended games remain unreliable. For Final, we will test IGDB descriptions linked by the same game IDs. We will review API terms, fit TF-IDF inside training folds, and compare structured, text-only and combined inputs using the same CV metric. Campaign wording may distinguish story progression from repeatable online play. The comparison will test whether it helps."
+    "seconds": 50,
+    "text": "The selected forest reaches test MAE 10.37 hours, improving on submitted Midterm Ridge by 1.45 hours. Median error is 2.26 hours, so the estimate is useful for rough catalog planning. It remains unreliable for long or open-ended games. Current prices, incomplete Steam coverage and previous test exposure limit the result. For Final we will use linked IGDB descriptions and compare structured, TF-IDF text and combined inputs with fold-fitted features and the same CV metric. Existing descriptions are retained, and any refresh uses the official API after a terms review."
   }
 ]

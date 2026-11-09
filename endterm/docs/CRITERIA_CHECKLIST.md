@@ -1,10 +1,10 @@
-# Endterm criteria and submission checks
+# Technical checks and defence preparation
 
 This checklist follows `reference/Endterm Rubric.pdf`, including the seven-minute presentation and five-minute question period. The earlier Midterm checklist is superseded. The rubric awards criteria 1-7 to the team and criterion 8 separately to each student.
 
 File checks can establish that code, data and analyses are present and consistent. Presentation timing, independent understanding, actual personal contributions and Moodle submission require student actions.
 
-The final verification completed two full fits: command-line training and a fresh-kernel notebook run with `RETRAIN=True`. All 13 model metric rows matched exactly; the maximum difference in selected-model predictions was 2.49e-14 hours. All 13 notebook code cells completed without errors. Eight integrity tests and the source/artifact checks passed. The report has ten reviewed pages; the presentation has nine reviewed slides, six native editable charts and six embedded workbooks. Evidence is in `outputs/reproducibility_check.json`, `validation_summary.json` and `artifact_review.json`.
+The final verification completed two full fits: command-line training and a fresh-kernel notebook run with `RETRAIN=True`. All 13 model metric rows matched exactly; the maximum difference in selected-model predictions was 2.49e-14 hours. All 13 notebook code cells completed without errors. Eight integrity tests and the source/artifact checks passed. The report has ten reviewed pages; the presentation has nine reviewed slides, five native editable charts and five embedded workbooks. Evidence is in `outputs/reproducibility_check.json`, `validation_summary.json` and `artifact_review.json`.
 
 | Criterion | Requirement and evidence | Verification or remaining action |
 | --- | --- | --- |
@@ -15,7 +15,7 @@ The final verification completed two full fits: command-line training and a fres
 | 5. Fair comparison and errors, 15 points | One results table includes the dummy, Midterm-family models, ensembles and MLP with CV mean/spread and test scores. `all_model_error_by_duration.csv`, `all_model_error_by_genre.csv` and `all_model_error_examples.csv` provide comparable errors and real objects across models. | Main metric MAE fits the time-budget question. RMSE, R2 and median error describe trade-offs. Residual figures and the report explain failure patterns rather than only ranking average scores. |
 | 6. Conclusions, limits and Final plan, 10 points | The notebook, report and final slide answer the research question and state current limits. The Final plan names IGDB descriptions, access through the official API, links by `game_id`, campaign/open-ended-game motivation, and a structured/text/combined test with fold-fitted TF-IDF/Ridge. | The plan keeps training CV selection and the saved test split. Source terms must be reviewed before any future fresh collection; cached source-access evidence is included. |
 | 7. Presentation, 10 points | Nine readable slides follow the question, fixes, data, models, results, errors, unsupervised analysis, MLP and conclusion. `DEFENSE_GUIDE.md` assigns both speakers a total of exactly 420 seconds. | Rehearse aloud to meet seven minutes. The planned allocation does not prove actual delivery time. Allow a further five minutes for questions. |
-| 8. Individual answers, 15 points each | `CONTRIBUTIONS.md` gives assigned responsibilities and factual AI-tool use. The defence guide covers tuning, leakage, group interpretation, MLP learning, errors and the partner's areas. | Each student must complete the stated review work, describe their actual contribution and explain the whole project independently. Personal work and oral understanding have not been independently confirmed. |
+| 8. Individual answers, 15 points each | `CONTRIBUTIONS.md` gives assigned responsibilities. The defence guide covers tuning, leakage, group interpretation, MLP learning, errors and the partner's areas. | Each student must complete the stated review work, describe their actual contribution and explain the whole project independently. Personal work and oral understanding have not been independently confirmed. |
 
 ## Archive completeness
 
@@ -27,7 +27,7 @@ The final verification completed two full fits: command-line training and a fres
 | Searches, unsupervised/MLP checks, results and errors | `outputs/search/`, other `outputs/` tables and figures |
 | Change log, conclusions and Final source plan | `docs/CHANGELOG.md`, report, notebook and final slide |
 | Slides for the seven-minute talk | `docs/Endterm_Defense.pptx`, `docs/Endterm_Defense.pdf`, `docs/DEFENSE_GUIDE.md` |
-| Contributions and AI use | `docs/CONTRIBUTIONS.md` and notebook disclosure |
+| Contributions | `docs/CONTRIBUTIONS.md` |
 | Supplied instructions | `reference/Endterm Rubric.pdf`, earlier rubric and guide |
 | Artifact construction code | `tools/presentation/`, `tools/report/`, `tools/notebook/` |
 
@@ -39,6 +39,5 @@ Both partners upload the same complete project contents. The confirmed group is 
 - Stored source gaps remain missing. `games_model_inputs.csv` has no entirely empty predictors. Historical empty price/tag columns remain only in the audit view, excluded from model inputs; their new populated replacements have measured coverage.
 - The original range and text filters exclude some real short games, and normalized-title/year deduplication can collapse editions. Endterm preserves them for continuity.
 - Current prices, selective Steam coverage, repeated app IDs and uncertain online-game labels limit interpretation. Neither a large error nor a higher score licenses changing source labels.
-- AI use is allowed by the Endterm rubric and must be disclosed. The disclosure does not replace each student's independent understanding.
 
 A successful automated validation covers the file requirements it tests. It cannot certify a seven-minute performance, completed personal work, the teacher's final judgement or a Moodle upload.

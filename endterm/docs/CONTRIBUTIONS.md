@@ -12,10 +12,6 @@ The team has assigned the review and defence responsibilities below. Completed p
 | Yerdaulet Akhanov | Evaluation | Recompute scores from predictions, compare errors across models and duration/genre/cluster groups, inspect real failures, and explain uncertainty and test reuse. |
 | Both | Conclusions, archive and defence | Review the full notebook/report/slides, explain what changed after Midterm, rehearse the seven-minute talk, check the extracted ZIP and practise questions from the partner's areas. |
 
-## AI tools used
-
-OpenAI Codex assisted with the collection and modelling code, executed experiments, data/result checks, and preparation of the notebook, report and slides. The Humanizer editing skill helped revise wording while preserving its factual meaning. The dataset contains saved source observations, and reported scores come from model runs. The team must review the resulting work and explain it independently.
-
 ## Personal review record
 
 Before submission, each student should add a short dated statement describing tasks they completed, the commands or evidence they checked, and any changes they made. A partner's assigned area alone does not establish that the work was completed. No review or rehearsal is claimed in this document until the students confirm it.

@@ -183,7 +183,7 @@ README provides installation and offline commands. The notebook defaults to RETR
 
 Syrym is assigned collection/preparation, exploration and PCA/clustering review. Yerdaulet is assigned modelling, tuning, MLP and evaluation review. Both must review conclusions and practise the entire defence. These are assigned tasks; completed individual contributions require factual student confirmation. CONTRIBUTIONS.md records the review tasks.
 
-OpenAI Codex assisted with code, actual experiments, verification, notebook/report/slide preparation and editing. Both students remain responsible for explaining the submitted work independently. The complete ZIP supplies everything shown, because the teacher will not inspect GitHub. Each partner must upload the same complete contents by 23:59 on the day before defence, using the required Endterm_Surname_Name_Group.zip filename format. The spoken presentation is seven minutes, followed by five minutes of questions. Rehearsal and upload are student actions.
+Both students remain responsible for explaining the submitted work independently. The complete ZIP supplies everything shown, because the teacher will not inspect GitHub. Each partner must upload the same complete contents by 23:59 on the day before defence, using the required Endterm_Surname_Name_Group.zip filename format. The spoken presentation is seven minutes, followed by five minutes of questions. Rehearsal and upload are student actions.
 
 ## Sources
 

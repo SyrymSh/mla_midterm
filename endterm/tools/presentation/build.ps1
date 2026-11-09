@@ -12,3 +12,5 @@ $env:PRESENTATION_SKILL_DIR=$PresentationSkillDir
 if ($LASTEXITCODE -ne 0) {throw 'Presentation build failed'}
 & $PythonExecutable (Join-Path $PSScriptRoot 'build_pdf.py')
 if ($LASTEXITCODE -ne 0) {throw 'Slide PDF export failed'}
+& $PythonExecutable (Join-Path $PSScriptRoot 'finalize_properties.py')
+if ($LASTEXITCODE -ne 0) {throw 'Document properties update failed'}

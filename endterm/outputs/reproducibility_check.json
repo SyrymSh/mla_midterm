@@ -17,10 +17,10 @@
     "features.py": "58deb562605038cb9545c8a679252c713f026310c4fdc660805b8e5bfd809a7c",
     "plots.py": "484dc948dff39de5953782d7e73a1f0db7417621cddccd3c9339ac8a20634ba1",
     "prepare.py": "10a078e10aa34f37dee076fce3c8933184390e001420d6cf28078982f6f242fd",
-    "train.py": "35fbcb9fbad07bfb9d2ffed3170beb670bdbde1c1fb244bb9424ed84bc551768",
-    "validate_submission.py": "334246e16ed8330c91e7335679422a9ad55e511052f5349267e6fbe3d325ec49"
+    "train.py": "35fbcb9fbad07bfb9d2ffed3170beb670bdbde1c1fb244bb9424ed84bc551768"
   },
-  "notebook_sha256": "ff1212828a69cad33d80dd3f255f33c1a13ef1a6b79cac44ee98cc6b7013cef0",
-  "post_execution_documentation_refresh": "Teacher-feedback wording and change-log display refreshed; executable code and numerical results unchanged.",
-  "executed_code_matches_current_template": true
+  "notebook_sha256": "f8f4ded54380b8e363a6bbd2f24587b1cb4e5cea716db6c5b9facdd9f1b78d0a",
+  "post_execution_documentation_refresh": "Narrative edited; executable cells and numerical results unchanged.",
+  "executed_code_matches_current_template": true,
+  "source_hash_scope": "Analysis and data preparation modules; validation/reporting helpers are excluded."
 }

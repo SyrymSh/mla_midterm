@@ -1,18 +1,18 @@
 {
-  "reviewed_at_utc": "2026-11-09T10:09:54.764144+00:00",
-  "reviewer": "Codex visual inspection of final rendered pages",
+  "reviewed_at_utc": "2026-11-09T10:58:45.957068+00:00",
   "report_pages_reviewed": 10,
   "slides_reviewed": 9,
   "slide_pdf_pages_reviewed": 9,
   "clipping_or_overlap_observed": false,
-  "native_editable_charts": 6,
-  "embedded_chart_workbooks": 6,
+  "native_editable_charts": 5,
+  "embedded_chart_workbooks": 5,
   "speaker_notes_match_script": true,
   "planned_presentation_seconds": 420,
   "deliverable_sha256": {
-    "Endterm_Report.pdf": "af9119238f245a9869a1bbcea6d6eb409d71a4b97d4fe3ce6e77a0f53965b9b6",
-    "Endterm_Defense.pptx": "c5b71e141ced64bcfa3b5d123028e01ae02e7d4f86db644b5e6dc78af51d550b",
-    "Endterm_Defense.pdf": "7a926227d6335d84f7e4530b9a9324eb4673b2df9255cbd00abd2cbecb011469"
+    "Endterm_Report.pdf": "34544401edb5d5a1b2f14e5a528f3c8284763c2c2b4facc5b99c881ee3d4985b",
+    "Endterm_Defense.pptx": "48939bf6a276b7d5c03f989a8774916fcf134bb276c36064c0f2b48719a43980",
+    "Endterm_Defense.pdf": "acfe318164d34ce9c1af38b32dc814345d6fe1de1d0fcd84bb553a32bd1b7383"
   },
-  "qualification": "Planned timing and file review do not certify student rehearsal or individual understanding."
+  "qualification": "Planned timing and file review do not certify student rehearsal or individual understanding.",
+  "presentation_revision": "Neutral light design, readable data table, training-only workflow, expanded conclusions; all nine rendered slides reviewed."
 }

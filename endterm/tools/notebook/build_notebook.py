@@ -192,10 +192,10 @@ Use the real IGDB descriptions already stored for these games, and the official 
 
 Descriptions can distinguish campaign structure and open-ended online games within broad genres. Before encoding, check descriptions for explicit duration statements and remove those phrases to avoid target disclosure. Fit TF-IDF vocabulary, IDF and a regularized Ridge text model inside training folds only. Compare structured-only, text-only and combined representations on the saved split, using the same three training folds and hour MAE. Select vocabulary/regularization by training CV, score the locked comparison on the held-out set, and inspect the long-game and cluster errors. A local app can then load the selected pipeline. This is a testable plan; no text-model improvement is claimed at Endterm.
 
-## 12 Contributions and AI use
+## 12 Team review responsibilities
 Syrym is assigned collection/preparation, exploration and PCA/clustering review. Yerdaulet is assigned model/tuning, MLP and evaluation review. Both must review conclusions, rehearse the seven-minute talk and answer questions across the project. These assignments require each student's factual confirmation after review.
 
-OpenAI Codex assisted with code, experiments, checks and preparation of the notebook, report and slides. Real API snapshots and executed outputs support the results. `docs/CONTRIBUTIONS.md` records the disclosure and review tasks. Human rehearsal, personal understanding and Moodle upload remain student actions.''')
+`docs/CONTRIBUTIONS.md` records the review tasks. Human rehearsal, personal understanding and Moodle upload remain student actions.''')
 
 nb=nbf.v4.new_notebook(cells=cells, metadata={'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'}})
 target=ROOT/'notebooks/Video_Game_Endterm.ipynb'

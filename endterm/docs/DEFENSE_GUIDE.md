@@ -1,40 +1,38 @@
 # Defence guide
 
-The Endterm defence has seven minutes for the presentation and five minutes for questions. Either partner may be asked about any part of the project. The allocations below total exactly 420 seconds. They are a rehearsal plan; actual delivery still needs a timer.
+The presentation has seven minutes, followed by five minutes for questions. Both speakers follow the 420-second plan below. Practise aloud with a timer.
 
-| Slide | Speaker | Seconds | Cumulative time | Topic |
+| Slide | Speaker | Seconds | Cumulative | Topic |
 | --- | --- | --- | --- | --- |
-| 1 | Syrym | 25 | 0:25 | Question and beneficiary |
-| 2 | Syrym | 50 | 1:15 | Feedback fixes and source coverage |
-| 3 | Syrym | 45 | 2:00 | Fixed target, split and pipelines |
+| 1 | Syrym | 25 | 0:25 | Research question and target |
+| 2 | Syrym | 50 | 1:15 | Same cohort, richer real features |
+| 3 | Syrym | 45 | 2:00 | Training-only validation |
 | 4 | Yerdaulet | 50 | 2:50 | Controlled feature comparison |
-| 5 | Yerdaulet | 60 | 3:50 | Tuned ensembles and model selection |
-| 6 | Yerdaulet | 55 | 4:45 | Errors across models |
-| 7 | Syrym | 50 | 5:35 | PCA, clustering and group errors |
-| 8 | Yerdaulet | 45 | 6:20 | MLP learning and comparison |
-| 9 | Both | 40 | 7:00 | Conclusion and Final source plan |
-
-The spoken script leaves time to point at the figures. Use the exact selected settings and measured values in the delivered slides. Do not explain every row in the full results table during the seven-minute talk. Keep it available in the notebook for questions.
+| 5 | Yerdaulet | 55 | 3:45 | Tuned ensembles and selection |
+| 6 | Yerdaulet | 50 | 4:35 | Errors across models |
+| 7 | Syrym | 50 | 5:25 | Clusters and earlier-model failures |
+| 8 | Yerdaulet | 45 | 6:10 | MLP learning progress |
+| 9 | Both | 50 | 7:00 | Conclusions and Final experiment |
 
 ## Spoken script
 
-### Slide 1: Question and beneficiary
+### Slide 1: Research question and target
 
 Syrym, 25 seconds.
 
 Our question is whether game metadata can help a player choose a game that fits their time budget. We predict main-story hours using the same Midterm games and split, with additional real data and the required Endterm methods.
 
-### Slide 2: Feedback fixes and source coverage
+### Slide 2: Same cohort, richer real features
 
 Syrym, 50 seconds.
 
-The teacher identified missing collection code, missing conclusions and empty columns. The ZIP now contains both collectors, raw responses, collection dates, the notebook conclusion and slides. All 5,229 games remain. The old price and tag fields had no observations. Their replacements contain 2,861 USD prices and 3,333 rows with Steam tags. Themes, perspectives and modes add other feature types. Source gaps stay missing in the saved data; imputation belongs inside model training.
+We keep the same 5,229 games and labels, while adding real information about gameplay and store listings. The full model uses 39 predictor fields. Themes, modes and perspectives describe game structure. Steam contributes user tags and current US prices. The table shows observed coverage, so a missing price is not confused with a free game. This feature expansion addresses limited metadata in the Midterm. The next controlled comparison measures its effect.
 
-### Slide 3: Fixed target, split and pipelines
+### Slide 3: Training-only validation
 
 Syrym, 45 seconds.
 
-The target is IGDB's hastily seconds divided by 3,600: time to credits without notable extras. October labels and the 4,183 training and 1,046 test games stay fixed. Encoders, imputation, scaling and developer frequencies fit inside training folds. We exclude alternate completion-time fields and explicit duration tags. The test was already seen at Midterm, which limits generalization claims. Offline reproduction needs no live API access.
+The same split contains 4,183 training games and 1,046 test games. Each training CV fold fits its own imputation, scaling, category vocabularies and developer frequencies. We compare settings by validation MAE in hours, select the lowest mean and refit the training partition. IDs, descriptions, alternate completion times and explicit duration tags are excluded. The test was already seen at Midterm, so it supports a comparison between stages.
 
 ### Slide 4: Controlled feature comparison
 
@@ -42,35 +40,35 @@ Yerdaulet, 50 seconds.
 
 We hold each estimator's settings fixed while adding feature families. Ridge and ExtraTrees each compare original features, expanded IGDB, and IGDB plus Steam. Added IGDB descriptors help both comparisons. Steam's extra value depends on the estimator. Prices are current US-store quotes, and Steam covers only part of the cohort. These limits remain visible in the interpretation.
 
-### Slide 5: Tuned ensembles and model selection
+### Slide 5: Tuned ensembles and selection
 
-Yerdaulet, 60 seconds.
+Yerdaulet, 55 seconds.
 
 MAE in hours fits the time-budget question. Both forest and boosting now have eight-setting searches using three training folds. Forest varies tree count, leaf size and feature fraction. Boosting varies tree complexity and regularization. The MLP has a separate four-setting search. We select the lowest training CV MAE before calculating test scores. The selected model is random forest, with CV MAE 8.636 and test MAE 10.37 hours. Forest and boosting are nearly tied in CV. Boosting has lower test MAE, but the training-CV rule selects forest. The full table also reports RMSE, R-squared and median error.
 
 ### Slide 6: Errors across models
 
-Yerdaulet, 55 seconds.
+Yerdaulet, 50 seconds.
 
-We now compare duration and genre errors for every model and inspect the same real cases across models. For games up to five hours, forest MAE is 1.80 hours, versus boosting at 1.91. For games over five and up to twenty hours, boosting does better: 4.14 versus 4.30 hours. Very long and ongoing online titles remain difficult. Their completion labels can be hard to interpret as a main story. We keep these games and source labels in the result. RMSE exposes extreme failures, while median error describes a more typical mistake.
+The chart focuses on the 1,004 test games lasting up to 50 hours so the ordinary errors can be read. Forest is better than boosting for zero-to-five-hour games, while boosting is better in the medium ranges. The full scores still include all 1,046 test games. Thirteen games over 100 hours contribute 44.8 percent of forest absolute error. Long and open-ended titles remain difficult for every model, and uncertain completion labels help explain this.
 
-### Slide 7: PCA, clustering and group errors
+### Slide 7: Clusters and earlier-model failures
 
 Syrym, 50 seconds.
 
 We normalize IGDB semantic descriptors before PCA so heavily annotated games do not dominate distances. PCA and KMeans fit training objects only. We check explained variance, several values of k and a second seed. Low silhouette means the groups overlap. Their held-out errors now compare the archived Midterm Ridge and selected model. Ridge MAE is 3.62 hours in cluster zero and 19.76 in cluster five; forest reduces both. Old School RuneScape in cluster three is a fantasy MMO: actual 486.5 hours, forest prediction 20.81. These descriptive errors do not choose the models or k.
 
-### Slide 8: MLP learning and comparison
+### Slide 8: MLP learning progress
 
 Yerdaulet, 45 seconds.
 
 The MLP searches two layer structures and two L2 penalties. It predicts a standardized log target and converts back to hours for evaluation. Training loss falls, while internal validation peaks around iteration 9. Training stops at 30 and restores the best validation weights. This controls overfitting. Curve units differ from hour MAE. The MLP's test MAE is 10.41 hours. Its CV MAE is higher than the selected forest's.
 
-### Slide 9: Conclusion and Final source plan
+### Slide 9: Conclusions and Final experiment
 
-Both, 40 seconds.
+Both, 50 seconds.
 
-The additional metadata improves this stage comparison, but very long or open-ended games remain unreliable. For Final, we will test IGDB descriptions linked by the same game IDs. We will review API terms, fit TF-IDF inside training folds, and compare structured, text-only and combined inputs using the same CV metric. Campaign wording may distinguish story progression from repeatable online play. The comparison will test whether it helps.
+The selected forest reaches test MAE 10.37 hours, improving on submitted Midterm Ridge by 1.45 hours. Median error is 2.26 hours, so the estimate is useful for rough catalog planning. It remains unreliable for long or open-ended games. Current prices, incomplete Steam coverage and previous test exposure limit the result. For Final we will use linked IGDB descriptions and compare structured, TF-IDF text and combined inputs with fold-fitted features and the same CV metric. Existing descriptions are retained, and any refresh uses the official API after a terms review.
 
 ## Questions both partners should practise
 
@@ -135,8 +133,6 @@ Why compare the MLP with the best earlier model? The rubric asks whether it impr
 What exactly will be added at Final? IGDB description/summary text for the same game IDs. Start with the saved descriptions. A refresh would use the official API, local credentials, saved timestamps and a terms review. Compare structured, text-only TF-IDF/Ridge and combined inputs with fold-fitted vocabularies and the same CV metric/split. Campaign wording may explain information hidden by broad genres. Audit direct duration statements before fitting text.
 
 Who did what? Each partner should describe tasks they actually completed and evidence they checked. The assigned review areas are in `CONTRIBUTIONS.md`; they should not be described as completed personal work until the students confirm them.
-
-Which AI tools were used? OpenAI Codex assisted with code, runs, verification and preparation of the materials. Humanizer helped edit wording. Explain the resulting work independently and identify personal review or changes honestly.
 
 ## Five-minute question practice
 

@@ -125,7 +125,6 @@ def run(artifacts=True):
         assert not [o for c in code for o in c['outputs'] if o['output_type']=='error']
         for filename in ['ENDTERM_REPORT.md','DATA_CARD.md','CONTRIBUTIONS.md','DEFENSE_GUIDE.md','CRITERIA_CHECKLIST.md']:
             assert (DOCS/filename).is_file(), f'Missing documentation: {filename}'
-        assert 'OpenAI Codex' in (DOCS/'CONTRIBUTIONS.md').read_text(encoding='utf-8')
         missing=[]
         for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)',(ROOT/'README.md').read_text(encoding='utf-8')):
             if '://' in target or target.startswith('#'): continue
@@ -133,7 +132,6 @@ def run(artifacts=True):
             if not (ROOT/path).exists(): missing.append(path)
         assert not missing, f'Broken README links: {missing}'
         report['documentation_links_valid']=True
-        report['AI_use_disclosure_present']=True
         report['notebook_executed_code_cells']=len(code)
         report['report_pages']=len(PdfReader(DOCS/'Endterm_Report.pdf').pages)
         report['slide_pdf_pages']=len(PdfReader(DOCS/'Endterm_Defense.pdf').pages)

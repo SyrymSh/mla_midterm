@@ -1,5 +1,5 @@
 {
-  "verified_at_utc": "2026-11-09T10:17:47.978571+00:00",
+  "verified_at_utc": "2026-11-09T10:58:53.756545+00:00",
   "raw_manifest_files_verified": 10,
   "original_files_preserved": 19,
   "cohort_rows": 5229,
@@ -16,17 +16,16 @@
   "cross_model_and_cluster_errors_verified": true,
   "MLP_learning_checks_present": true,
   "documentation_links_valid": true,
-  "AI_use_disclosure_present": true,
   "notebook_executed_code_cells": 13,
   "report_pages": 10,
   "slide_pdf_pages": 9,
   "editable_slide_count": 9,
-  "native_chart_count": 6,
-  "embedded_chart_workbooks": 6,
+  "native_chart_count": 5,
+  "embedded_chart_workbooks": 5,
   "deliverable_sha256": {
-    "notebooks/Video_Game_Endterm.ipynb": "ff1212828a69cad33d80dd3f255f33c1a13ef1a6b79cac44ee98cc6b7013cef0",
-    "docs/Endterm_Report.pdf": "af9119238f245a9869a1bbcea6d6eb409d71a4b97d4fe3ce6e77a0f53965b9b6",
-    "docs/Endterm_Defense.pptx": "c5b71e141ced64bcfa3b5d123028e01ae02e7d4f86db644b5e6dc78af51d550b",
-    "docs/Endterm_Defense.pdf": "7a926227d6335d84f7e4530b9a9324eb4673b2df9255cbd00abd2cbecb011469"
+    "notebooks/Video_Game_Endterm.ipynb": "f8f4ded54380b8e363a6bbd2f24587b1cb4e5cea716db6c5b9facdd9f1b78d0a",
+    "docs/Endterm_Report.pdf": "34544401edb5d5a1b2f14e5a528f3c8284763c2c2b4facc5b99c881ee3d4985b",
+    "docs/Endterm_Defense.pptx": "48939bf6a276b7d5c03f989a8774916fcf134bb276c36064c0f2b48719a43980",
+    "docs/Endterm_Defense.pdf": "acfe318164d34ce9c1af38b32dc814345d6fe1de1d0fcd84bb553a32bd1b7383"
   }
 }

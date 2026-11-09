@@ -79,7 +79,7 @@
     {
       "path": "data/clean/source_verification.json",
       "bytes": 366,
-      "sha256": "40a4d31e9a50df77e535d06aeadcaa24f6694661681d8b1b6b01b0144ad51536"
+      "sha256": "e4a5fff7599d14f74e4ae991795509def3ee97f2b565c09a416023fdd1137065"
     },
     {
       "path": "data/raw/collection_manifest.json",
@@ -143,13 +143,13 @@
     },
     {
       "path": "docs/CONTRIBUTIONS.md",
-      "bytes": 2335,
-      "sha256": "c7637c7e08a067270e92f8a1b430066ba6c30b1abf9bb577c2c18efea87607f2"
+      "bytes": 1908,
+      "sha256": "7d6ac659e1711ca1537f67f47d506ebe5548fba8e0887d9b23f07077d9da75a6"
     },
     {
       "path": "docs/CRITERIA_CHECKLIST.md",
-      "bytes": 7799,
-      "sha256": "30ee7f0a97126f3964773b89ed90880820c34c19df18f5817f4af2c7403e90e6"
+      "bytes": 7604,
+      "sha256": "9ebbb82635ec269af96137b2ed1a422c681f39f61e3f2372cc1f31a51f57bd40"
     },
     {
       "path": "docs/DATA_CARD.md",
@@ -158,38 +158,38 @@
     },
     {
       "path": "docs/DEFENSE_GUIDE.md",
-      "bytes": 14693,
-      "sha256": "cca8eac0d44426cd77fc99008777a07114f30a65ef02b09199c329605aebe4f1"
+      "bytes": 14075,
+      "sha256": "a8e41a6810f3b3699ced9366390753a96d11b47ba414abaaff4af0705a7c9787"
     },
     {
       "path": "docs/ENDTERM_REPORT.md",
-      "bytes": 22619,
-      "sha256": "564f03d1ddced282b162f24ec00abe051bb58b4a65e3f8959768511ce48e682f"
+      "bytes": 22505,
+      "sha256": "479d5e07da93c591d8fe65c8b1ca553c7128f9554a1f83b21bcd6ab9b1ac5d08"
     },
     {
       "path": "docs/Endterm_Defense.pdf",
-      "bytes": 423027,
-      "sha256": "7a926227d6335d84f7e4530b9a9324eb4673b2df9255cbd00abd2cbecb011469"
+      "bytes": 445003,
+      "sha256": "acfe318164d34ce9c1af38b32dc814345d6fe1de1d0fcd84bb553a32bd1b7383"
     },
     {
       "path": "docs/Endterm_Defense.pptx",
-      "bytes": 70460,
-      "sha256": "c5b71e141ced64bcfa3b5d123028e01ae02e7d4f86db644b5e6dc78af51d550b"
+      "bytes": 68466,
+      "sha256": "48939bf6a276b7d5c03f989a8774916fcf134bb276c36064c0f2b48719a43980"
     },
     {
       "path": "docs/Endterm_Report.pdf",
-      "bytes": 1152209,
-      "sha256": "af9119238f245a9869a1bbcea6d6eb409d71a4b97d4fe3ce6e77a0f53965b9b6"
+      "bytes": 1152130,
+      "sha256": "34544401edb5d5a1b2f14e5a528f3c8284763c2c2b4facc5b99c881ee3d4985b"
     },
     {
       "path": "docs/defense_notes.json",
-      "bytes": 4932,
-      "sha256": "d6711c16417455347589aa320e48653a83423219df20085a4cd067f0eb0ad695"
+      "bytes": 4959,
+      "sha256": "9dcc670e38dd7914b37c4276b02abe8f218756918fcbd8a27467a18784810e0a"
     },
     {
       "path": "notebooks/Video_Game_Endterm.ipynb",
-      "bytes": 3106607,
-      "sha256": "ff1212828a69cad33d80dd3f255f33c1a13ef1a6b79cac44ee98cc6b7013cef0"
+      "bytes": 3106430,
+      "sha256": "f8f4ded54380b8e363a6bbd2f24587b1cb4e5cea716db6c5b9facdd9f1b78d0a"
     },
     {
       "path": "outputs/all_model_error_by_duration.csv",
@@ -213,8 +213,8 @@
     },
     {
       "path": "outputs/artifact_review.json",
-      "bytes": 841,
-      "sha256": "e9f5253e84cd06f8fe5adbccd8183de56f70e7cc9e62e6992b3c8ae0912d921f"
+      "bytes": 930,
+      "sha256": "c9d9df1f00a1676d8f2fec6de4346ef430e81f55f70cd61c05268a9d7fd2b161"
     },
     {
       "path": "outputs/best_model.joblib",
@@ -333,8 +333,8 @@
     },
     {
       "path": "outputs/reproducibility_check.json",
-      "bytes": 1726,
-      "sha256": "0ff8fe0b391cd0e940327434a6e0b35418a2a357d2b51f0386c3bb4acee76bfa"
+      "bytes": 1696,
+      "sha256": "930f6f137b096597bf08a44aba4b34b46b8e59bc0ac9dac08d0445f9b49d63b2"
     },
     {
       "path": "outputs/sensitivity_subsets.csv",
@@ -353,8 +353,8 @@
     },
     {
       "path": "outputs/validation_summary.json",
-      "bytes": 1374,
-      "sha256": "964728d0d299e385caee63a7be40c5041ff3f71540189c1abc53a6c0d93adf5a"
+      "bytes": 1336,
+      "sha256": "1c70cdaec073d49d247fe7cf8c12d16a067f50f332c6a6a5bd982c00053bfb4d"
     },
     {
       "path": "outputs/coverage_diagnostic/cluster_assignments.csv",
@@ -688,8 +688,8 @@
     },
     {
       "path": "src/validate_submission.py",
-      "bytes": 10614,
-      "sha256": "334246e16ed8330c91e7335679422a9ad55e511052f5349267e6fbe3d325ec49"
+      "bytes": 10633,
+      "sha256": "dc641e118f6f9006d6ddd7e2750b052d06fe2c2b33e69b11e85a7ea32b8e4400"
     },
     {
       "path": "tests/test_invariants.py",
@@ -713,8 +713,8 @@
     },
     {
       "path": "tools/notebook/build_notebook.py",
-      "bytes": 21090,
-      "sha256": "32cc04a8a01c37b669108117cb6119ab1044f309ddc31bcf0cd7d94d84ab9871"
+      "bytes": 20913,
+      "sha256": "f96bad6826d7f6f2fa4d772f07a7f2973b35a3f32e4b7e677d14aee317bf247b"
     },
     {
       "path": "tools/notebook/execute_notebook.py",
@@ -728,18 +728,18 @@
     },
     {
       "path": "tools/presentation/README.md",
-      "bytes": 1873,
-      "sha256": "f07f76da47be0ddc958a26711401ff696643e0cc972687c7b4e32e657cc80dcb"
+      "bytes": 1936,
+      "sha256": "8474591170ce736f4a58619b22cf21930b1c5feeb8514b35d296a145370b57ab"
     },
     {
       "path": "tools/presentation/build.ps1",
-      "bytes": 663,
-      "sha256": "4c1618de76d76b6ddc0c4d2fbbb5e507d1406d763e8250848ed37995aa68a42b"
+      "bytes": 803,
+      "sha256": "79098701c776cde991cddd2fb5cce0c527a6563a0070226af12a52c3ce7d5a1b"
     },
     {
       "path": "tools/presentation/build_deck.mjs",
-      "bytes": 23228,
-      "sha256": "5168daa2dd9cd7ce73feb8253c78270d63fc59e06d4b13407c8bd3366c5b16a0"
+      "bytes": 22460,
+      "sha256": "08cd8b1d618e68cc843efc80bb5a470b4846ffcbf60e749bcf12d88964cbfac7"
     },
     {
       "path": "tools/presentation/build_pdf.py",
@@ -747,9 +747,14 @@
       "sha256": "d7fd171edb964ce5875a634d2f6d8309fc1b7856bf45a06ec8dce59a491cb739"
     },
     {
+      "path": "tools/presentation/finalize_properties.py",
+      "bytes": 984,
+      "sha256": "bc50460ab3181aa1423dc271ed14875e067b2407593810f5d526ca8bc27a6ab2"
+    },
+    {
       "path": "tools/presentation/inspect_source.mjs",
-      "bytes": 1092,
-      "sha256": "f821a6395a06b4bd11d088b12dfe338f5d2cd40b0d9001add34447ebb05d3d54"
+      "bytes": 1116,
+      "sha256": "70c155fa3004fac65109d13fe856e83ecc96bd2c8daad406ee81098ab8251537"
     },
     {
       "path": "tools/presentation/reference/Previous_Endterm_Defense.pptx",
@@ -758,8 +763,8 @@
     },
     {
       "path": "tools/report/build_report.py",
-      "bytes": 30655,
-      "sha256": "c6ca3029844d556051b8c09b15195d84f7170b08ad82c6ff2dfa35277fceff63"
+      "bytes": 30866,
+      "sha256": "9cc9358c3e1f66813adca26f489da1e35dfb1dc61731ffe9c8c730694d1da924"
     }
   ]
 }
